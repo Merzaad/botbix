@@ -1,11 +1,11 @@
 /* eslint-disable import/no-unresolved */
 /* eslint-disable import/extensions */
 import { configureStore, ThunkAction, Action } from '@reduxjs/toolkit'
-import counterReducer from '../features/counter/counterSlice'
+import boxbitReducer from '../features/boxbit/boxbitSlice'
 
 export const store = configureStore({
   reducer: {
-    counter: counterReducer,
+    boxbit: boxbitReducer,
   },
 })
 
