@@ -11,6 +11,7 @@ export type DraggableListProps = {
     title: string
     text: string
     color: string
+    game: string
   }[]
   onDragEnd: OnDragEndResponder
 }

@@ -12,18 +12,18 @@ import DisplaySettingsIcon from '@mui/icons-material/DisplaySettings'
 import QueueMusicIcon from '@mui/icons-material/QueueMusic'
 import DraggableList from './features/boxbit/boxbit'
 import { useAppSelector, useAppDispatch } from './app/hooks'
-import { selectItems, reorder, roll, reset } from './features/boxbit/boxbitSlice'
+import { selectItems, selectResult, reorder, roll, reset } from './features/boxbit/boxbitSlice'
 
 function App() {
-  const items = useAppSelector(selectItems)
-
   const dispatch = useAppDispatch()
+  const items = useAppSelector(selectItems)
+  const result = useAppSelector(selectResult)
   const board = {
     reset: () => {
       dispatch(reset())
       dispatch(roll())
     },
-    color: (x: number) => (items.length > 0 ? items[x].color : 'white'),
+    color: (x: number) => (result[x] === true ? items[x].color : 'white'),
   }
   const onDragEnd = ({ destination, source }: DropResult) => {
     if (!destination) return

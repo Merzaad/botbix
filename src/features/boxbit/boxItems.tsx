@@ -22,6 +22,7 @@ export type DragItem = {
     title: string
     text: string
     color: string
+    game: string
   }
   index: number
 }
