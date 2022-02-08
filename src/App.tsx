@@ -27,12 +27,11 @@ function App() {
   }
   const onDragEnd = ({ destination, source }: DropResult) => {
     if (!destination) return
-    dispatch(
-      reorder({
-        destination: destination.index,
-        source: source.index,
-      }),
-    )
+    const x:{destination:number, source:number} = {
+      destination: destination.index,
+      source: source.index,
+    }
+    dispatch(reorder(x))
   }
 
   return (
