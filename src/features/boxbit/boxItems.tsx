@@ -9,16 +9,17 @@ import makeStyles from '@material-ui/core/styles/makeStyles'
 
 const useStyles = makeStyles({
   draggingItem: {
-    background: 'rgb(235,235,235)',
+    background: 'rgb(251,0,157,0.5)',
     borderRadius: '10px',
+    boxShadow: '0px 0px 8px rgb(251,0,157)',
   },
 })
 
 export type DragItem = {
   item: {
-    id: string,
-    title: string,
-    text: string,
+    id: string
+    title: string
+    text: string
   }
   index: number
 }
@@ -35,13 +36,14 @@ function DraggableListItem({ item, index }: DragItem) {
           className={snapshot.isDragging ? classes.draggingItem : ''}
           sx={{
             width: `${Number(item.id) * 100}px`,
-            background: 'rgb(0,235,235)',
+            background: 'rgb(251,0,157,0.5)',
             height: '40px',
             borderRadius: '10px',
             margin: '10px',
+            color: 'white',
           }}
         >
-          s
+          {' '}
         </Container>
       )}
     </Draggable>

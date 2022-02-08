@@ -12,6 +12,7 @@ function App() {
   const items = useAppSelector(selectItems)
   const dispatch = useAppDispatch()
   const addtest = () => {
+    if (items.length === 5) return null
     for (let i = 0; i < 5; i += 1) {
       const z = {
         id: `${i}`,
@@ -20,6 +21,7 @@ function App() {
       }
       dispatch(addItem(z))
     }
+    return null
   }
   const onDragEnd = ({ destination, source }: DropResult) => {
     if (!destination) return
@@ -37,7 +39,7 @@ function App() {
         display: 'flex',
         flexDirection: 'row',
         alignItems: 'center',
-        maxWidth: '80vh',
+        width: '700px',
         marginTop: '15vh',
         minHeight: '300px',
         borderRadius: '20px',
@@ -48,11 +50,14 @@ function App() {
       <Button
         onClick={addtest}
         sx={{
-          color: 'rgb(200,200,200)',
-          background: 'linear-gradient(90deg, rgba(168,0,105,0.25201834884344365) 0%, rgba(255,50,157,0.5433348754540879) 100%)',
+          color: 'rgb(83,255,179,0.7)',
+          background:
+            'linear-gradient(90deg, rgba(83,255,179,0.2) 0%, rgba(0,0,0,0.1) 100%)',
+          boxShadow: '0px 0px 3px rgb(83,255,179)',
+          textShadow: '0px 0px 3px rgb(83,255,179)',
         }}
       >
-        add items
+        ~
       </Button>
       <DraggableList items={items} onDragEnd={onDragEnd} />
     </Container>

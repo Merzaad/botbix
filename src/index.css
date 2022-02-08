@@ -15,7 +15,11 @@ code {
     monospace;
 }
 
-#appbg{
-background: rgb(8,0,5);
-background: linear-gradient(90deg, rgba(8,0,5,0.5769483208322391) 0%, rgba(255,50,157,0.5433348754540879) 100%);
+#appbg {
+  background: rgb(8, 0, 5);
+  background: linear-gradient(
+    90deg,
+    rgba(8, 0, 5, 0.5769483208322391) 0%,
+    rgba(0, 179, 104, 0.543) 100%
+  );
 }
