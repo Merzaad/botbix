@@ -16,12 +16,14 @@ import { selectItems, reorder, roll, reset } from './features/boxbit/boxbitSlice
 
 function App() {
   const items = useAppSelector(selectItems)
+
   const dispatch = useAppDispatch()
   const board = {
     reset: () => {
       dispatch(reset())
       dispatch(roll())
     },
+    color: (x: number) => (items.length > 0 ? items[x].color : 'white'),
   }
   const onDragEnd = ({ destination, source }: DropResult) => {
     if (!destination) return
@@ -87,31 +89,31 @@ function App() {
         <DisplaySettingsIcon
           fontSize="large"
           sx={{
-            color: 'white',
+            color: `${board.color(0)}`,
           }}
         />
         <QueueMusicIcon
           fontSize="large"
           sx={{
-            color: 'white',
+            color: `${board.color(1)}`,
           }}
         />
         <SportsEsportsOutlinedIcon
           fontSize="large"
           sx={{
-            color: 'white',
+            color: `${board.color(2)}`,
           }}
         />
         <PauseIcon
           fontSize="large"
           sx={{
-            color: 'white',
+            color: `${board.color(3)}`,
           }}
         />
         <PlayArrowIcon
           fontSize="large"
           sx={{
-            color: 'white',
+            color: `${board.color(4)}`,
           }}
         />
       </Container>

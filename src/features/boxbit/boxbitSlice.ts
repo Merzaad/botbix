@@ -35,7 +35,7 @@ export const boxbitSlice = createSlice({
             id: `${i}`,
             title: `title${i}`,
             text: `text${i}`,
-            color: `rgb(100,${Math.random() * 250},200)`,
+            color: `rgb(${Math.random() * 200},255,200,.9)`,
           }
           x.items.push(z)
         }
