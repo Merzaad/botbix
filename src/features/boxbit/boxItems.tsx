@@ -9,9 +9,9 @@ import makeStyles from '@material-ui/core/styles/makeStyles'
 
 const useStyles = makeStyles({
   draggingItem: {
-    background: 'rgb(251,0,157,0.5)',
+    background: 'rgb(146,255,207,0.9)',
     borderRadius: '10px',
-    boxShadow: '0px 0px 8px rgb(251,0,157)',
+    boxShadow: '0px 0px 8px (255,255,230)',
   },
 })
 
@@ -20,6 +20,7 @@ export type DragItem = {
     id: string
     title: string
     text: string
+    color: string
   }
   index: number
 }
@@ -35,12 +36,13 @@ function DraggableListItem({ item, index }: DragItem) {
           {...provided.dragHandleProps}
           className={snapshot.isDragging ? classes.draggingItem : ''}
           sx={{
-            width: `${Number(item.id) * 100}px`,
-            background: 'rgb(251,0,157,0.5)',
+            width: `${Number(item.id) * 20}%`,
+            background: `${item.color}`,
             height: '40px',
             borderRadius: '10px',
-            margin: '10px',
             color: 'white',
+            marginLeft: '0px',
+            marginBottom: '10px',
           }}
         >
           {' '}

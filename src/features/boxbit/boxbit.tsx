@@ -2,11 +2,7 @@
 /* eslint-disable import/extensions */
 /* eslint-disable import/no-unresolved */
 import * as React from 'react'
-import {
-  DragDropContext,
-  Droppable,
-  OnDragEndResponder,
-} from 'react-beautiful-dnd'
+import { DragDropContext, Droppable, OnDragEndResponder } from 'react-beautiful-dnd'
 import DraggableListItem from './boxItems'
 
 export type DraggableListProps = {
@@ -14,6 +10,7 @@ export type DraggableListProps = {
     id: string
     title: string
     text: string
+    color: string
   }[]
   onDragEnd: OnDragEndResponder
 }

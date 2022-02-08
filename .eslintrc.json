@@ -13,11 +13,8 @@
   },
   "plugins": ["react", "@typescript-eslint"],
   "rules": {
-    "react/jsx-filename-extension": [
-      1,
-      { "extensions": [".js", ".jsx", ".ts", ".tsx"] }
-    ],
+    "react/jsx-filename-extension": [1, { "extensions": [".js", ".jsx", ".ts", ".tsx"] }],
     "semi": [2, "never"],
-    "max-len": ["error", { "code": 80 }]
+    "max-len": ["error", { "code": 100 }]
   }
 }

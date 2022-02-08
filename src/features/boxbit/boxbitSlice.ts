@@ -9,6 +9,7 @@ export interface BoxbitState {
     id: string
     title: string
     text: string
+    color: string
   }[]
 }
 
@@ -20,19 +21,33 @@ export const boxbitSlice = createSlice({
   name: 'boxbit',
   initialState,
   reducers: {
-    addItem: (state, action: PayloadAction<any>) => {
-      const x = state
-      x.items.push(action.payload)
-    },
     reorder: (state, action: PayloadAction<any>) => {
       const x = state
       const y = action.payload
       const moved = x.items.splice(y.source, 1)
       x.items.splice(y.destination, 0, moved[0])
     },
+    roll: (state) => {
+      const x = state
+      if (x.items.length === 0) {
+        for (let i = 0; i < 5; i += 1) {
+          const z = {
+            id: `${i}`,
+            title: `title${i}`,
+            text: `text${i}`,
+            color: `rgb(100,${Math.random() * 250},200)`,
+          }
+          x.items.push(z)
+        }
+      }
+    },
+    reset: (state) => {
+      const x = state
+      x.items = []
+    },
   },
 })
 
 export const selectItems = (state: RootState) => state.boxbit.items
-export const { addItem, reorder } = boxbitSlice.actions
+export const { reorder, roll, reset } = boxbitSlice.actions
 export default boxbitSlice.reducer
