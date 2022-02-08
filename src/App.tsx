@@ -10,9 +10,9 @@ import SportsEsportsOutlinedIcon from '@mui/icons-material/SportsEsportsOutlined
 import CasinoOutlinedIcon from '@mui/icons-material/CasinoOutlined'
 import DisplaySettingsIcon from '@mui/icons-material/DisplaySettings'
 import QueueMusicIcon from '@mui/icons-material/QueueMusic'
-import DraggableList from './features/boxbit/boxbit'
+import DnD from './features/dragbox/dragbox'
 import { useAppSelector, useAppDispatch } from './app/hooks'
-import { selectItems, selectResult, reorder, roll, reset } from './features/boxbit/boxbitSlice'
+import { selectItems, selectResult, reorder, roll, reset } from './features/dragbox/dragboxSlice'
 
 function App() {
   const dispatch = useAppDispatch()
@@ -27,7 +27,7 @@ function App() {
   }
   const onDragEnd = ({ destination, source }: DropResult) => {
     if (!destination) return
-    const x:{destination:number, source:number} = {
+    const x: { destination: number; source: number } = {
       destination: destination.index,
       source: source.index,
     }
@@ -44,7 +44,11 @@ function App() {
         marginTop: '15vh',
         minHeight: '300px',
         borderRadius: '20px',
-        boxShadow: '0px 0px 5px white',
+        boxShadow: `${
+          localStorage.getItem('gameResult')?.split(',').includes('false')
+            ? '0px 0px 5px white'
+            : '0px 0px 20px mediumspringgreen'
+        }`,
         gap: '10px',
       }}
       id="appbg"
@@ -75,7 +79,7 @@ function App() {
           width: '60%',
         }}
       >
-        <DraggableList items={items} onDragEnd={onDragEnd} />
+        <DnD items={items} onDragEnd={onDragEnd} />
       </Container>
       <Container
         sx={{

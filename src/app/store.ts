@@ -1,7 +1,7 @@
 /* eslint-disable import/no-unresolved */
 /* eslint-disable import/extensions */
 import { configureStore, ThunkAction, Action } from '@reduxjs/toolkit'
-import boxbitReducer from '../features/boxbit/boxbitSlice'
+import boxbitReducer from '../features/dragbox/dragboxSlice'
 
 export const store = configureStore({
   reducer: {

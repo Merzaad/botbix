@@ -3,9 +3,9 @@
 /* eslint-disable import/no-unresolved */
 import * as React from 'react'
 import { DragDropContext, Droppable, OnDragEndResponder } from 'react-beautiful-dnd'
-import DraggableListItem from './boxItems'
+import DraggableItems from './dragitem'
 
-export type DraggableListProps = {
+export type DnDProps = {
   items: {
     id: string
     title: string
@@ -16,13 +16,13 @@ export type DraggableListProps = {
   onDragEnd: OnDragEndResponder
 }
 
-const DraggableList = React.memo(({ items, onDragEnd }: DraggableListProps) => (
+const DnD = React.memo(({ items, onDragEnd }: DnDProps) => (
   <DragDropContext onDragEnd={onDragEnd}>
     <Droppable droppableId="droppable-list">
       {(provided) => (
         <div ref={provided.innerRef} {...provided.droppableProps}>
           {items.map((item, index) => (
-            <DraggableListItem item={item} index={index} key={item.id} />
+            <DraggableItems item={item} index={index} key={item.id} />
           ))}
           {provided.placeholder}
         </div>
@@ -31,4 +31,4 @@ const DraggableList = React.memo(({ items, onDragEnd }: DraggableListProps) => (
   </DragDropContext>
 ))
 
-export default DraggableList
+export default DnD

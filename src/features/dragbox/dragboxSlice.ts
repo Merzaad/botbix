@@ -33,12 +33,13 @@ export const boxbitSlice = createSlice({
         if (test[i] === x.items[i].game) x.result[i] = true
         else x.result[i] = false
       }
+      localStorage.setItem('gameResult', x.result.toString())
     },
     roll: (state) => {
       const x = state
       x.result = []
       if (x.items.length === 0) {
-        for (let i = 0; i < 5; i += 1) {
+        for (let i = 0; i < 6; i += 1) {
           const y = Math.random() * 200
           const z = {
             id: `${i}`,

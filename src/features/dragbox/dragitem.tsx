@@ -27,7 +27,7 @@ export type DragItem = {
   index: number
 }
 
-function DraggableListItem({ item, index }: DragItem) {
+function DraggableItems({ item, index }: DragItem) {
   const classes = useStyles()
   return (
     <Draggable draggableId={item.id} index={index}>
@@ -40,7 +40,7 @@ function DraggableListItem({ item, index }: DragItem) {
           sx={{
             width: `${Number(item.id) * 20}%`,
             background: `${item.color}`,
-            height: '40px',
+            height: '35px',
             borderRadius: '10px',
             marginLeft: '0px',
             marginBottom: '10px',
@@ -53,4 +53,4 @@ function DraggableListItem({ item, index }: DragItem) {
   )
 }
 
-export default DraggableListItem
+export default DraggableItems
