@@ -47,6 +47,9 @@
       "last 1 safari version"
     ]
   },
+  "engines": {
+    "node": "17.3.0"
+  },
   "devDependencies": {
     "@types/react-beautiful-dnd": "^13.1.2",
     "@typescript-eslint/eslint-plugin": "^5.11.0",
