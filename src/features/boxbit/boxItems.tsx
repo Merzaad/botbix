@@ -3,47 +3,46 @@
 /* eslint-disable import/extensions */
 import * as React from 'react'
 import { Draggable } from 'react-beautiful-dnd'
+import { Container } from '@mui/material'
 
 import makeStyles from '@material-ui/core/styles/makeStyles'
-import ListItem from '@material-ui/core/ListItem'
-import ListItemAvatar from '@material-ui/core/ListItemAvatar'
-import ListItemText from '@material-ui/core/ListItemText'
-import Avatar from '@material-ui/core/Avatar'
-import AbcIcon from '@mui/icons-material/Abc'
 
 const useStyles = makeStyles({
-  draggingListItem: {
+  draggingItem: {
     background: 'rgb(235,235,235)',
+    borderRadius: '10px',
   },
 })
 
-export type DraggableListItemProps = {
+export type DragItem = {
   item: {
-    id: string
-    title: string
-    text: string
+    id: string,
+    title: string,
+    text: string,
   }
   index: number
 }
 
-function DraggableListItem({ item, index }: DraggableListItemProps) {
+function DraggableListItem({ item, index }: DragItem) {
   const classes = useStyles()
   return (
     <Draggable draggableId={item.id} index={index}>
       {(provided, snapshot) => (
-        <ListItem
+        <Container
           ref={provided.innerRef}
           {...provided.draggableProps}
           {...provided.dragHandleProps}
-          className={snapshot.isDragging ? classes.draggingListItem : ''}
+          className={snapshot.isDragging ? classes.draggingItem : ''}
+          sx={{
+            width: `${Number(item.id) * 100}px`,
+            background: 'rgb(0,235,235)',
+            height: '40px',
+            borderRadius: '10px',
+            margin: '10px',
+          }}
         >
-          <ListItemAvatar>
-            <Avatar>
-              <AbcIcon />
-            </Avatar>
-          </ListItemAvatar>
-          <ListItemText primary={item.title} secondary={item.text} />
-        </ListItem>
+          s
+        </Container>
       )}
     </Draggable>
   )

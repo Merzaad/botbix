@@ -1,3 +1,4 @@
+/* eslint-disable max-len */
 /* eslint-disable import/extensions */
 /* eslint-disable import/no-unresolved */
 import * as React from 'react'
@@ -11,7 +12,7 @@ function App() {
   const items = useAppSelector(selectItems)
   const dispatch = useAppDispatch()
   const addtest = () => {
-    for (let i = 0; i < 10; i += 1) {
+    for (let i = 0; i < 5; i += 1) {
       const z = {
         id: `${i}`,
         title: `title${i}`,
@@ -35,20 +36,25 @@ function App() {
       sx={{
         display: 'flex',
         flexDirection: 'row',
+        alignItems: 'center',
+        maxWidth: '80vh',
+        marginTop: '15vh',
+        minHeight: '300px',
+        borderRadius: '20px',
+        boxShadow: '0px 0px 5px white',
       }}
+      id="appbg"
     >
-      <Container
+      <Button
+        onClick={addtest}
         sx={{
-          display: 'flex',
-          flexDirection: 'row',
+          color: 'rgb(200,200,200)',
+          background: 'linear-gradient(90deg, rgba(168,0,105,0.25201834884344365) 0%, rgba(255,50,157,0.5433348754540879) 100%)',
         }}
       >
-        <DraggableList items={items} onDragEnd={onDragEnd} />
-      </Container>
-      <Container>
-        <Container>{items.map((item: any) => item.text)}</Container>
-      </Container>
-      <Button onClick={addtest}>add items</Button>
+        add items
+      </Button>
+      <DraggableList items={items} onDragEnd={onDragEnd} />
     </Container>
   )
 }
