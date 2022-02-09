@@ -8,7 +8,7 @@ export type AudioPlayerIcons = {
   VolumeOffIcon: any
   CloseIcon: any
 }
-export interface BoxbitState {
+export interface DragboxSlice {
   items: {
     id: string
     title: string
@@ -39,4 +39,13 @@ export type DragItem = {
     game: string
   }
   index: number
+}
+
+export interface SoundboxState {
+  items: {
+    second: number
+    minute: number
+    isActive: boolean
+    counter: number
+  }[]
 }

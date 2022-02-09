@@ -11,11 +11,10 @@ import SportsEsportsOutlinedIcon from '@mui/icons-material/SportsEsportsOutlined
 import CasinoOutlinedIcon from '@mui/icons-material/CasinoOutlined'
 import DisplaySettingsIcon from '@mui/icons-material/DisplaySettings'
 import QueueMusicIcon from '@mui/icons-material/QueueMusic'
-import AudioPlayer from 'material-ui-audio-player'
 import DnD from './features/dragbox/dragbox'
 import { useAppSelector, useAppDispatch } from './app/hooks'
 import { selectItems, selectResult, reorder, roll, reset } from './features/dragbox/dragboxSlice'
-import { AudioPlayerIcons } from './app/types'
+import SoundBox from './features/soundbox/soundbox'
 
 function App() {
   const dispatch = useAppDispatch()
@@ -38,14 +37,6 @@ function App() {
     dispatch(reorder(x))
   }
 
-  const icons: AudioPlayerIcons = {
-    PlayIcon: PlayArrowIcon,
-    ReplayIcon: DisplaySettingsIcon,
-    PauseIcon,
-    VolumeUpIcon: SportsEsportsOutlinedIcon,
-    VolumeOffIcon: CasinoOutlinedIcon,
-    CloseIcon: CasinoOutlinedIcon,
-  }
   return (
     <Container>
       <Container
@@ -148,11 +139,7 @@ function App() {
         }}
         id="appbg"
       >
-        <AudioPlayer
-          icons={icons}
-          width="100%"
-          src="https://www.soundhelix.com/examples/mp3/SoundHelix-Song-1.mp3"
-        />
+        <SoundBox />
       </Container>
     </Container>
   )

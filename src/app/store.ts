@@ -1,11 +1,13 @@
 /* eslint-disable import/no-unresolved */
 /* eslint-disable import/extensions */
 import { configureStore, ThunkAction, Action } from '@reduxjs/toolkit'
-import boxbitReducer from '../features/dragbox/dragboxSlice'
+import dragboxReducer from '../features/dragbox/dragboxSlice'
+import soundboxReducer from '../features/soundbox/soundboxSlice'
 
 export const store = configureStore({
   reducer: {
-    boxbit: boxbitReducer,
+    dragbox: dragboxReducer,
+    soundbox: soundboxReducer,
   },
 })
 

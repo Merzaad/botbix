@@ -2,14 +2,14 @@
 /* eslint-disable import/extensions */
 import { createSlice, PayloadAction } from '@reduxjs/toolkit'
 import { RootState } from '../../app/store'
-import { BoxbitState } from '../../app/types'
+import { DragboxSlice } from '../../app/types'
 
-const initialState: BoxbitState = {
+const initialState: DragboxSlice = {
   items: [],
   result: [],
 }
-export const boxbitSlice = createSlice({
-  name: 'boxbit',
+export const dragboxSlice = createSlice({
+  name: 'dragbox',
   initialState,
   reducers: {
     reorder: (state, action: PayloadAction<any>) => {
@@ -49,8 +49,8 @@ export const boxbitSlice = createSlice({
   },
 })
 
-export const selectItems = (state: RootState) => state.boxbit.items
-export const selectResult = (state: RootState) => state.boxbit.result
+export const selectItems = (state: RootState) => state.dragbox.items
+export const selectResult = (state: RootState) => state.dragbox.result
 
-export const { reorder, roll, reset } = boxbitSlice.actions
-export default boxbitSlice.reducer
+export const { reorder, roll, reset } = dragboxSlice.actions
+export default dragboxSlice.reducer

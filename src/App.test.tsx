@@ -11,17 +11,16 @@ import SportsEsportsOutlinedIcon from '@mui/icons-material/SportsEsportsOutlined
 import CasinoOutlinedIcon from '@mui/icons-material/CasinoOutlined'
 import DisplaySettingsIcon from '@mui/icons-material/DisplaySettings'
 import QueueMusicIcon from '@mui/icons-material/QueueMusic'
-import AudioPlayer from 'material-ui-audio-player'
 import DnD from './features/dragbox/dragbox'
 import { useAppSelector, useAppDispatch } from './app/hooks'
 import { selectItems, selectResult, reorder, roll, reset } from './features/dragbox/dragboxSlice'
-import { AudioPlayerIcons } from './app/types'
+import SoundBox from './features/soundbox/soundbox'
 
 function App() {
   const dispatch = useAppDispatch()
   const items = useAppSelector(selectItems)
   const result = useAppSelector(selectResult)
-  const won = localStorage.getItem('gameResult')?.split(',').includes('false')
+  const notWon = localStorage.getItem('gameResult')?.split(',').includes('false')
   const board = {
     reset: () => {
       dispatch(reset())
@@ -38,14 +37,6 @@ function App() {
     dispatch(reorder(x))
   }
 
-  const icons: AudioPlayerIcons = {
-    PlayIcon: PlayArrowIcon,
-    ReplayIcon: DisplaySettingsIcon,
-    PauseIcon,
-    VolumeUpIcon: SportsEsportsOutlinedIcon,
-    VolumeOffIcon: CasinoOutlinedIcon,
-    CloseIcon: CasinoOutlinedIcon,
-  }
   return (
     <Container>
       <Container
@@ -57,8 +48,14 @@ function App() {
           marginTop: '5vh',
           minHeight: '300px',
           borderRadius: '20px',
-          boxShadow: `${won ? '0px 0px 5px white' : '0px 0px 20px mediumspringgreen'}`,
           gap: '10px',
+          background: `${
+            notWon
+              ? `linear-gradient(90deg, rgba(0, 255, 191, 0.1) 0%,
+              rgba(113, 238, 255, 0.1) 100%)`
+              : `linear-gradient(90deg, rgba(0, 255, 191, 0.2) 0%,
+                 rgba(113, 238, 255, 0.2) 100%)`
+          }`,
         }}
       >
         <Container
@@ -72,7 +69,7 @@ function App() {
           <Button
             onClick={board.reset}
             sx={{
-              color: `${won ? 'white' : 'red'}`,
+              color: `${notWon ? 'white' : 'mediumspringgreen'}`,
             }}
           >
             <CasinoOutlinedIcon />
@@ -137,20 +134,12 @@ function App() {
           marginTop: '5vh',
           minHeight: '100px',
           borderRadius: '10px',
-          boxShadow: `${
-            localStorage.getItem('gameResult')?.split(',').includes('false')
-              ? '0px 0px 5px white'
-              : '0px 0px 20px mediumspringgreen'
-          }`,
+          boxShadow: 'mediumspringgreen',
           gap: '10px',
         }}
         id="appbg"
       >
-        <AudioPlayer
-          icons={icons}
-          width="100%"
-          src="https://www.soundhelix.com/examples/mp3/SoundHelix-Song-1.mp3"
-        />
+        <SoundBox />
       </Container>
     </Container>
   )
