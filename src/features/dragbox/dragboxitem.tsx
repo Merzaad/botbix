@@ -4,8 +4,8 @@
 import * as React from 'react'
 import { Draggable } from 'react-beautiful-dnd'
 import { Container } from '@mui/material'
-
 import makeStyles from '@material-ui/core/styles/makeStyles'
+import { DragItem } from '../../app/types'
 
 const useStyles = makeStyles({
   draggingItem: {
@@ -15,17 +15,6 @@ const useStyles = makeStyles({
     boxShadow: '0px 0px 20px (255,255,230)',
   },
 })
-
-export type DragItem = {
-  item: {
-    id: string
-    title: string
-    text: string
-    color: string
-    game: string
-  }
-  index: number
-}
 
 function DraggableItems({ item, index }: DragItem) {
   const classes = useStyles()

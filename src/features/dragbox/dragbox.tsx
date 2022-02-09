@@ -2,19 +2,9 @@
 /* eslint-disable import/extensions */
 /* eslint-disable import/no-unresolved */
 import * as React from 'react'
-import { DragDropContext, Droppable, OnDragEndResponder } from 'react-beautiful-dnd'
-import DraggableItems from './dragitem'
-
-export type DnDProps = {
-  items: {
-    id: string
-    title: string
-    text: string
-    color: string
-    game: string
-  }[]
-  onDragEnd: OnDragEndResponder
-}
+import { DragDropContext, Droppable } from 'react-beautiful-dnd'
+import DraggableItems from './dragboxitem'
+import { DnDProps } from '../../app/types'
 
 const DnD = React.memo(({ items, onDragEnd }: DnDProps) => (
   <DragDropContext onDragEnd={onDragEnd}>

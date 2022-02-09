@@ -1,3 +1,4 @@
+/* eslint-disable linebreak-style */
 /* eslint-disable object-curly-newline */
 /* eslint-disable import/extensions */
 /* eslint-disable import/no-unresolved */
@@ -10,9 +11,11 @@ import SportsEsportsOutlinedIcon from '@mui/icons-material/SportsEsportsOutlined
 import CasinoOutlinedIcon from '@mui/icons-material/CasinoOutlined'
 import DisplaySettingsIcon from '@mui/icons-material/DisplaySettings'
 import QueueMusicIcon from '@mui/icons-material/QueueMusic'
+import AudioPlayer from 'material-ui-audio-player'
 import DnD from './features/dragbox/dragbox'
 import { useAppSelector, useAppDispatch } from './app/hooks'
 import { selectItems, selectResult, reorder, roll, reset } from './features/dragbox/dragboxSlice'
+import { AudioPlayerIcons } from './app/types'
 
 function App() {
   const dispatch = useAppDispatch()
@@ -34,90 +37,124 @@ function App() {
     dispatch(reorder(x))
   }
 
+  const icons: AudioPlayerIcons = {
+    PlayIcon: PlayArrowIcon,
+    ReplayIcon: DisplaySettingsIcon,
+    PauseIcon,
+    VolumeUpIcon: SportsEsportsOutlinedIcon,
+    VolumeOffIcon: CasinoOutlinedIcon,
+    CloseIcon: CasinoOutlinedIcon,
+  }
   return (
-    <Container
-      sx={{
-        display: 'flex',
-        flexDirection: 'row',
-        alignItems: 'center',
-        width: '800px',
-        marginTop: '15vh',
-        minHeight: '300px',
-        borderRadius: '20px',
-        boxShadow: `${
-          localStorage.getItem('gameResult')?.split(',').includes('false')
-            ? '0px 0px 5px white'
-            : '0px 0px 20px mediumspringgreen'
-        }`,
-        gap: '10px',
-      }}
-      id="appbg"
-    >
+    <Container>
       <Container
         sx={{
           display: 'flex',
-          flexDirection: 'column',
-          gap: '5px',
-          width: '20%',
+          flexDirection: 'row',
+          alignItems: 'center',
+          width: '800px',
+          marginTop: '5vh',
+          minHeight: '300px',
+          borderRadius: '20px',
+          boxShadow: `${
+            localStorage.getItem('gameResult')?.split(',').includes('false')
+              ? '0px 0px 5px white'
+              : '0px 0px 20px mediumspringgreen'
+          }`,
+          gap: '10px',
         }}
+        id="appbg"
       >
-        <Button
-          onClick={board.reset}
+        <Container
           sx={{
-            color: 'rgb(37,255,159)',
-            background: 'rgb(37,255,159,0.4)',
+            display: 'flex',
+            flexDirection: 'column',
+            gap: '5px',
+            width: '20%',
           }}
         >
-          <CasinoOutlinedIcon />
-        </Button>
+          <Button
+            onClick={board.reset}
+            sx={{
+              color: 'rgb(37,255,159)',
+              background: 'rgb(37,255,159,0.4)',
+            }}
+          >
+            <CasinoOutlinedIcon />
+          </Button>
+        </Container>
+        <Container
+          sx={{
+            display: 'flex',
+            flexDirection: 'column',
+            gap: '5px',
+            width: '60%',
+          }}
+        >
+          <DnD items={items} onDragEnd={onDragEnd} />
+        </Container>
+        <Container
+          sx={{
+            display: 'flex',
+            flexDirection: 'column',
+            gap: '15px',
+            width: '20%',
+          }}
+        >
+          <DisplaySettingsIcon
+            fontSize="large"
+            sx={{
+              color: `${board.color(0)}`,
+            }}
+          />
+          <QueueMusicIcon
+            fontSize="large"
+            sx={{
+              color: `${board.color(1)}`,
+            }}
+          />
+          <SportsEsportsOutlinedIcon
+            fontSize="large"
+            sx={{
+              color: `${board.color(2)}`,
+            }}
+          />
+          <PauseIcon
+            fontSize="large"
+            sx={{
+              color: `${board.color(3)}`,
+            }}
+          />
+          <PlayArrowIcon
+            fontSize="large"
+            sx={{
+              color: `${board.color(4)}`,
+            }}
+          />
+        </Container>
       </Container>
       <Container
         sx={{
           display: 'flex',
-          flexDirection: 'column',
-          gap: '5px',
-          width: '60%',
+          flexDirection: 'row',
+          alignItems: 'center',
+          width: '500px',
+          marginTop: '5vh',
+          minHeight: '100px',
+          borderRadius: '10px',
+          boxShadow: `${
+            localStorage.getItem('gameResult')?.split(',').includes('false')
+              ? '0px 0px 5px white'
+              : '0px 0px 20px mediumspringgreen'
+          }`,
+          gap: '10px',
         }}
+        id="appbg"
       >
-        <DnD items={items} onDragEnd={onDragEnd} />
-      </Container>
-      <Container
-        sx={{
-          display: 'flex',
-          flexDirection: 'column',
-          gap: '15px',
-          width: '20%',
-        }}
-      >
-        <DisplaySettingsIcon
-          fontSize="large"
-          sx={{
-            color: `${board.color(0)}`,
-          }}
-        />
-        <QueueMusicIcon
-          fontSize="large"
-          sx={{
-            color: `${board.color(1)}`,
-          }}
-        />
-        <SportsEsportsOutlinedIcon
-          fontSize="large"
-          sx={{
-            color: `${board.color(2)}`,
-          }}
-        />
-        <PauseIcon
-          fontSize="large"
-          sx={{
-            color: `${board.color(3)}`,
-          }}
-        />
-        <PlayArrowIcon
-          fontSize="large"
-          sx={{
-            color: `${board.color(4)}`,
-          }}
+        <AudioPlayer
+          icons={icons}
+          width="100%"
+          src="https://www.soundhelix.com/examples/mp3/SoundHelix-Song-1.mp3"
         />
       </Container>
     </Container>

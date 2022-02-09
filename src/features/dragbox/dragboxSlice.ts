@@ -2,17 +2,7 @@
 /* eslint-disable import/extensions */
 import { createSlice, PayloadAction } from '@reduxjs/toolkit'
 import { RootState } from '../../app/store'
-
-export interface BoxbitState {
-  items: {
-    id: string
-    title: string
-    text: string
-    color: string
-    game: string
-  }[]
-  result: boolean[]
-}
+import { BoxbitState } from '../../app/types'
 
 const initialState: BoxbitState = {
   items: [],
