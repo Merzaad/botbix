@@ -16,10 +16,10 @@ const useStyles = makeStyles({
   },
 })
 
-function DraggableItems({ item, index }: DragItem) {
+function DraggableItems({ record, index }: DragItem) {
   const classes = useStyles()
   return (
-    <Draggable draggableId={item.id} index={index}>
+    <Draggable draggableId={record.id} index={index}>
       {(provided, snapshot) => (
         <Container
           ref={provided.innerRef}
@@ -27,8 +27,8 @@ function DraggableItems({ item, index }: DragItem) {
           {...provided.dragHandleProps}
           className={snapshot.isDragging ? classes.draggingItem : ''}
           sx={{
-            width: `${Number(item.id) * 20}%`,
-            background: `${item.color}`,
+            width: `${Number(record.id) * 20}%`,
+            background: `${record.color}`,
             height: '35px',
             borderRadius: '10px',
             marginLeft: '0px',

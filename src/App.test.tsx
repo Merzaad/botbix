@@ -13,12 +13,12 @@ import DisplaySettingsIcon from '@mui/icons-material/DisplaySettings'
 import QueueMusicIcon from '@mui/icons-material/QueueMusic'
 import DnD from './features/dragbox/dragbox'
 import { useAppSelector, useAppDispatch } from './app/hooks'
-import { selectItems, selectResult, reorder, roll, reset } from './features/dragbox/dragboxSlice'
+import { selectRecords, selectResult, reorder, roll, reset } from './features/dragbox/dragboxSlice'
 import SoundBox from './features/soundbox/soundbox'
 
 function App() {
   const dispatch = useAppDispatch()
-  const items = useAppSelector(selectItems)
+  const records = useAppSelector(selectRecords)
   const result = useAppSelector(selectResult)
   const notWon = localStorage.getItem('gameResult')?.split(',').includes('false')
   const board = {
@@ -26,7 +26,7 @@ function App() {
       dispatch(reset())
       dispatch(roll())
     },
-    color: (x: number) => (result[x] === true ? items[x].color : 'white'),
+    color: (x: number) => (result[x] === true ? records[x].color : 'white'),
   }
   const onDragEnd = ({ destination, source }: DropResult) => {
     if (!destination) return
@@ -83,7 +83,7 @@ function App() {
             width: '60%',
           }}
         >
-          <DnD items={items} onDragEnd={onDragEnd} />
+          <DnD records={records} onDragEnd={onDragEnd} />
         </Container>
         <Container
           sx={{
@@ -130,12 +130,12 @@ function App() {
           display: 'flex',
           flexDirection: 'row',
           alignItems: 'center',
-          width: '500px',
+          width: '800px',
           marginTop: '5vh',
           minHeight: '100px',
           borderRadius: '10px',
           boxShadow: 'mediumspringgreen',
-          gap: '10px',
+          padding: '0px',
         }}
         id="appbg"
       >

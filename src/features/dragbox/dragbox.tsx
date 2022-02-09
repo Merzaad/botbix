@@ -6,13 +6,13 @@ import { DragDropContext, Droppable } from 'react-beautiful-dnd'
 import DraggableItems from './dragboxitem'
 import { DnDProps } from '../../app/types'
 
-const DnD = React.memo(({ items, onDragEnd }: DnDProps) => (
+const DnD = React.memo(({ records, onDragEnd }: DnDProps) => (
   <DragDropContext onDragEnd={onDragEnd}>
     <Droppable droppableId="droppable-list">
       {(provided) => (
         <div ref={provided.innerRef} {...provided.droppableProps}>
-          {items.map((item, index) => (
-            <DraggableItems item={item} index={index} key={item.id} />
+          {records.map((record, index) => (
+            <DraggableItems record={record} index={index} key={record.id} />
           ))}
           {provided.placeholder}
         </div>

@@ -5,7 +5,7 @@ import { RootState } from '../../app/store'
 import { DragboxSlice } from '../../app/types'
 
 const initialState: DragboxSlice = {
-  items: [],
+  records: [],
   result: [],
 }
 export const dragboxSlice = createSlice({
@@ -15,12 +15,12 @@ export const dragboxSlice = createSlice({
     reorder: (state, action: PayloadAction<any>) => {
       const x = state
       const y = action.payload
-      const moved = x.items.splice(y.source, 1)
-      x.items.splice(y.destination, 0, moved[0])
-      const test = x.items.map((i) => i.game)
+      const moved = x.records.splice(y.source, 1)
+      x.records.splice(y.destination, 0, moved[0])
+      const test = x.records.map((i) => i.game)
       test.sort((a: any, b: any) => a - b)
-      for (let i = 0; i < x.items.length; i += 1) {
-        if (test[i] === x.items[i].game) x.result[i] = true
+      for (let i = 0; i < x.records.length; i += 1) {
+        if (test[i] === x.records[i].game) x.result[i] = true
         else x.result[i] = false
       }
       localStorage.setItem('gameResult', x.result.toString())
@@ -28,7 +28,7 @@ export const dragboxSlice = createSlice({
     roll: (state) => {
       const x = state
       x.result = []
-      if (x.items.length === 0) {
+      if (x.records.length === 0) {
         for (let i = 0; i < 6; i += 1) {
           const y = Math.random() * 200
           const z = {
@@ -37,19 +37,20 @@ export const dragboxSlice = createSlice({
             text: `text${i}`,
             color: `rgb(${y},254,200,.9)`,
             game: `${y}`,
+            width: `${i * 40}px`,
           }
-          x.items.push(z)
+          x.records.push(z)
         }
       }
     },
     reset: (state) => {
       const x = state
-      x.items = []
+      x.records = []
     },
   },
 })
 
-export const selectItems = (state: RootState) => state.dragbox.items
+export const selectRecords = (state: RootState) => state.dragbox.records
 export const selectResult = (state: RootState) => state.dragbox.result
 
 export const { reorder, roll, reset } = dragboxSlice.actions
