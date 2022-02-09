@@ -10,8 +10,8 @@ const initialState: DragboxSlice = {
     {
       id: '',
       title: '',
-      text: '',
-      color: 'rgb(56, 255, 189)',
+      text: 'initial',
+      color: '',
       game: '',
       width: '',
       margin: 0,

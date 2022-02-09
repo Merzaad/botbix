@@ -57,8 +57,7 @@ function App() {
             notWon
               ? `linear-gradient(90deg, rgba(0, 255, 191, 0.1) 0%,
               rgba(113, 238, 255, 0.1) 100%)`
-              : `linear-gradient(90deg, rgba(0, 255, 191, 0.2) 0%,
-                 rgba(113, 238, 255, 0.2) 100%)`
+              : 'linear-gradient(90deg, rgba(130, 255, 92, 0.1) 0%, rgba(48, 255, 134, 0.1) 100%)'
           }`,
         }}
       >

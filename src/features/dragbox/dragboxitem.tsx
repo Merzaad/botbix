@@ -15,7 +15,6 @@ export function Testbutton(props: { target: number }) {
   const dispatch = useAppDispatch()
   const addTime = () => dispatch(addMargin(target))
   const removeTime = () => dispatch(removeMargin(target))
-
   return (
     <Container
       sx={{
@@ -63,7 +62,7 @@ function DraggableItems({ record, index }: DragItem) {
             alignItems: 'center',
           }}
         >
-          <Testbutton target={index} />
+          {record.text !== 'initial' ? <Testbutton target={index} /> : null}
         </Container>
       )}
     </Draggable>
