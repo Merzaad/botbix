@@ -4,38 +4,65 @@
 import * as React from 'react'
 import { Draggable } from 'react-beautiful-dnd'
 import { Container } from '@mui/material'
-import makeStyles from '@material-ui/core/styles/makeStyles'
+import ArrowForwardIosIcon from '@mui/icons-material/ArrowForwardIos'
+import ArrowBackIosIcon from '@mui/icons-material/ArrowBackIos'
 import { DragItem } from '../../app/types'
+import { useAppDispatch } from '../../app/hooks'
+import { addMargin, removeMargin } from './dragboxSlice'
 
-const useStyles = makeStyles({
-  draggingItem: {
-    background: 'rgb(146,255,207,0.5)',
-    borderRadius: '10px',
-    borderColor: 'red',
-    boxShadow: '0px 0px 20px (255,255,230)',
-  },
-})
+export function Testbutton(props: { target: number }) {
+  const { target } = props
+  const dispatch = useAppDispatch()
+  const addTime = () => dispatch(addMargin(target))
+  const removeTime = () => dispatch(removeMargin(target))
+
+  return (
+    <Container
+      sx={{
+        display: 'flex',
+        flexDirection: 'row',
+        justifyContent: 'center',
+        color: 'white',
+        gap: '20px',
+      }}
+    >
+      <ArrowBackIosIcon
+        sx={{
+          color: 'white',
+        }}
+        onClick={removeTime}
+      />
+
+      <ArrowForwardIosIcon
+        sx={{
+          color: 'white',
+        }}
+        onClick={addTime}
+      />
+    </Container>
+  )
+}
 
 function DraggableItems({ record, index }: DragItem) {
-  const classes = useStyles()
   return (
     <Draggable draggableId={record.id} index={index}>
-      {(provided, snapshot) => (
+      {(provided) => (
         <Container
           ref={provided.innerRef}
           {...provided.draggableProps}
           {...provided.dragHandleProps}
-          className={snapshot.isDragging ? classes.draggingItem : ''}
           sx={{
             width: `${record.width}px`,
             background: `${record.color}`,
             height: '35px',
             borderRadius: '10px',
-            marginLeft: '0px',
+            marginLeft: `${record.margin}px`,
             marginBottom: '10px',
+            display: 'flex',
+            padding: '5px',
           }}
         >
-          {' '}
+          <Testbutton target={index} />
         </Container>
       )}
     </Draggable>

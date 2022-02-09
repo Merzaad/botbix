@@ -16,6 +16,7 @@ export interface DragboxSlice {
     color: string
     game: string
     width: string
+    margin: number
   }[]
   result: boolean[]
 }
@@ -28,6 +29,7 @@ export type DnDProps = {
     color: string
     game: string
     width: string
+    margin: number
   }[]
   onDragEnd: OnDragEndResponder
 }
@@ -40,6 +42,7 @@ export type DragItem = {
     color: string
     game: string
     width: string
+    margin: number
   }
   index: number
 }

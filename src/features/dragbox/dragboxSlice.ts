@@ -1,3 +1,4 @@
+/* eslint-disable object-curly-newline */
 /* eslint-disable import/no-unresolved */
 /* eslint-disable import/extensions */
 import { createSlice, PayloadAction } from '@reduxjs/toolkit'
@@ -5,9 +6,20 @@ import { RootState } from '../../app/store'
 import { DragboxSlice } from '../../app/types'
 
 const initialState: DragboxSlice = {
-  records: [],
+  records: [
+    {
+      id: '',
+      title: '',
+      text: '',
+      color: 'rgb(56, 255, 189)',
+      game: '',
+      width: '',
+      margin: 0,
+    },
+  ],
   result: [],
 }
+
 export const dragboxSlice = createSlice({
   name: 'dragbox',
   initialState,
@@ -37,7 +49,8 @@ export const dragboxSlice = createSlice({
             text: `text${i}`,
             color: `rgb(${y},254,200,.9)`,
             game: `${y}`,
-            width: `${(i + 1) * 50}`,
+            width: `${i * 60 + 100}`,
+            margin: i * 10,
           }
           x.records.push(z)
         }
@@ -47,11 +60,21 @@ export const dragboxSlice = createSlice({
       const x = state
       x.records = []
     },
+    addMargin: (state, action: PayloadAction<number>) => {
+      const x = state
+      const y = action.payload
+      x.records[y].margin += 20
+    },
+    removeMargin: (state, action: PayloadAction<number>) => {
+      const x = state
+      const y = action.payload
+      x.records[y].margin -= 20
+    },
   },
 })
 
 export const selectRecords = (state: RootState) => state.dragbox.records
 export const selectResult = (state: RootState) => state.dragbox.result
 
-export const { reorder, roll, reset } = dragboxSlice.actions
+export const { reorder, roll, reset, addMargin, removeMargin } = dragboxSlice.actions
 export default dragboxSlice.reducer

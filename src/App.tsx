@@ -13,7 +13,15 @@ import DisplaySettingsIcon from '@mui/icons-material/DisplaySettings'
 import QueueMusicIcon from '@mui/icons-material/QueueMusic'
 import DnD from './features/dragbox/dragbox'
 import { useAppSelector, useAppDispatch } from './app/hooks'
-import { selectRecords, selectResult, reorder, roll, reset } from './features/dragbox/dragboxSlice'
+import {
+  selectRecords,
+  selectResult,
+  reorder,
+  roll,
+  reset,
+  addMargin,
+  removeMargin,
+} from './features/dragbox/dragboxSlice'
 import SoundBox from './features/soundbox/soundbox'
 
 function App() {
@@ -21,13 +29,13 @@ function App() {
   const records = useAppSelector(selectRecords)
   const result = useAppSelector(selectResult)
   const notWon = localStorage.getItem('gameResult')?.split(',').includes('false')
-  const board = {
-    reset: () => {
-      dispatch(reset())
-      dispatch(roll())
-    },
-    color: (x: number) => (result[x] === true ? records[x].color : 'white'),
+  const resetHandler = () => {
+    dispatch(reset())
+    dispatch(roll())
   }
+  const addTime = () => dispatch(addMargin(5))
+  const removeTime = () => dispatch(removeMargin(5))
+  const color = (x: number) => (result[x] === true ? records[x].color : 'white')
   const onDragEnd = ({ destination, source }: DropResult) => {
     if (!destination) return
     const x: { destination: number; source: number } = {
@@ -67,7 +75,23 @@ function App() {
           }}
         >
           <Button
-            onClick={board.reset}
+            onClick={resetHandler}
+            sx={{
+              color: `${notWon ? 'white' : 'mediumspringgreen'}`,
+            }}
+          >
+            <CasinoOutlinedIcon />
+          </Button>
+          <Button
+            onClick={addTime}
+            sx={{
+              color: `${notWon ? 'white' : 'mediumspringgreen'}`,
+            }}
+          >
+            <CasinoOutlinedIcon />
+          </Button>
+          <Button
+            onClick={removeTime}
             sx={{
               color: `${notWon ? 'white' : 'mediumspringgreen'}`,
             }}
@@ -96,31 +120,31 @@ function App() {
           <DisplaySettingsIcon
             fontSize="large"
             sx={{
-              color: `${board.color(0)}`,
+              color: `${color(0)}`,
             }}
           />
           <QueueMusicIcon
             fontSize="large"
             sx={{
-              color: `${board.color(1)}`,
+              color: `${color(1)}`,
             }}
           />
           <SportsEsportsOutlinedIcon
             fontSize="large"
             sx={{
-              color: `${board.color(2)}`,
+              color: `${color(2)}`,
             }}
           />
           <PauseIcon
             fontSize="large"
             sx={{
-              color: `${board.color(3)}`,
+              color: `${color(3)}`,
             }}
           />
           <PlayArrowIcon
             fontSize="large"
             sx={{
-              color: `${board.color(4)}`,
+              color: `${color(4)}`,
             }}
           />
         </Container>
