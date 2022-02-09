@@ -19,8 +19,6 @@ import {
   reorder,
   roll,
   reset,
-  addMargin,
-  removeMargin,
 } from './features/dragbox/dragboxSlice'
 import SoundBox from './features/soundbox/soundbox'
 
@@ -33,8 +31,6 @@ function App() {
     dispatch(reset())
     dispatch(roll())
   }
-  const addTime = () => dispatch(addMargin(5))
-  const removeTime = () => dispatch(removeMargin(5))
   const color = (x: number) => (result[x] === true ? records[x].color : 'white')
   const onDragEnd = ({ destination, source }: DropResult) => {
     if (!destination) return
@@ -76,22 +72,6 @@ function App() {
         >
           <Button
             onClick={resetHandler}
-            sx={{
-              color: `${notWon ? 'white' : 'mediumspringgreen'}`,
-            }}
-          >
-            <CasinoOutlinedIcon />
-          </Button>
-          <Button
-            onClick={addTime}
-            sx={{
-              color: `${notWon ? 'white' : 'mediumspringgreen'}`,
-            }}
-          >
-            <CasinoOutlinedIcon />
-          </Button>
-          <Button
-            onClick={removeTime}
             sx={{
               color: `${notWon ? 'white' : 'mediumspringgreen'}`,
             }}

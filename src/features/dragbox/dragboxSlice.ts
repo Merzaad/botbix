@@ -49,8 +49,8 @@ export const dragboxSlice = createSlice({
             text: `text${i}`,
             color: `rgb(${y},254,200,.9)`,
             game: `${y}`,
-            width: `${i * 60 + 100}`,
-            margin: i * 10,
+            width: `${i * 50 + 100}`,
+            margin: 0,
           }
           x.records.push(z)
         }
@@ -62,13 +62,21 @@ export const dragboxSlice = createSlice({
     },
     addMargin: (state, action: PayloadAction<number>) => {
       const x = state
-      const y = action.payload
-      x.records[y].margin += 20
+      const id = action.payload
+      const w = Number(x.records[id].width)
+      const m = Number(x.records[id].margin)
+      if (m >= 0 && m < ((5 - ((w - 100) / 50)) * 50)) {
+        x.records[id].margin += 50
+      }
     },
     removeMargin: (state, action: PayloadAction<number>) => {
       const x = state
-      const y = action.payload
-      x.records[y].margin -= 20
+      const id = action.payload
+      const w = Number(x.records[id].width)
+      const m = Number(x.records[id].margin)
+      if (m > 0 && m > ((((w - 100) / 50) - 5) * 50)) {
+        x.records[id].margin -= 50
+      }
     },
   },
 })

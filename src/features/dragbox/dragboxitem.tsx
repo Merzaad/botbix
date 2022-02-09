@@ -59,7 +59,8 @@ function DraggableItems({ record, index }: DragItem) {
             marginLeft: `${record.margin}px`,
             marginBottom: '10px',
             display: 'flex',
-            padding: '5px',
+            justifyContent: 'center',
+            alignItems: 'center',
           }}
         >
           <Testbutton target={index} />
