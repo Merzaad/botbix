@@ -42,10 +42,10 @@ export type DragItem = {
 }
 
 export interface SoundboxState {
-  items: {
+  item: {
     second: number
     minute: number
-    isActive: boolean
+    isActive: number
     counter: number
-  }[]
+  }
 }

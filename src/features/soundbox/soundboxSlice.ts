@@ -7,7 +7,12 @@ import { RootState } from '../../app/store'
 import { SoundboxState } from '../../app/types'
 
 const initialState: SoundboxState = {
-  items: [],
+  item: {
+    second: 0,
+    minute: 0,
+    isActive: 0,
+    counter: 0,
+  },
 }
 export const soundboxSlice = createSlice({
   name: 'soundbox',
@@ -15,19 +20,25 @@ export const soundboxSlice = createSlice({
   reducers: {
     setSecond: (state, action: PayloadAction<number>) => {
       const x = state
-      x.items[0].second = action.payload
+      x.item.second = action.payload
     },
     setMinute: (state, action: PayloadAction<number>) => {
       const x = state
-      x.items[0].minute = action.payload
+      x.item.minute = action.payload
     },
     setCounter: (state, action: PayloadAction<number>) => {
       const x = state
-      x.items[0].counter = action.payload
+      x.item.counter = action.payload
+    },
+    setIsActive: (state, action: PayloadAction<number>) => {
+      const x = state
+      x.item.isActive = action.payload
     },
   },
 })
 
-export const selectRecords = (state: RootState) => state.soundbox.items
-export const { setSecond, setMinute, setCounter } = soundboxSlice.actions
+export const selectRecord = (state: RootState) => state.soundbox.item
+export const {
+  setSecond, setMinute, setCounter, setIsActive,
+} = soundboxSlice.actions
 export default soundboxSlice.reducer

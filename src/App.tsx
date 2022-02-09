@@ -130,12 +130,12 @@ function App() {
           display: 'flex',
           flexDirection: 'row',
           alignItems: 'center',
-          width: '500px',
+          width: '800px',
           marginTop: '5vh',
           minHeight: '100px',
           borderRadius: '10px',
           boxShadow: 'mediumspringgreen',
-          gap: '10px',
+          padding: '0px',
         }}
         id="appbg"
       >
