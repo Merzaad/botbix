@@ -27,6 +27,7 @@ export type DnDProps = {
     text: string
     color: string
     game: string
+    width: string
   }[]
   onDragEnd: OnDragEndResponder
 }
@@ -38,6 +39,7 @@ export type DragItem = {
     text: string
     color: string
     game: string
+    width: string
   }
   index: number
 }

@@ -37,7 +37,7 @@ export const dragboxSlice = createSlice({
             text: `text${i}`,
             color: `rgb(${y},254,200,.9)`,
             game: `${y}`,
-            width: `${i * 40}px`,
+            width: `${(i + 1) * 50}`,
           }
           x.records.push(z)
         }

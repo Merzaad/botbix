@@ -27,7 +27,7 @@ function DraggableItems({ record, index }: DragItem) {
           {...provided.dragHandleProps}
           className={snapshot.isDragging ? classes.draggingItem : ''}
           sx={{
-            width: `${Number(record.id) * 20}%`,
+            width: `${record.width}px`,
             background: `${record.color}`,
             height: '35px',
             borderRadius: '10px',
