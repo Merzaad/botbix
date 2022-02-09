@@ -21,6 +21,7 @@ function App() {
   const dispatch = useAppDispatch()
   const items = useAppSelector(selectItems)
   const result = useAppSelector(selectResult)
+  const notWon = localStorage.getItem('gameResult')?.split(',').includes('false')
   const board = {
     reset: () => {
       dispatch(reset())
@@ -56,14 +57,15 @@ function App() {
           marginTop: '5vh',
           minHeight: '300px',
           borderRadius: '20px',
-          boxShadow: `${
-            localStorage.getItem('gameResult')?.split(',').includes('false')
-              ? '0px 0px 5px white'
-              : '0px 0px 20px mediumspringgreen'
-          }`,
           gap: '10px',
+          background: `${
+            notWon
+              ? `linear-gradient(90deg, rgba(0, 255, 191, 0.1) 0%,
+              rgba(113, 238, 255, 0.1) 100%)`
+              : `linear-gradient(90deg, rgba(0, 255, 191, 0.2) 0%,
+                 rgba(113, 238, 255, 0.2) 100%)`
+          }`,
         }}
-        id="appbg"
       >
         <Container
           sx={{
@@ -76,8 +78,7 @@ function App() {
           <Button
             onClick={board.reset}
             sx={{
-              color: 'rgb(37,255,159)',
-              background: 'rgb(37,255,159,0.4)',
+              color: `${notWon ? 'white' : 'mediumspringgreen'}`,
             }}
           >
             <CasinoOutlinedIcon />
@@ -142,11 +143,7 @@ function App() {
           marginTop: '5vh',
           minHeight: '100px',
           borderRadius: '10px',
-          boxShadow: `${
-            localStorage.getItem('gameResult')?.split(',').includes('false')
-              ? '0px 0px 5px white'
-              : '0px 0px 20px mediumspringgreen'
-          }`,
+          boxShadow: 'mediumspringgreen',
           gap: '10px',
         }}
         id="appbg"
