@@ -7,34 +7,34 @@ import { RootState } from '../../app/store'
 import { SoundboxState } from '../../app/types'
 
 const initialState: SoundboxState = {
-  record: {
-    second: 0,
-    minute: 0,
-    isActive: 0,
-    counter: 0,
-  },
+  records: [],
 }
 export const soundboxSlice = createSlice({
   name: 'soundbox',
   initialState,
   reducers: {
-    setSecond: (state, action: PayloadAction<number>) => {
+    setIsActive: (state, action: PayloadAction<{ value: number; target: number }>) => {
       const x = state
-      x.record.second = action.payload
+      x.records[action.payload.target].isActive = action.payload.value
     },
-    setMinute: (state, action: PayloadAction<number>) => {
+    rollSound: (state) => {
       const x = state
-      x.record.minute = action.payload
-    },
-    setIsActive: (state, action: PayloadAction<number>) => {
-      const x = state
-      x.record.isActive = action.payload
+      x.records = []
+      for (let i = 0; i < 6; i += 1) {
+        const z = {
+          id: `${i}`,
+          second: 0,
+          minute: 0,
+          isActive: 0,
+          counter: 0,
+        }
+        x.records.push(z)
+      }
     },
   },
 })
 
-export const selectRecord = (state: RootState) => state.soundbox.record
-export const selectCounter = (state: RootState) => state.soundbox.record.counter
+export const selectRecords = (state: RootState) => state.soundbox.records
 
-export const { setSecond, setMinute, setIsActive } = soundboxSlice.actions
+export const { setIsActive, rollSound } = soundboxSlice.actions
 export default soundboxSlice.reducer

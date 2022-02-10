@@ -1,3 +1,4 @@
+/* eslint-disable object-curly-newline */
 /* eslint-disable import/extensions */
 /* eslint-disable import/no-unresolved */
 import * as React from 'react'
@@ -15,9 +16,7 @@ import RadioButtonCheckedOutlinedIcon from '@mui/icons-material/RadioButtonCheck
 import RadioButtonUncheckedOutlinedIcon from '@mui/icons-material/RadioButtonUncheckedOutlined'
 import { AudioPlayerIcons } from '../../app/types'
 import { useAppDispatch, useAppSelector } from '../../app/hooks'
-import {
-  setIsActive, selectRecord,
-} from './soundboxSlice'
+import { setIsActive, selectRecords } from './soundboxSlice'
 
 const icons: AudioPlayerIcons = {
   PlayIcon: PlayArrowIcon,
@@ -27,29 +26,28 @@ const icons: AudioPlayerIcons = {
   VolumeOffIcon: VolumeMuteIcon,
   CloseIcon: CasinoOutlinedIcon,
 }
-function SoundBox() {
+function SoundBox(props: { item: number }) {
+  const { item } = props
   const dispatch = useAppDispatch()
-  const record = useAppSelector(selectRecord)
-  const {
-    pauseRecording, resumeRecording, startRecording, stopRecording, mediaBlobUrl,
-  } = useReactMediaRecorder({
+  const record = useAppSelector(selectRecords)
+  const { pauseRecording, resumeRecording, startRecording, stopRecording, mediaBlobUrl } = useReactMediaRecorder({
     video: false,
     audio: true,
   })
   const start = () => {
-    dispatch(setIsActive(1))
+    dispatch(setIsActive({ value: 1, target: item }))
     startRecording()
   }
   const pause = () => {
-    switch (record.isActive) {
+    switch (record[item].isActive) {
       case 0:
         break
       case 1:
-        dispatch(setIsActive(2))
+        dispatch(setIsActive({ value: 2, target: item }))
         pauseRecording()
         break
       case 2:
-        dispatch(setIsActive(1))
+        dispatch(setIsActive({ value: 1, target: item }))
         resumeRecording()
         break
       default:
@@ -57,7 +55,7 @@ function SoundBox() {
     }
   }
   const stop = () => {
-    dispatch(setIsActive(0))
+    dispatch(setIsActive({ value: 0, target: item }))
     stopRecording()
   }
   const src = mediaBlobUrl ? String(mediaBlobUrl) : []
@@ -92,7 +90,7 @@ function SoundBox() {
             color: 'white',
           }}
         >
-          {record.isActive === 1 ? <PauseIcon /> : <PlayArrowIcon />}
+          {record[item].isActive === 1 ? <PauseIcon /> : <PlayArrowIcon />}
         </Button>
         <Button
           onClick={stop}
@@ -107,11 +105,7 @@ function SoundBox() {
             color: 'white',
           }}
         >
-          {record.isActive === 1 ? (
-            <RadioButtonCheckedOutlinedIcon />
-          ) : (
-            <RadioButtonUncheckedOutlinedIcon />
-          )}
+          {record[item].isActive === 1 ? <RadioButtonCheckedOutlinedIcon /> : <RadioButtonUncheckedOutlinedIcon />}
         </Button>
       </Container>
     </Container>

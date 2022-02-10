@@ -48,10 +48,11 @@ export type DragItem = {
 }
 
 export interface SoundboxState {
-  record: {
+  records: {
+    id: string
     second: number
     minute: number
     isActive: number
     counter: number
-  }
+  }[]
 }

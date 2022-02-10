@@ -37,23 +37,22 @@ export const dragboxSlice = createSlice({
       }
       localStorage.setItem('gameResult', x.result.toString())
     },
-    roll: (state) => {
+    rollDrag: (state) => {
       const x = state
+      x.items = []
       x.result = []
-      if (x.items.length === 0) {
-        for (let i = 0; i < 6; i += 1) {
-          const y = Math.random() * 200
-          const z = {
-            id: `${i}`,
-            title: `title${i}`,
-            text: `text${i}`,
-            color: `rgb(${y},254,200,.9)`,
-            game: `${y}`,
-            width: `${i * 50 + 100}`,
-            margin: 0,
-          }
-          x.items.push(z)
+      for (let i = 0; i < 6; i += 1) {
+        const y = Math.random() * 200
+        const z = {
+          id: `${i}`,
+          title: `title${i}`,
+          text: `text${i}`,
+          color: `rgb(${y},254,200,.9)`,
+          game: `${y}`,
+          width: `${i * 50 + 100}`,
+          margin: 0,
         }
+        x.items.push(z)
       }
     },
     reset: (state) => {
@@ -84,5 +83,5 @@ export const dragboxSlice = createSlice({
 export const selectItems = (state: RootState) => state.dragbox.items
 export const selectResult = (state: RootState) => state.dragbox.result
 
-export const { reorder, roll, reset, addMargin, removeMargin } = dragboxSlice.actions
+export const { reorder, rollDrag, reset, addMargin, removeMargin } = dragboxSlice.actions
 export default dragboxSlice.reducer

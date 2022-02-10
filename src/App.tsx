@@ -13,17 +13,20 @@ import DisplaySettingsIcon from '@mui/icons-material/DisplaySettings'
 import QueueMusicIcon from '@mui/icons-material/QueueMusic'
 import DnD from './features/dragbox/dragbox'
 import { useAppSelector, useAppDispatch } from './app/hooks'
-import { selectItems, selectResult, reorder, roll, reset } from './features/dragbox/dragboxSlice'
+import { selectItems, selectResult, reorder, rollDrag, reset } from './features/dragbox/dragboxSlice'
 import SoundBox from './features/soundbox/soundbox'
+import { selectRecords, rollSound } from './features/soundbox/soundboxSlice'
 
 function App() {
   const dispatch = useAppDispatch()
   const items = useAppSelector(selectItems)
   const result = useAppSelector(selectResult)
+  const records = useAppSelector(selectRecords)
   const notWon = localStorage.getItem('gameResult')?.split(',').includes('false')
   const resetHandler = () => {
     dispatch(reset())
-    dispatch(roll())
+    dispatch(rollDrag())
+    dispatch(rollSound())
   }
   const color = (x: number) => (result[x] === true ? items[x].color : 'white')
   const onDragEnd = ({ destination, source }: DropResult) => {
@@ -120,15 +123,16 @@ function App() {
           alignItems: 'center',
           width: '800px',
           marginTop: '5vh',
-          minHeight: '200px',
           borderRadius: '10px',
           boxShadow: 'mediumspringgreen',
-          padding: '5px',
+          padding: '50px',
+          gap: '30px;',
         }}
         id="appbg"
       >
-        <SoundBox />
-        <SoundBox />
+        {records.map((i) => (
+          <SoundBox item={Number(i.id)} />
+        ))}
       </Container>
     </Container>
   )
