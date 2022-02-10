@@ -26,10 +26,6 @@ export const soundboxSlice = createSlice({
       const x = state
       x.record.minute = action.payload
     },
-    setCounter: (state, action: PayloadAction<number>) => {
-      const x = state
-      x.record.counter = action.payload
-    },
     setIsActive: (state, action: PayloadAction<number>) => {
       const x = state
       x.record.isActive = action.payload
@@ -38,7 +34,7 @@ export const soundboxSlice = createSlice({
 })
 
 export const selectRecord = (state: RootState) => state.soundbox.record
-export const {
-  setSecond, setMinute, setCounter, setIsActive,
-} = soundboxSlice.actions
+export const selectCounter = (state: RootState) => state.soundbox.record.counter
+
+export const { setSecond, setMinute, setIsActive } = soundboxSlice.actions
 export default soundboxSlice.reducer

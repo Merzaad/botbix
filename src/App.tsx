@@ -13,25 +13,19 @@ import DisplaySettingsIcon from '@mui/icons-material/DisplaySettings'
 import QueueMusicIcon from '@mui/icons-material/QueueMusic'
 import DnD from './features/dragbox/dragbox'
 import { useAppSelector, useAppDispatch } from './app/hooks'
-import {
-  selectRecords,
-  selectResult,
-  reorder,
-  roll,
-  reset,
-} from './features/dragbox/dragboxSlice'
+import { selectItems, selectResult, reorder, roll, reset } from './features/dragbox/dragboxSlice'
 import SoundBox from './features/soundbox/soundbox'
 
 function App() {
   const dispatch = useAppDispatch()
-  const records = useAppSelector(selectRecords)
+  const items = useAppSelector(selectItems)
   const result = useAppSelector(selectResult)
   const notWon = localStorage.getItem('gameResult')?.split(',').includes('false')
   const resetHandler = () => {
     dispatch(reset())
     dispatch(roll())
   }
-  const color = (x: number) => (result[x] === true ? records[x].color : 'white')
+  const color = (x: number) => (result[x] === true ? items[x].color : 'white')
   const onDragEnd = ({ destination, source }: DropResult) => {
     if (!destination) return
     const x: { destination: number; source: number } = {
@@ -78,7 +72,7 @@ function App() {
             <CasinoOutlinedIcon />
           </Button>
         </Container>
-        <DnD records={records} onDragEnd={onDragEnd} />
+        <DnD items={items} onDragEnd={onDragEnd} />
         <Container
           sx={{
             display: 'flex',
@@ -122,17 +116,18 @@ function App() {
       <Container
         sx={{
           display: 'flex',
-          flexDirection: 'row',
+          flexDirection: 'column',
           alignItems: 'center',
           width: '800px',
           marginTop: '5vh',
-          minHeight: '100px',
+          minHeight: '200px',
           borderRadius: '10px',
           boxShadow: 'mediumspringgreen',
-          padding: '0px',
+          padding: '5px',
         }}
         id="appbg"
       >
+        <SoundBox />
         <SoundBox />
       </Container>
     </Container>

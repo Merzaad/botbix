@@ -42,27 +42,27 @@ export function Testbutton(props: { target: number }) {
   )
 }
 
-function DraggableItems({ record, index }: DragItem) {
+function DraggableItems({ item, index }: DragItem) {
   return (
-    <Draggable draggableId={record.id} index={index}>
+    <Draggable draggableId={item.id} index={index}>
       {(provided) => (
         <Container
           ref={provided.innerRef}
           {...provided.draggableProps}
           {...provided.dragHandleProps}
           sx={{
-            width: `${record.width}px`,
-            background: `${record.color}`,
+            width: `${item.width}px`,
+            background: `${item.color}`,
             height: '35px',
             borderRadius: '10px',
-            marginLeft: `${record.margin}px`,
+            marginLeft: `${item.margin}px`,
             marginBottom: '10px',
             display: 'flex',
             justifyContent: 'center',
             alignItems: 'center',
           }}
         >
-          {record.text !== 'initial' ? <Testbutton target={index} /> : null}
+          {item.text !== 'initial' ? <Testbutton target={index} /> : null}
         </Container>
       )}
     </Draggable>

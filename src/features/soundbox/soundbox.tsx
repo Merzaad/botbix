@@ -15,7 +15,9 @@ import RadioButtonCheckedOutlinedIcon from '@mui/icons-material/RadioButtonCheck
 import RadioButtonUncheckedOutlinedIcon from '@mui/icons-material/RadioButtonUncheckedOutlined'
 import { AudioPlayerIcons } from '../../app/types'
 import { useAppDispatch, useAppSelector } from '../../app/hooks'
-import { setIsActive, selectRecord } from './soundboxSlice'
+import {
+  setIsActive, selectRecord,
+} from './soundboxSlice'
 
 const icons: AudioPlayerIcons = {
   PlayIcon: PlayArrowIcon,
@@ -62,6 +64,7 @@ function SoundBox() {
   return (
     <Container
       sx={{
+        margin: 'auto',
         display: 'flex',
         flexDirection: 'row',
       }}

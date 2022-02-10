@@ -7,7 +7,7 @@ import { Container } from '@mui/material'
 import DraggableItems from './dragboxitem'
 import { DnDProps } from '../../app/types'
 
-const DnD = React.memo(({ records, onDragEnd }: DnDProps) => (
+const DnD = React.memo(({ items, onDragEnd }: DnDProps) => (
   <DragDropContext onDragEnd={onDragEnd}>
     <Droppable droppableId="droppable-list">
       {(provided) => (
@@ -20,8 +20,8 @@ const DnD = React.memo(({ records, onDragEnd }: DnDProps) => (
             width: '60%',
           }}
         >
-          {records.map((record, index) => (
-            <DraggableItems record={record} index={index} key={record.id} />
+          {items.map((item, index) => (
+            <DraggableItems item={item} index={index} key={item.id} />
           ))}
           {provided.placeholder}
         </Container>

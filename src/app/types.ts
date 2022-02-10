@@ -9,7 +9,7 @@ export type AudioPlayerIcons = {
   CloseIcon: any
 }
 export interface DragboxSlice {
-  records: {
+  items: {
     id: string
     title: string
     text: string
@@ -22,7 +22,7 @@ export interface DragboxSlice {
 }
 
 export type DnDProps = {
-  records: {
+  items: {
     id: string
     title: string
     text: string
@@ -35,7 +35,7 @@ export type DnDProps = {
 }
 
 export type DragItem = {
-  record: {
+  item: {
     id: string
     title: string
     text: string
