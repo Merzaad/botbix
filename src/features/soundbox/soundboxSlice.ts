@@ -27,14 +27,20 @@ export const soundboxSlice = createSlice({
           minute: 0,
           isActive: 0,
           counter: 0,
+          src: '',
         }
         x.records.push(z)
       }
+    },
+    setSrc: (state, action: PayloadAction<{ value: string | undefined, target: number }>) => {
+      const x = state.records
+      const y = action.payload
+      x[y.target].src = y.value
     },
   },
 })
 
 export const selectRecords = (state: RootState) => state.soundbox.records
 
-export const { setIsActive, rollSound } = soundboxSlice.actions
+export const { setIsActive, rollSound, setSrc } = soundboxSlice.actions
 export default soundboxSlice.reducer

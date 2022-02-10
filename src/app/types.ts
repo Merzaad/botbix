@@ -54,5 +54,6 @@ export interface SoundboxState {
     minute: number
     isActive: number
     counter: number
+    src: string | undefined
   }[]
 }

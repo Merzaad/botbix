@@ -37,7 +37,14 @@ function App() {
     }
     dispatch(reorder(x))
   }
-
+  const playAll = () => {
+    records.forEach((x) => {
+      const y = x.src
+      const z = new Audio(y)
+      const t = Number(items[Number(x.id)].margin) * 10
+      setTimeout(() => z.play(), t)
+    })
+  }
   return (
     <Container>
       <Container
@@ -73,6 +80,14 @@ function App() {
             }}
           >
             <CasinoOutlinedIcon />
+          </Button>
+          <Button
+            onClick={playAll}
+            sx={{
+              color: `${notWon ? 'white' : 'mediumspringgreen'}`,
+            }}
+          >
+            <PlayArrowIcon />
           </Button>
         </Container>
         <DnD items={items} onDragEnd={onDragEnd} />
@@ -118,20 +133,16 @@ function App() {
       </Container>
       <Container
         sx={{
-          display: 'flex',
-          flexDirection: 'column',
-          alignItems: 'center',
-          width: '800px',
+          width: '500px',
           marginTop: '5vh',
           borderRadius: '10px',
           boxShadow: 'mediumspringgreen',
-          padding: '50px',
-          gap: '30px;',
+          padding: '20px',
         }}
         id="appbg"
       >
         {records.map((i) => (
-          <SoundBox item={Number(i.id)} />
+          <SoundBox item={Number(i.id)} key={i.id} />
         ))}
       </Container>
     </Container>
