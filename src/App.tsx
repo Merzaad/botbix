@@ -78,16 +78,7 @@ function App() {
             <CasinoOutlinedIcon />
           </Button>
         </Container>
-        <Container
-          sx={{
-            display: 'flex',
-            flexDirection: 'column',
-            gap: '5px',
-            width: '60%',
-          }}
-        >
-          <DnD records={records} onDragEnd={onDragEnd} />
-        </Container>
+        <DnD records={records} onDragEnd={onDragEnd} />
         <Container
           sx={{
             display: 'flex',
