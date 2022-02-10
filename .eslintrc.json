@@ -16,6 +16,5 @@
     "react/jsx-filename-extension": [1, { "extensions": [".js", ".jsx", ".ts", ".tsx"] }],
     "semi": [2, "never"],
     "max-len": ["error", { "code": 130 }],
-    "linebreak-style": ["error", "windows"]
   }
 }
