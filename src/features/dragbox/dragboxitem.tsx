@@ -3,7 +3,7 @@
 /* eslint-disable import/extensions */
 import * as React from 'react'
 import { Draggable } from 'react-beautiful-dnd'
-import { Container } from '@mui/material'
+import { Container, IconButton } from '@mui/material'
 import ArrowForwardIosIcon from '@mui/icons-material/ArrowForwardIos'
 import ArrowBackIosIcon from '@mui/icons-material/ArrowBackIos'
 import { DragItem } from '../../app/types'
@@ -36,9 +36,13 @@ function DraggableItems({ item, index }: DragItem) {
             color: 'white',
           }}
         >
-          <ArrowBackIosIcon onClick={removeTime} />
+          <IconButton onClick={removeTime}>
+            <ArrowBackIosIcon />
+          </IconButton>
           {item.text !== 'initial' ? <RecordMenu item={item.id} /> : null}
-          <ArrowForwardIosIcon onClick={addTime} />
+          <IconButton onClick={addTime}>
+            <ArrowForwardIosIcon />
+          </IconButton>
         </Container>
       )}
     </Draggable>

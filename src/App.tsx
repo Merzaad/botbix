@@ -53,15 +53,14 @@ function App() {
           flexDirection: 'row',
           alignItems: 'center',
           width: '800px',
-          marginTop: '5vh',
-          minHeight: '500px',
+          marginTop: '10vh',
+          minHeight: '400px',
           borderRadius: '20px',
           gap: '10px',
           background: `${
             notWon
-              ? `linear-gradient(90deg, rgba(0, 255, 191, 0.1) 0%,
-              rgba(113, 238, 255, 0.1) 100%)`
-              : 'linear-gradient(90deg, rgba(130, 255, 92, 0.1) 0%, rgba(48, 255, 134, 0.1) 100%)'
+              ? 'linear-gradient(90deg, rgba(50,50,50,0.9) 0%, rgba(50,50,50,0.9) 100%)'
+              : 'linear-gradient(90deg, rgba(48, 150, 92, 0.5) 0%, rgba(48, 255, 134, 0.2) 100%)'
           }`,
         }}
       >

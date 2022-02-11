@@ -17,8 +17,7 @@ const DnD = React.memo(({ items, onDragEnd }: DnDProps) => (
           sx={{
             display: 'flex',
             flexDirection: 'column',
-            width: '60%',
-            gap: '10px',
+            width: '80%',
           }}
         >
           {items.map((item, index) => (

@@ -6,7 +6,7 @@ import PauseIcon from '@mui/icons-material/Pause'
 import StopIcon from '@mui/icons-material/Stop'
 import PlayArrowIcon from '@mui/icons-material/PlayArrow'
 import { useReactMediaRecorder } from 'react-media-recorder'
-import { Button, Container } from '@mui/material'
+import { IconButton, Container } from '@mui/material'
 import MicNoneOutlinedIcon from '@mui/icons-material/MicNoneOutlined'
 import RadioButtonCheckedOutlinedIcon from '@mui/icons-material/RadioButtonCheckedOutlined'
 import RadioButtonUncheckedOutlinedIcon from '@mui/icons-material/RadioButtonUncheckedOutlined'
@@ -55,37 +55,37 @@ function RecordBox(props: { item: number }) {
         borderRadius: '10px',
       }}
     >
-      <Button
+      <IconButton
         onClick={start}
         sx={{
           color: 'black',
         }}
       >
         <MicNoneOutlinedIcon />
-      </Button>
-      <Button
+      </IconButton>
+      <IconButton
         onClick={pause}
         sx={{
           color: 'black',
         }}
       >
         {record[item].isActive === 1 ? <PauseIcon /> : <PlayArrowIcon />}
-      </Button>
-      <Button
+      </IconButton>
+      <IconButton
         onClick={stop}
         sx={{
           color: 'black',
         }}
       >
         <StopIcon />
-      </Button>
-      <Button
+      </IconButton>
+      <IconButton
         sx={{
           color: 'black',
         }}
       >
         {record[item].isActive === 1 ? <RadioButtonCheckedOutlinedIcon /> : <RadioButtonUncheckedOutlinedIcon />}
-      </Button>
+      </IconButton>
     </Container>
   )
 }

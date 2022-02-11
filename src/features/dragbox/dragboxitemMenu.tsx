@@ -3,8 +3,9 @@
 import * as React from 'react'
 import Menu from '@mui/material/Menu'
 import MenuItem from '@mui/material/MenuItem'
-import { Button } from '@mui/material'
-import SoundBox from '../recordbox/recordbox'
+import { IconButton } from '@mui/material'
+import SettingsVoiceIcon from '@mui/icons-material/SettingsVoice'
+import RecordBox from '../recordbox/recordbox'
 
 export default function RecordMenu(props: { item: string }) {
   const { item } = props
@@ -20,15 +21,15 @@ export default function RecordMenu(props: { item: string }) {
 
   return (
     <div>
-      <Button
+      <IconButton
         id="basic-button"
         aria-controls={open ? 'basic-menu' : undefined}
         aria-haspopup="true"
         aria-expanded={open ? 'true' : undefined}
         onClick={handleClick}
       >
-        ...
-      </Button>
+        <SettingsVoiceIcon />
+      </IconButton>
       <Menu
         id="basic-menu"
         anchorEl={anchorEl}
@@ -39,7 +40,7 @@ export default function RecordMenu(props: { item: string }) {
         }}
       >
         <MenuItem>
-          <SoundBox item={Number(item)} />
+          <RecordBox item={Number(item)} />
         </MenuItem>
       </Menu>
     </div>
