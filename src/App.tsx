@@ -14,8 +14,7 @@ import QueueMusicIcon from '@mui/icons-material/QueueMusic'
 import DnD from './features/dragbox/dragbox'
 import { useAppSelector, useAppDispatch } from './app/hooks'
 import { selectItems, selectResult, reorder, rollDrag, reset } from './features/dragbox/dragboxSlice'
-import SoundBox from './features/soundbox/soundbox'
-import { selectRecords, rollSound } from './features/soundbox/soundboxSlice'
+import { selectRecords, rollSound } from './features/recordbox/recordboxSlice'
 
 function App() {
   const dispatch = useAppDispatch()
@@ -39,10 +38,11 @@ function App() {
   }
   const playAll = () => {
     items.forEach((x) => {
-      const { src } = records[Number(x.id)]
-      const audio = new Audio(src)
-      const timeout = Number(x.margin) * 10
-      setTimeout(() => audio.play(), timeout)
+      if (records[Number(x.id)].src) {
+        const audio = new Audio(records[Number(x.id)].src)
+        const timeout = Number(x.margin) * 10
+        setTimeout(() => audio.play(), timeout)
+      }
     })
   }
   return (
@@ -54,7 +54,7 @@ function App() {
           alignItems: 'center',
           width: '800px',
           marginTop: '5vh',
-          minHeight: '300px',
+          minHeight: '500px',
           borderRadius: '20px',
           gap: '10px',
           background: `${
@@ -69,7 +69,6 @@ function App() {
           sx={{
             display: 'flex',
             flexDirection: 'column',
-            gap: '5px',
             width: '20%',
           }}
         >
@@ -130,20 +129,6 @@ function App() {
             }}
           />
         </Container>
-      </Container>
-      <Container
-        sx={{
-          width: '500px',
-          marginTop: '5vh',
-          borderRadius: '10px',
-          boxShadow: 'mediumspringgreen',
-          padding: '20px',
-        }}
-        id="appbg"
-      >
-        {records.map((i) => (
-          <SoundBox item={Number(i.id)} key={i.id} />
-        ))}
       </Container>
     </Container>
   )

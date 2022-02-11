@@ -14,8 +14,8 @@ import QueueMusicIcon from '@mui/icons-material/QueueMusic'
 import DnD from './features/dragbox/dragbox'
 import { useAppSelector, useAppDispatch } from './app/hooks'
 import { selectItems, selectResult, reorder, rollDrag, reset } from './features/dragbox/dragboxSlice'
-import SoundBox from './features/soundbox/soundbox'
-import { selectRecords, rollSound } from './features/soundbox/soundboxSlice'
+import SoundBox from './features/recordbox/recordbox'
+import { selectRecords, rollSound } from './features/recordbox/recordboxSlice'
 
 function App() {
   const dispatch = useAppDispatch()

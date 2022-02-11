@@ -7,42 +7,15 @@ import { Container } from '@mui/material'
 import ArrowForwardIosIcon from '@mui/icons-material/ArrowForwardIos'
 import ArrowBackIosIcon from '@mui/icons-material/ArrowBackIos'
 import { DragItem } from '../../app/types'
+import RecordMenu from './dragboxitemMenu'
 import { useAppDispatch } from '../../app/hooks'
 import { addMargin, removeMargin } from './dragboxSlice'
 
-export function Testbutton(props: { target: number }) {
-  const { target } = props
-  const dispatch = useAppDispatch()
-  const addTime = () => dispatch(addMargin(target))
-  const removeTime = () => dispatch(removeMargin(target))
-  return (
-    <Container
-      sx={{
-        display: 'flex',
-        flexDirection: 'row',
-        justifyContent: 'center',
-        color: 'white',
-        gap: '20px',
-      }}
-    >
-      <ArrowBackIosIcon
-        sx={{
-          color: 'white',
-        }}
-        onClick={removeTime}
-      />
-
-      <ArrowForwardIosIcon
-        sx={{
-          color: 'white',
-        }}
-        onClick={addTime}
-      />
-    </Container>
-  )
-}
-
 function DraggableItems({ item, index }: DragItem) {
+  const dispatch = useAppDispatch()
+  const addTime = () => dispatch(addMargin(index))
+  const removeTime = () => dispatch(removeMargin(index))
+
   return (
     <Draggable draggableId={item.id} index={index}>
       {(provided) => (
@@ -53,16 +26,19 @@ function DraggableItems({ item, index }: DragItem) {
           sx={{
             width: `${item.width}px`,
             background: `${item.color}`,
-            height: '35px',
+            height: '40px',
             borderRadius: '10px',
             marginLeft: `${item.margin}px`,
             marginBottom: '10px',
             display: 'flex',
             justifyContent: 'center',
             alignItems: 'center',
+            color: 'white',
           }}
         >
-          {item.text !== 'initial' ? <Testbutton target={index} /> : null}
+          <ArrowBackIosIcon onClick={removeTime} />
+          {item.text !== 'initial' ? <RecordMenu item={item.id} /> : null}
+          <ArrowForwardIosIcon onClick={addTime} />
         </Container>
       )}
     </Draggable>

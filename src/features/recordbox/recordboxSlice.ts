@@ -3,13 +3,13 @@
 
 import { createSlice, PayloadAction } from '@reduxjs/toolkit'
 import { RootState } from '../../app/store'
-import { SoundboxState } from '../../app/types'
+import { RecordboxState } from '../../app/types'
 
-const initialState: SoundboxState = {
+const initialState: RecordboxState = {
   records: [],
 }
-export const soundboxSlice = createSlice({
-  name: 'soundbox',
+export const recordboxSlice = createSlice({
+  name: 'recordbox',
   initialState,
   reducers: {
     setIsActive: (state, action: PayloadAction<{ value: number; target: number }>) => {
@@ -31,7 +31,7 @@ export const soundboxSlice = createSlice({
         x.records.push(z)
       }
     },
-    setSrc: (state, action: PayloadAction<{ value: string | undefined, target: number }>) => {
+    setSrc: (state, action: PayloadAction<{ value: string | undefined; target: number }>) => {
       const x = state.records
       const y = action.payload
       x[y.target].src = y.value
@@ -39,7 +39,7 @@ export const soundboxSlice = createSlice({
   },
 })
 
-export const selectRecords = (state: RootState) => state.soundbox.records
+export const selectRecords = (state: RootState) => state.recordbox.records
 
-export const { setIsActive, rollSound, setSrc } = soundboxSlice.actions
-export default soundboxSlice.reducer
+export const { setIsActive, rollSound, setSrc } = recordboxSlice.actions
+export default recordboxSlice.reducer

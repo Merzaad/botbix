@@ -6,17 +6,7 @@ import { RootState } from '../../app/store'
 import { DragboxSlice } from '../../app/types'
 
 const initialState: DragboxSlice = {
-  items: [
-    {
-      id: '0',
-      title: '',
-      text: 'initial',
-      color: '',
-      game: '',
-      width: '',
-      margin: 0,
-    },
-  ],
+  items: [],
   result: [],
 }
 
@@ -49,7 +39,7 @@ export const dragboxSlice = createSlice({
           text: `text${i}`,
           color: `rgb(${y},254,200,.9)`,
           game: `${y}`,
-          width: `${i * 50 + 100}`,
+          width: `${i * 50 + 120}`,
           margin: 0,
         }
         x.items.push(z)
@@ -64,7 +54,7 @@ export const dragboxSlice = createSlice({
       const id = action.payload
       const w = Number(x.items[id].width)
       const m = Number(x.items[id].margin)
-      if (m >= 0 && m < (5 - (w - 100) / 50) * 50) {
+      if (m >= 0 && m < (5 - (w - 120) / 50) * 50) {
         x.items[id].margin += 50
       }
     },

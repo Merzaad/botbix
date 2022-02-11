@@ -11,9 +11,9 @@ import MicNoneOutlinedIcon from '@mui/icons-material/MicNoneOutlined'
 import RadioButtonCheckedOutlinedIcon from '@mui/icons-material/RadioButtonCheckedOutlined'
 import RadioButtonUncheckedOutlinedIcon from '@mui/icons-material/RadioButtonUncheckedOutlined'
 import { useAppDispatch, useAppSelector } from '../../app/hooks'
-import { setIsActive, selectRecords, setSrc } from './soundboxSlice'
+import { setIsActive, selectRecords, setSrc } from './recordboxSlice'
 
-function SoundBox(props: { item: number }) {
+function RecordBox(props: { item: number }) {
   const { item } = props
   const dispatch = useAppDispatch()
   const record = useAppSelector(selectRecords)
@@ -46,13 +46,11 @@ function SoundBox(props: { item: number }) {
     stopRecording()
   }
   React.useEffect(() => {
-    const x = mediaBlobUrl || undefined
-    dispatch(setSrc({ value: x, target: item }))
+    if (mediaBlobUrl !== null) dispatch(setSrc({ value: mediaBlobUrl, target: item }))
   })
   return (
     <Container
       sx={{
-        color: 'white',
         border: '1px solid',
         borderRadius: '10px',
       }}
@@ -60,7 +58,7 @@ function SoundBox(props: { item: number }) {
       <Button
         onClick={start}
         sx={{
-          color: 'white',
+          color: 'black',
         }}
       >
         <MicNoneOutlinedIcon />
@@ -68,7 +66,7 @@ function SoundBox(props: { item: number }) {
       <Button
         onClick={pause}
         sx={{
-          color: 'white',
+          color: 'black',
         }}
       >
         {record[item].isActive === 1 ? <PauseIcon /> : <PlayArrowIcon />}
@@ -76,14 +74,14 @@ function SoundBox(props: { item: number }) {
       <Button
         onClick={stop}
         sx={{
-          color: 'white',
+          color: 'black',
         }}
       >
         <StopIcon />
       </Button>
       <Button
         sx={{
-          color: 'white',
+          color: 'black',
         }}
       >
         {record[item].isActive === 1 ? <RadioButtonCheckedOutlinedIcon /> : <RadioButtonUncheckedOutlinedIcon />}
@@ -91,4 +89,4 @@ function SoundBox(props: { item: number }) {
     </Container>
   )
 }
-export default SoundBox
+export default RecordBox

@@ -47,7 +47,7 @@ export type DragItem = {
   index: number
 }
 
-export interface SoundboxState {
+export interface RecordboxState {
   records: {
     id: string
     second: number
