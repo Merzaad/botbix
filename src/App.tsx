@@ -38,11 +38,11 @@ function App() {
     dispatch(reorder(x))
   }
   const playAll = () => {
-    records.forEach((x) => {
-      const y = x.src
-      const z = new Audio(y)
-      const t = Number(items[Number(x.id)].margin) * 10
-      setTimeout(() => z.play(), t)
+    items.forEach((x) => {
+      const { src } = records[Number(x.id)]
+      const audio = new Audio(src)
+      const timeout = Number(x.margin) * 10
+      setTimeout(() => audio.play(), timeout)
     })
   }
   return (
