@@ -10,6 +10,7 @@ import { IconButton, Container } from '@mui/material'
 import MicNoneOutlinedIcon from '@mui/icons-material/MicNoneOutlined'
 import RadioButtonCheckedOutlinedIcon from '@mui/icons-material/RadioButtonCheckedOutlined'
 import RadioButtonUncheckedOutlinedIcon from '@mui/icons-material/RadioButtonUncheckedOutlined'
+import DeleteForeverOutlinedIcon from '@mui/icons-material/DeleteForeverOutlined'
 import { useAppDispatch, useAppSelector } from '../../app/hooks'
 import { setIsActive, selectRecords, setSrc } from './recordboxSlice'
 
@@ -45,16 +46,21 @@ function RecordBox(props: { item: number }) {
     dispatch(setIsActive({ value: 0, target: item }))
     stopRecording()
   }
+  const remove = () => {
+    dispatch(setSrc({ value: undefined, target: item }))
+  }
   React.useEffect(() => {
     if (mediaBlobUrl !== null) dispatch(setSrc({ value: mediaBlobUrl, target: item }))
   })
   return (
-    <Container
-      sx={{
-        border: '1px solid',
-        borderRadius: '10px',
-      }}
-    >
+    <Container>
+      <IconButton
+        sx={{
+          color: 'black',
+        }}
+      >
+        {record[item].isActive === 1 ? <RadioButtonCheckedOutlinedIcon /> : <RadioButtonUncheckedOutlinedIcon />}
+      </IconButton>
       <IconButton
         onClick={start}
         sx={{
@@ -80,11 +86,12 @@ function RecordBox(props: { item: number }) {
         <StopIcon />
       </IconButton>
       <IconButton
+        onClick={remove}
         sx={{
           color: 'black',
         }}
       >
-        {record[item].isActive === 1 ? <RadioButtonCheckedOutlinedIcon /> : <RadioButtonUncheckedOutlinedIcon />}
+        <DeleteForeverOutlinedIcon />
       </IconButton>
     </Container>
   )

@@ -26,10 +26,10 @@ function DraggableItems({ item, index }: DragItem) {
           sx={{
             width: `${item.width}px`,
             background: `${item.color}`,
-            height: '40px',
+            height: '50px',
             borderRadius: '10px',
             marginLeft: `${item.margin}px`,
-            marginBottom: '10px',
+            marginBottom: '5px',
             display: 'flex',
             justifyContent: 'center',
             alignItems: 'center',

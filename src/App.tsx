@@ -7,10 +7,12 @@ import { DropResult } from 'react-beautiful-dnd'
 import { Container, Button } from '@mui/material'
 import PauseIcon from '@mui/icons-material/Pause'
 import PlayArrowIcon from '@mui/icons-material/PlayArrow'
-import SportsEsportsOutlinedIcon from '@mui/icons-material/SportsEsportsOutlined'
 import CasinoOutlinedIcon from '@mui/icons-material/CasinoOutlined'
-import DisplaySettingsIcon from '@mui/icons-material/DisplaySettings'
-import QueueMusicIcon from '@mui/icons-material/QueueMusic'
+import VideogameAssetTwoToneIcon from '@mui/icons-material/VideogameAssetTwoTone'
+import SportsSoccerTwoToneIcon from '@mui/icons-material/SportsSoccerTwoTone'
+import SportsEsportsTwoToneIcon from '@mui/icons-material/SportsEsportsTwoTone'
+import ToysTwoToneIcon from '@mui/icons-material/ToysTwoTone'
+import ExtensionTwoToneIcon from '@mui/icons-material/ExtensionTwoTone'
 import DnD from './features/dragbox/dragbox'
 import { useAppSelector, useAppDispatch } from './app/hooks'
 import { selectItems, selectResult, reorder, rollDrag, reset } from './features/dragbox/dragboxSlice'
@@ -60,7 +62,7 @@ function App() {
           background: `${
             notWon
               ? 'linear-gradient(90deg, rgba(50,50,50,0.9) 0%, rgba(50,50,50,0.9) 100%)'
-              : 'linear-gradient(90deg, rgba(48, 150, 92, 0.5) 0%, rgba(48, 255, 134, 0.2) 100%)'
+              : 'linear-gradient(90deg, rgba(48, 100, 92, 0.5) 0%, rgba(48, 200, 134, 0.2) 100%)'
           }`,
         }}
       >
@@ -77,7 +79,14 @@ function App() {
               color: `${notWon ? 'white' : 'mediumspringgreen'}`,
             }}
           >
-            <CasinoOutlinedIcon />
+            <CasinoOutlinedIcon fontSize="large" />
+          </Button>
+          <Button
+            sx={{
+              color: `${notWon ? 'white' : 'mediumspringgreen'}`,
+            }}
+          >
+            <PauseIcon fontSize="large" />
           </Button>
           <Button
             onClick={playAll}
@@ -85,7 +94,7 @@ function App() {
               color: `${notWon ? 'white' : 'mediumspringgreen'}`,
             }}
           >
-            <PlayArrowIcon />
+            <PlayArrowIcon fontSize="large" />
           </Button>
         </Container>
         <DnD items={items} onDragEnd={onDragEnd} />
@@ -97,31 +106,31 @@ function App() {
             width: '20%',
           }}
         >
-          <DisplaySettingsIcon
+          <SportsSoccerTwoToneIcon
             fontSize="large"
             sx={{
               color: `${color(0)}`,
             }}
           />
-          <QueueMusicIcon
+          <VideogameAssetTwoToneIcon
             fontSize="large"
             sx={{
               color: `${color(1)}`,
             }}
           />
-          <SportsEsportsOutlinedIcon
+          <SportsEsportsTwoToneIcon
             fontSize="large"
             sx={{
               color: `${color(2)}`,
             }}
           />
-          <PauseIcon
+          <ExtensionTwoToneIcon
             fontSize="large"
             sx={{
               color: `${color(3)}`,
             }}
           />
-          <PlayArrowIcon
+          <ToysTwoToneIcon
             fontSize="large"
             sx={{
               color: `${color(4)}`,

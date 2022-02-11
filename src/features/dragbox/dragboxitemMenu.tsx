@@ -39,7 +39,13 @@ export default function RecordMenu(props: { item: string }) {
           'aria-labelledby': 'basic-button',
         }}
       >
-        <MenuItem>
+        <MenuItem
+          sx={{
+            padding: '0px',
+            margin: '0',
+            height: '30px',
+          }}
+        >
           <RecordBox item={Number(item)} />
         </MenuItem>
       </Menu>
