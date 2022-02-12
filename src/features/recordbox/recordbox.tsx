@@ -15,8 +15,8 @@ import { useAppDispatch, useAppSelector } from '../../app/hooks'
 import { setIsActive, selectRecords, setSrc, addSecond, resetSecond } from './recordboxSlice'
 import { addWidth, resetWidth, resetMargin } from '../dragbox/dragboxSlice'
 
-function RecordBox(props: { item: number }) {
-  const { item } = props
+function RecordBox(props: { item: number, index: number }) {
+  const { item, index } = props
   const dispatch = useAppDispatch()
   const record = useAppSelector(selectRecords)
   const { pauseRecording, resumeRecording, startRecording, stopRecording, mediaBlobUrl } = useReactMediaRecorder({
@@ -50,15 +50,15 @@ function RecordBox(props: { item: number }) {
   const remove = () => {
     stop()
     dispatch(setSrc({ value: '', target: item }))
-    dispatch(resetWidth(item))
+    dispatch(resetWidth(index))
     dispatch(resetSecond(item))
-    dispatch(resetMargin(item))
+    dispatch(resetMargin(index))
   }
   React.useEffect(() => {
     const timer = setInterval(() => {
       if (record[item].isActive === 1) {
         dispatch(addSecond(item))
-        dispatch(addWidth(item))
+        dispatch(addWidth(index))
       }
     }, 1000)
     return () => clearInterval(timer)
@@ -81,10 +81,9 @@ function RecordBox(props: { item: number }) {
         sx={{
           color: 'black',
         }}
-        disabled={!!record[item].second}
+        disabled={!!record[item].src}
       >
         <MicNoneOutlinedIcon />
-        {record[item].second}
       </IconButton>
       <IconButton
         onClick={pause}

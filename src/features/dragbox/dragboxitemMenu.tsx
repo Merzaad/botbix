@@ -12,9 +12,9 @@ import {
 } from '../recordbox/recordboxSlice'
 import { resetWidth, resetMargin } from '../dragbox/dragboxSlice'
 
-export default function RecordMenu(props: { item: number }) {
+export default function RecordMenu(props: { item: number, index: number }) {
   const dispatch = useAppDispatch()
-  const { item } = props
+  const { item, index } = props
   const records = useAppSelector(selectRecords)
   const [anchorEl, setAnchorEl] = React.useState<null | HTMLElement>(null)
   const open = Boolean(anchorEl)
@@ -26,9 +26,9 @@ export default function RecordMenu(props: { item: number }) {
     if (!records[item].src) {
       dispatch(setIsActive({ value: 0, target: item }))
       dispatch(setSrc({ value: undefined, target: item }))
-      dispatch(resetWidth(item))
+      dispatch(resetWidth(index))
       dispatch(resetSecond(item))
-      dispatch(resetMargin(item))
+      dispatch(resetMargin(index))
     }
   }
 
@@ -59,7 +59,7 @@ export default function RecordMenu(props: { item: number }) {
             height: '30px',
           }}
         >
-          <RecordBox item={item} />
+          <RecordBox item={item} index={index} />
         </MenuItem>
       </Menu>
     </div>

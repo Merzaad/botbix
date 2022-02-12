@@ -46,7 +46,7 @@ function DraggableItems({ item, index }: DragItem) {
               />
             )
             : null}
-          <RecordMenu item={item.id} />
+          <RecordMenu item={item.id} index={index} />
 
           {item.width > 50
             ? (
