@@ -11,7 +11,7 @@
     },
     "ecmaVersion": "latest"
   },
-  "plugins": ["react", "@typescript-eslint"],
+  "plugins": ["react"],
   "rules": {
     "react/jsx-filename-extension": [1, { "extensions": [".js", ".jsx", ".ts", ".tsx"] }],
     "semi": [2, "never"],
