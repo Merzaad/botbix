@@ -81,7 +81,7 @@ function RecordBox(props: { item: number, index: number }) {
         sx={{
           color: 'black',
         }}
-        disabled={!!record[item].src}
+        disabled={!!record[item].second}
       >
         <MicNoneOutlinedIcon />
       </IconButton>
