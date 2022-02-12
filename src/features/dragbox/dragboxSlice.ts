@@ -8,6 +8,7 @@ import { DragboxSlice } from '../../app/types'
 const initialState: DragboxSlice = {
   items: [],
   result: [],
+  reapeatPlay: false,
 }
 
 export const dragboxSlice = createSlice({
@@ -78,11 +79,17 @@ export const dragboxSlice = createSlice({
       const target = action.payload
       x.items[target].width += 50
     },
+    toggleRepeatPLay: (state) => {
+      const x = state
+      x.reapeatPlay = !!x.reapeatPlay === false
+    },
   },
 })
 
 export const selectItems = (state: RootState) => state.dragbox.items
 export const selectResult = (state: RootState) => state.dragbox.result
+export const selectRepeatPlay = (state: RootState) => state.dragbox.reapeatPlay
 
-export const { reorder, rollDrag, resetWidth, addMargin, removeMargin, addWidth, resetMargin } = dragboxSlice.actions
+export const {
+  reorder, rollDrag, resetWidth, addMargin, removeMargin, addWidth, resetMargin, toggleRepeatPLay } = dragboxSlice.actions
 export default dragboxSlice.reducer

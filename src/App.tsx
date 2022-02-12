@@ -6,7 +6,8 @@ import * as React from 'react'
 import { DropResult } from 'react-beautiful-dnd'
 import { Container, Button } from '@mui/material'
 import PauseIcon from '@mui/icons-material/Pause'
-import PlayArrowIcon from '@mui/icons-material/PlayArrow'
+import RepeatOnOutlinedIcon from '@mui/icons-material/RepeatOnOutlined'
+import RepeatOneOnOutlinedIcon from '@mui/icons-material/RepeatOneOnOutlined'
 import CasinoOutlinedIcon from '@mui/icons-material/CasinoOutlined'
 import VideogameAssetTwoToneIcon from '@mui/icons-material/VideogameAssetTwoTone'
 import SportsSoccerTwoToneIcon from '@mui/icons-material/SportsSoccerTwoTone'
@@ -15,13 +16,16 @@ import ToysTwoToneIcon from '@mui/icons-material/ToysTwoTone'
 import ExtensionTwoToneIcon from '@mui/icons-material/ExtensionTwoTone'
 import DnD from './features/dragbox/dragbox'
 import { useAppSelector, useAppDispatch } from './app/hooks'
-import { selectItems, selectResult, reorder, rollDrag, resetWidth } from './features/dragbox/dragboxSlice'
+import {
+  selectItems, selectResult, reorder, rollDrag, resetWidth, toggleRepeatPLay, selectRepeatPlay,
+} from './features/dragbox/dragboxSlice'
 import { selectRecords, rollSound } from './features/recordbox/recordboxSlice'
 
 function App() {
   const dispatch = useAppDispatch()
   const items = useAppSelector(selectItems)
   const result = useAppSelector(selectResult)
+  const repeatPlay = useAppSelector(selectRepeatPlay)
   const records = useAppSelector(selectRecords)
   const notWon = localStorage.getItem('gameResult')?.split(',').includes('false')
   const resetHandler = () => {
@@ -47,6 +51,15 @@ function App() {
       }
     })
   }
+  const reapeat = () => {
+    dispatch(toggleRepeatPLay())
+  }
+  React.useEffect(() => {
+    const repeat = setInterval(() => {
+      if (repeatPlay) playAll()
+    }, 2000)
+    return () => clearInterval(repeat)
+  }, [repeatPlay])
   return (
     <Container>
       <Container
@@ -82,11 +95,12 @@ function App() {
             <CasinoOutlinedIcon fontSize="large" />
           </Button>
           <Button
+            onClick={reapeat}
             sx={{
               color: `${notWon ? 'white' : 'mediumspringgreen'}`,
             }}
           >
-            <PauseIcon fontSize="large" />
+            {repeatPlay ? <PauseIcon fontSize="large" /> : <RepeatOnOutlinedIcon fontSize="large" /> }
           </Button>
           <Button
             onClick={playAll}
@@ -94,7 +108,7 @@ function App() {
               color: `${notWon ? 'white' : 'mediumspringgreen'}`,
             }}
           >
-            <PlayArrowIcon fontSize="large" />
+            <RepeatOneOnOutlinedIcon fontSize="large" />
           </Button>
         </Container>
         <DnD items={items} onDragEnd={onDragEnd} />

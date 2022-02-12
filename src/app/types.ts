@@ -19,6 +19,7 @@ export interface DragboxSlice {
     margin: number
   }[]
   result: boolean[]
+  reapeatPlay: boolean
 }
 
 export type DnDProps = {
