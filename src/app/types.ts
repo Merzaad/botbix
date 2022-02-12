@@ -10,12 +10,12 @@ export type AudioPlayerIcons = {
 }
 export interface DragboxSlice {
   items: {
-    id: string
+    id: number
     title: string
     text: string
     color: string
     game: string
-    width: string
+    width: number
     margin: number
   }[]
   result: boolean[]
@@ -23,12 +23,12 @@ export interface DragboxSlice {
 
 export type DnDProps = {
   items: {
-    id: string
+    id: number
     title: string
     text: string
     color: string
     game: string
-    width: string
+    width: number
     margin: number
   }[]
   onDragEnd: OnDragEndResponder
@@ -36,12 +36,12 @@ export type DnDProps = {
 
 export type DragItem = {
   item: {
-    id: string
+    id: number
     title: string
     text: string
     color: string
     game: string
-    width: string
+    width: number
     margin: number
   }
   index: number
@@ -49,9 +49,8 @@ export type DragItem = {
 
 export interface RecordboxState {
   records: {
-    id: string
+    id: number
     second: number
-    minute: number
     isActive: number
     counter: number
     src: string | undefined

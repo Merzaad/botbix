@@ -15,7 +15,7 @@ import ToysTwoToneIcon from '@mui/icons-material/ToysTwoTone'
 import ExtensionTwoToneIcon from '@mui/icons-material/ExtensionTwoTone'
 import DnD from './features/dragbox/dragbox'
 import { useAppSelector, useAppDispatch } from './app/hooks'
-import { selectItems, selectResult, reorder, rollDrag, reset } from './features/dragbox/dragboxSlice'
+import { selectItems, selectResult, reorder, rollDrag, resetWidth } from './features/dragbox/dragboxSlice'
 import { selectRecords, rollSound } from './features/recordbox/recordboxSlice'
 
 function App() {
@@ -25,7 +25,7 @@ function App() {
   const records = useAppSelector(selectRecords)
   const notWon = localStorage.getItem('gameResult')?.split(',').includes('false')
   const resetHandler = () => {
-    dispatch(reset())
+    items.forEach((i) => dispatch(resetWidth(i.id)))
     dispatch(rollDrag())
     dispatch(rollSound())
   }
@@ -40,9 +40,9 @@ function App() {
   }
   const playAll = () => {
     items.forEach((x) => {
-      if (records[Number(x.id)].src) {
-        const audio = new Audio(records[Number(x.id)].src)
-        const timeout = Number(x.margin) * 10
+      if (records[x.id].src) {
+        const audio = new Audio(records[x.id].src)
+        const timeout = x.margin * 10
         setTimeout(() => audio.play(), timeout)
       }
     })

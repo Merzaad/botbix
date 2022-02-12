@@ -3,16 +3,17 @@
 /* eslint-disable import/no-unresolved */
 import * as React from 'react'
 import PauseIcon from '@mui/icons-material/Pause'
-import StopIcon from '@mui/icons-material/Stop'
 import PlayArrowIcon from '@mui/icons-material/PlayArrow'
 import { useReactMediaRecorder } from 'react-media-recorder'
 import { IconButton, Container } from '@mui/material'
 import MicNoneOutlinedIcon from '@mui/icons-material/MicNoneOutlined'
 import RadioButtonCheckedOutlinedIcon from '@mui/icons-material/RadioButtonCheckedOutlined'
 import RadioButtonUncheckedOutlinedIcon from '@mui/icons-material/RadioButtonUncheckedOutlined'
+import SaveAltIcon from '@mui/icons-material/SaveAlt'
 import DeleteForeverOutlinedIcon from '@mui/icons-material/DeleteForeverOutlined'
 import { useAppDispatch, useAppSelector } from '../../app/hooks'
-import { setIsActive, selectRecords, setSrc } from './recordboxSlice'
+import { setIsActive, selectRecords, setSrc, addSecond, resetSecond } from './recordboxSlice'
+import { addWidth, resetWidth, resetMargin } from '../dragbox/dragboxSlice'
 
 function RecordBox(props: { item: number }) {
   const { item } = props
@@ -47,11 +48,25 @@ function RecordBox(props: { item: number }) {
     stopRecording()
   }
   const remove = () => {
-    dispatch(setSrc({ value: undefined, target: item }))
+    stop()
+    dispatch(setSrc({ value: '', target: item }))
+    dispatch(resetWidth(item))
+    dispatch(resetSecond(item))
+    dispatch(resetMargin(item))
   }
   React.useEffect(() => {
+    const timer = setInterval(() => {
+      if (record[item].isActive === 1) {
+        dispatch(addSecond(item))
+        dispatch(addWidth(item))
+      }
+    }, 1000)
+    return () => clearInterval(timer)
+  }, [record[item].isActive])
+  React.useEffect(() => {
+    if (record[item].second >= 6) pause()
     if (mediaBlobUrl !== null) dispatch(setSrc({ value: mediaBlobUrl, target: item }))
-  })
+  }, [mediaBlobUrl, record[item].second])
   return (
     <Container>
       <IconButton
@@ -66,8 +81,10 @@ function RecordBox(props: { item: number }) {
         sx={{
           color: 'black',
         }}
+        disabled={!!record[item].second}
       >
         <MicNoneOutlinedIcon />
+        {record[item].second}
       </IconButton>
       <IconButton
         onClick={pause}
@@ -83,13 +100,14 @@ function RecordBox(props: { item: number }) {
           color: 'black',
         }}
       >
-        <StopIcon />
+        <SaveAltIcon />
       </IconButton>
       <IconButton
         onClick={remove}
         sx={{
           color: 'black',
         }}
+        disabled={!record[item].src}
       >
         <DeleteForeverOutlinedIcon />
       </IconButton>

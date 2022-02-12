@@ -6,10 +6,16 @@ import MenuItem from '@mui/material/MenuItem'
 import { IconButton } from '@mui/material'
 import SettingsVoiceIcon from '@mui/icons-material/SettingsVoice'
 import RecordBox from '../recordbox/recordbox'
+import { useAppDispatch, useAppSelector } from '../../app/hooks'
+import {
+  setIsActive, selectRecords, setSrc, resetSecond,
+} from '../recordbox/recordboxSlice'
+import { resetWidth, resetMargin } from '../dragbox/dragboxSlice'
 
-export default function RecordMenu(props: { item: string }) {
+export default function RecordMenu(props: { item: number }) {
+  const dispatch = useAppDispatch()
   const { item } = props
-
+  const records = useAppSelector(selectRecords)
   const [anchorEl, setAnchorEl] = React.useState<null | HTMLElement>(null)
   const open = Boolean(anchorEl)
   const handleClick = (event: React.MouseEvent<HTMLButtonElement>) => {
@@ -17,6 +23,13 @@ export default function RecordMenu(props: { item: string }) {
   }
   const handleClose = () => {
     setAnchorEl(null)
+    if (!records[item].src) {
+      dispatch(setIsActive({ value: 0, target: item }))
+      dispatch(setSrc({ value: undefined, target: item }))
+      dispatch(resetWidth(item))
+      dispatch(resetSecond(item))
+      dispatch(resetMargin(item))
+    }
   }
 
   return (
@@ -46,7 +59,7 @@ export default function RecordMenu(props: { item: string }) {
             height: '30px',
           }}
         >
-          <RecordBox item={Number(item)} />
+          <RecordBox item={item} />
         </MenuItem>
       </Menu>
     </div>

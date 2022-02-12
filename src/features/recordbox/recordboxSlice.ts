@@ -21,9 +21,8 @@ export const recordboxSlice = createSlice({
       x.records = []
       for (let i = 0; i < 6; i += 1) {
         const z = {
-          id: `${i}`,
+          id: i,
           second: 0,
-          minute: 0,
           isActive: 0,
           counter: 0,
           src: '',
@@ -36,10 +35,22 @@ export const recordboxSlice = createSlice({
       const y = action.payload
       x[y.target].src = y.value
     },
+    addSecond: (state, action: PayloadAction<number>) => {
+      const x = state.records
+      const target = action.payload
+      x[target].second += 1
+    },
+    resetSecond: (state, action: PayloadAction<number>) => {
+      const x = state.records
+      const target = action.payload
+      x[target].second = 0
+    },
   },
 })
 
 export const selectRecords = (state: RootState) => state.recordbox.records
 
-export const { setIsActive, rollSound, setSrc } = recordboxSlice.actions
+export const {
+  setIsActive, rollSound, setSrc, addSecond, resetSecond,
+} = recordboxSlice.actions
 export default recordboxSlice.reducer

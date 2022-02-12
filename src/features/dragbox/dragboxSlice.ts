@@ -34,38 +34,49 @@ export const dragboxSlice = createSlice({
       for (let i = 0; i < 6; i += 1) {
         const y = Math.random() * 200
         const z = {
-          id: `${i}`,
+          id: i,
           title: `title${i}`,
           text: `text${i}`,
           color: `rgb(${y},254,200,.9)`,
           game: `${y}`,
-          width: `${i * 50 + 150}`,
+          width: 50,
           margin: 0,
         }
         x.items.push(z)
       }
     },
-    reset: (state) => {
+    resetWidth: (state, action: PayloadAction<number>) => {
       const x = state
-      x.items = []
+      const target = action.payload
+      x.items[target].width = 50
+    },
+    resetMargin: (state, action: PayloadAction<number>) => {
+      const x = state
+      const target = action.payload
+      x.items[target].margin = 0
     },
     addMargin: (state, action: PayloadAction<number>) => {
       const x = state
       const id = action.payload
-      const w = Number(x.items[id].width)
-      const m = Number(x.items[id].margin)
-      if (m >= 0 && m < (5 - (w - 150) / 50) * 50) {
+      const w = x.items[id].width
+      const m = x.items[id].margin
+      if (m >= 0 && m < (5 - (w - 100) / 50) * 50) {
         x.items[id].margin += 50
       }
     },
     removeMargin: (state, action: PayloadAction<number>) => {
       const x = state
       const id = action.payload
-      const w = Number(x.items[id].width)
-      const m = Number(x.items[id].margin)
+      const w = x.items[id].width
+      const m = x.items[id].margin
       if (m > 0 && m > ((w - 100) / 50 - 5) * 50) {
         x.items[id].margin -= 50
       }
+    },
+    addWidth: (state, action: PayloadAction<number>) => {
+      const x = state
+      const target = action.payload
+      x.items[target].width += 50
     },
   },
 })
@@ -73,5 +84,5 @@ export const dragboxSlice = createSlice({
 export const selectItems = (state: RootState) => state.dragbox.items
 export const selectResult = (state: RootState) => state.dragbox.result
 
-export const { reorder, rollDrag, reset, addMargin, removeMargin } = dragboxSlice.actions
+export const { reorder, rollDrag, resetWidth, addMargin, removeMargin, addWidth, resetMargin } = dragboxSlice.actions
 export default dragboxSlice.reducer

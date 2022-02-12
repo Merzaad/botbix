@@ -3,7 +3,7 @@
 /* eslint-disable import/extensions */
 import * as React from 'react'
 import { Draggable } from 'react-beautiful-dnd'
-import { Container, IconButton } from '@mui/material'
+import { Container } from '@mui/material'
 import ArrowForwardIosIcon from '@mui/icons-material/ArrowForwardIos'
 import ArrowBackIosIcon from '@mui/icons-material/ArrowBackIos'
 import { DragItem } from '../../app/types'
@@ -17,7 +17,7 @@ function DraggableItems({ item, index }: DragItem) {
   const removeTime = () => dispatch(removeMargin(index))
 
   return (
-    <Draggable draggableId={item.id} index={index}>
+    <Draggable draggableId={String(item.id)} index={index}>
       {(provided) => (
         <Container
           ref={provided.innerRef}
@@ -36,13 +36,28 @@ function DraggableItems({ item, index }: DragItem) {
             color: 'white',
           }}
         >
-          <IconButton onClick={removeTime}>
-            <ArrowBackIosIcon />
-          </IconButton>
-          {item.text !== 'initial' ? <RecordMenu item={item.id} /> : null}
-          <IconButton onClick={addTime}>
-            <ArrowForwardIosIcon />
-          </IconButton>
+          {item.width > 50
+            ? (
+              <ArrowBackIosIcon
+                onClick={removeTime}
+                sx={{
+                  color: 'rgba(0, 0, 0, 0.5)',
+                }}
+              />
+            )
+            : null}
+          <RecordMenu item={item.id} />
+
+          {item.width > 50
+            ? (
+              <ArrowForwardIosIcon
+                onClick={addTime}
+                sx={{
+                  color: 'rgba(0, 0, 0, 0.5)',
+                }}
+              />
+            )
+            : null}
         </Container>
       )}
     </Draggable>
