@@ -55,9 +55,10 @@ function App() {
     dispatch(toggleRepeatPLay())
   }
   React.useEffect(() => {
+    if (repeatPlay) playAll()
     const repeat = setInterval(() => {
       if (repeatPlay) playAll()
-    }, 2000)
+    }, 4400)
     return () => clearInterval(repeat)
   }, [repeatPlay])
   return (
