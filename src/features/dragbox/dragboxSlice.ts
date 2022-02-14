@@ -61,7 +61,7 @@ export const dragboxSlice = createSlice({
       const id = action.payload
       const w = x.items[id].width
       const m = x.items[id].margin
-      if (m >= 0 && m < (5 - (w - 100) / 50) * 50) {
+      if (m >= 0 && m < 350 - w) {
         x.items[id].margin += 50
       }
     },
@@ -70,14 +70,14 @@ export const dragboxSlice = createSlice({
       const id = action.payload
       const w = x.items[id].width
       const m = x.items[id].margin
-      if (m > 0 && m > ((w - 100) / 50 - 5) * 50) {
+      if (m > 0 && m > w - 350) {
         x.items[id].margin -= 50
       }
     },
     addWidth: (state, action: PayloadAction<number>) => {
       const x = state
-      const target = action.payload
-      x.items[target].width += 50
+      const id = action.payload
+      x.items[id].width += 50
     },
     toggleRepeatPLay: (state) => {
       const x = state
@@ -91,5 +91,6 @@ export const selectResult = (state: RootState) => state.dragbox.result
 export const selectRepeatPlay = (state: RootState) => state.dragbox.reapeatPlay
 
 export const {
-  reorder, rollDrag, resetWidth, addMargin, removeMargin, addWidth, resetMargin, toggleRepeatPLay } = dragboxSlice.actions
+  reorder, rollDrag, resetWidth, addMargin, removeMargin, addWidth, resetMargin, toggleRepeatPLay,
+} = dragboxSlice.actions
 export default dragboxSlice.reducer

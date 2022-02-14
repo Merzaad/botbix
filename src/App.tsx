@@ -17,7 +17,13 @@ import ExtensionTwoToneIcon from '@mui/icons-material/ExtensionTwoTone'
 import DnD from './features/dragbox/dragbox'
 import { useAppSelector, useAppDispatch } from './app/hooks'
 import {
-  selectItems, selectResult, reorder, rollDrag, resetWidth, toggleRepeatPLay, selectRepeatPlay,
+  selectItems,
+  selectResult,
+  reorder,
+  rollDrag,
+  resetWidth,
+  toggleRepeatPLay,
+  selectRepeatPlay,
 } from './features/dragbox/dragboxSlice'
 import { selectRecords, rollSound } from './features/recordbox/recordboxSlice'
 
@@ -75,7 +81,7 @@ function App() {
           gap: '10px',
           background: `${
             notWon
-              ? 'linear-gradient(90deg, rgba(50,50,50,0.9) 0%, rgba(50,50,50,0.9) 100%)'
+              ? 'linear-gradient(90deg, rgba(110,120,110,0.8) 0%, rgba(120,150,120,0.8) 100%)'
               : 'linear-gradient(90deg, rgba(48, 100, 92, 0.5) 0%, rgba(48, 200, 134, 0.2) 100%)'
           }`,
         }}
@@ -101,7 +107,7 @@ function App() {
               color: `${notWon ? 'white' : 'mediumspringgreen'}`,
             }}
           >
-            {repeatPlay ? <PauseIcon fontSize="large" /> : <RepeatOnOutlinedIcon fontSize="large" /> }
+            {repeatPlay ? <PauseIcon fontSize="large" /> : <RepeatOnOutlinedIcon fontSize="large" />}
           </Button>
           <Button
             onClick={playAll}

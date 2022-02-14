@@ -1,13 +1,5 @@
 import { OnDragEndResponder } from 'react-beautiful-dnd'
 
-export type AudioPlayerIcons = {
-  PlayIcon: any
-  ReplayIcon: any
-  PauseIcon: any
-  VolumeUpIcon: any
-  VolumeOffIcon: any
-  CloseIcon: any
-}
 export interface DragboxSlice {
   items: {
     id: number
@@ -56,4 +48,16 @@ export interface RecordboxState {
     counter: number
     src: string | undefined
   }[]
+}
+export interface PlayBoxSlice {
+  bars: {
+    id: number
+    title: string
+    text: string
+    color: string
+    width: number
+    margin: number
+    src: string
+}[]
+selectedBarId: number | null
 }
