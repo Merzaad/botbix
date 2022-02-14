@@ -12,7 +12,7 @@ function App2() {
       sx={{
         position: 'fixed',
         bottom: '0',
-        height: '45%',
+        height: '60%',
         width: '100%',
         background: 'white',
       }}

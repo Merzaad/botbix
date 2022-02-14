@@ -2,7 +2,7 @@
 /* eslint-disable import/no-unresolved */
 import * as React from 'react'
 import {
-  IconButton, Paper, Button,
+  IconButton, Paper, Button, Slider,
 } from '@mui/material'
 import DeleteForeverOutlinedIcon from '@mui/icons-material/DeleteForeverOutlined'
 import RadioButtonCheckedTwoToneIcon from '@mui/icons-material/RadioButtonCheckedTwoTone'
@@ -11,16 +11,20 @@ import { useReactMediaRecorder } from 'react-media-recorder'
 import PlayCircleOutlineOutlinedIcon from '@mui/icons-material/PlayCircleOutlineOutlined'
 import { useAppDispatch, useAppSelector } from '../../app/hooks'
 import {
-  addWidth, resetWidth, selectedBarId, addSrc, removeSrc, selectBars,
+  addWidth, resetWidth, selectedBarId, addSrc, removeSrc, selectBars, setMargin, setRecording,
 } from './playboxSlice'
 
 function PlayboxMenu() {
   const [preUrl, setPreUrl] = React.useState('')
+
   const bars = useAppSelector(selectBars)
   const dispatch = useAppDispatch()
   const selectedId = useAppSelector(selectedBarId)
+  const marginValue = selectedId !== null ? bars[selectedId].margin / 10 : 0
+  const selectedColor = selectedId !== null ? bars[selectedId].color : 'black'
+
   const {
-    startRecording, stopRecording, status, mediaBlobUrl,
+    startRecording, stopRecording, status, mediaBlobUrl, clearBlobUrl,
   } = useReactMediaRecorder({
     video: false,
     audio: true,
@@ -28,9 +32,14 @@ function PlayboxMenu() {
   const record = () => {
     if (selectedId !== null) {
       if (preUrl === '') {
-        if (status !== 'recording') startRecording()
+        if (status !== 'recording') {
+          dispatch(addWidth(-20))
+          startRecording()
+          dispatch(setRecording(true))
+        }
         if (status === 'recording') {
           stopRecording()
+          dispatch(setRecording(false))
         }
       }
     }
@@ -48,13 +57,30 @@ function PlayboxMenu() {
     if (selectedId !== null) {
       dispatch(resetWidth())
       dispatch(removeSrc())
+      dispatch(setMargin(0))
       setPreUrl('')
+      clearBlobUrl()
     }
   }
+  const delay = (event: Event, currentValue: number | number[]) => {
+    if (selectedId !== null) {
+      dispatch(setMargin(currentValue as number * 10))
+    }
+  }
+  const playAll = () => {
+    bars.forEach((x) => {
+      if (bars[x.id].src) {
+        const audio = new Audio(bars[x.id].src)
+        const timeout = x.margin * 90
+        setTimeout(() => audio.play(), timeout)
+      }
+    })
+  }
   React.useEffect(() => {
+    dispatch(addWidth(5))
     const timer = setInterval(() => {
       if (status === 'recording') {
-        dispatch(addWidth(50))
+        dispatch(addWidth(5))
       }
     }, 500)
     return () => clearTimeout(timer)
@@ -91,7 +117,7 @@ function PlayboxMenu() {
           padding: '10px',
           display: 'flex',
           flexDirection: 'row',
-          justifyContent: 'right',
+          justifyContent: 'center',
           gap: '5px',
           height: '15%',
         }}
@@ -118,6 +144,7 @@ function PlayboxMenu() {
           sx={{
             color: 'black',
           }}
+          disabled={preUrl === ''}
         >
           <DeleteForeverOutlinedIcon />
         </IconButton>
@@ -133,23 +160,32 @@ function PlayboxMenu() {
         }}
         elevation={0}
       >
-        <Button
-          color="secondary"
-          variant="contained"
-        >
-          +5 seconds
-        </Button>
-        <Button
-          color="info"
-          variant="contained"
-        >
-          -5 seconds
-        </Button>
+        <Slider
+          valueLabelDisplay="auto"
+          value={marginValue}
+          step={2}
+          min={0}
+          max={180}
+          onChange={delay}
+          sx={{
+            color: `${selectedColor}`,
+          }}
+        />
         <Button
           color="warning"
-          variant="contained"
+          variant="outlined"
         >
-          repeat
+          +repeat
+        </Button>
+        <Button
+          color="error"
+          variant="outlined"
+          sx={{
+            marginTop: '50px',
+          }}
+          onClick={playAll}
+        >
+          play
         </Button>
       </Paper>
     </Paper>

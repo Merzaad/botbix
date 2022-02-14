@@ -28,7 +28,6 @@ function Playbox() {
           sx={{
             height: '100%',
           }}
-          elevation={0}
         >
           <PlayboxMenu />
         </Paper>
@@ -38,6 +37,8 @@ function Playbox() {
           bottom: '0',
           width: '80%',
           display: 'grid',
+          overflow: 'scroll',
+
         }}
       >
         <Paper
@@ -52,9 +53,7 @@ function Playbox() {
             sx={{
               height: '15%',
             }}
-          >
-            Hello
-          </Paper>
+          />
           <Paper
             sx={{
               height: '85%',

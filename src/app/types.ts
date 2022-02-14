@@ -60,4 +60,5 @@ export interface PlayBoxSlice {
     src: string
 }[]
 selectedBarId: number | null
+recording: boolean
 }
