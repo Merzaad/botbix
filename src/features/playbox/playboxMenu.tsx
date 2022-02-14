@@ -2,26 +2,27 @@
 /* eslint-disable import/no-unresolved */
 import * as React from 'react'
 import {
-  IconButton, Paper, Button, Slider,
+  Paper, Button, Slider,
 } from '@mui/material'
 import DeleteForeverOutlinedIcon from '@mui/icons-material/DeleteForeverOutlined'
 import RadioButtonCheckedTwoToneIcon from '@mui/icons-material/RadioButtonCheckedTwoTone'
 import RadioButtonUncheckedTwoToneIcon from '@mui/icons-material/RadioButtonUncheckedTwoTone'
 import { useReactMediaRecorder } from 'react-media-recorder'
-import PlayCircleOutlineOutlinedIcon from '@mui/icons-material/PlayCircleOutlineOutlined'
+import PlayArrowRoundedIcon from '@mui/icons-material/PlayArrowRounded'
 import { useAppDispatch, useAppSelector } from '../../app/hooks'
 import {
-  addWidth, resetWidth, selectedBarId, addSrc, removeSrc, selectBars, setMargin, setRecording,
+  addWidth, resetWidth, selectedBarId, addSrc, removeSrc, selectBars, setMargin, setRecording, setPlaying, selectPlaying,
 } from './playboxSlice'
 
 function PlayboxMenu() {
   const [preUrl, setPreUrl] = React.useState('')
 
   const bars = useAppSelector(selectBars)
+  const playing = useAppSelector(selectPlaying)
   const dispatch = useAppDispatch()
   const selectedId = useAppSelector(selectedBarId)
   const marginValue = selectedId !== null ? bars[selectedId].margin / 10 : 0
-  const selectedColor = selectedId !== null ? bars[selectedId].color : 'black'
+  const selectedColor = selectedId !== null ? bars[selectedId].color : 'gray'
 
   const {
     startRecording, stopRecording, status, mediaBlobUrl, clearBlobUrl,
@@ -72,12 +73,17 @@ function PlayboxMenu() {
       if (bars[x.id].src) {
         const audio = new Audio(bars[x.id].src)
         const timeout = x.margin * 90
-        setTimeout(() => audio.play(), timeout)
+        if (!playing) {
+          setTimeout(() => audio.play(), timeout)
+          dispatch(setPlaying(true))
+        } else {
+          audio.pause()
+          dispatch(setPlaying(false))
+        }
       }
     })
   }
   React.useEffect(() => {
-    dispatch(addWidth(5))
     const timer = setInterval(() => {
       if (status === 'recording') {
         dispatch(addWidth(5))
@@ -123,31 +129,31 @@ function PlayboxMenu() {
         }}
         elevation={0}
       >
-        <IconButton
+        <Button
           onClick={record}
           sx={{
-            color: 'black',
+            color: selectedColor,
           }}
         >
           {status === 'recording' ? <RadioButtonCheckedTwoToneIcon /> : <RadioButtonUncheckedTwoToneIcon /> }
-        </IconButton>
-        <IconButton
+        </Button>
+        <Button
           onClick={play}
           sx={{
-            color: 'black',
+            color: selectedColor,
           }}
         >
-          <PlayCircleOutlineOutlinedIcon />
-        </IconButton>
-        <IconButton
+          <PlayArrowRoundedIcon fontSize="large" />
+        </Button>
+        <Button
           onClick={remove}
           sx={{
-            color: 'black',
+            color: selectedColor,
           }}
           disabled={preUrl === ''}
         >
-          <DeleteForeverOutlinedIcon />
-        </IconButton>
+          <DeleteForeverOutlinedIcon fontSize="large" />
+        </Button>
       </Paper>
       <Paper
         sx={{
@@ -172,8 +178,11 @@ function PlayboxMenu() {
           }}
         />
         <Button
-          color="warning"
           variant="outlined"
+          color="inherit"
+          sx={{
+            color: selectedColor,
+          }}
         >
           +repeat
         </Button>
@@ -185,7 +194,7 @@ function PlayboxMenu() {
           }}
           onClick={playAll}
         >
-          play
+          { !playing ? 'Play All' : 'Back to 0'}
         </Button>
       </Paper>
     </Paper>

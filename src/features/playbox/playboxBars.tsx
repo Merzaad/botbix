@@ -22,9 +22,9 @@ function PlayboxBars() {
         key={bar.id}
         sx={{
           height: '35px',
-          background: `${bar.src !== '' ? bar.color : 'gray'}`,
+          background: `${bar.src !== '' ? bar.color : 'rgb(0,0,0,0.2)'}`,
           width: `${bar.width}px`,
-          marginLeft: `${bar.margin}px`,
+          marginLeft: `${bar.margin + 10}px`,
           boxShadow: `${bar.id === selectedId ? `0px 0px 5px ${bar.color}` : 'none'}`,
           cursor: 'pointer',
         }}

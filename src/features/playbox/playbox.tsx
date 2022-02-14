@@ -6,6 +6,7 @@ import Paper from '@mui/material/Paper'
 import { Box } from '@material-ui/core'
 import PlayboxBars from './playboxBars'
 import PlayboxMenu from './playboxMenu'
+import Timer from './playboxTimer'
 
 function Playbox() {
   return (
@@ -53,7 +54,9 @@ function Playbox() {
             sx={{
               height: '15%',
             }}
-          />
+          >
+            <Timer />
+          </Paper>
           <Paper
             sx={{
               height: '85%',
