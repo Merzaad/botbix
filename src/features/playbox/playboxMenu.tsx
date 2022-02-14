@@ -69,20 +69,23 @@ function PlayboxMenu() {
     }
   }
   const playAll = () => {
-    bars.forEach((x) => {
-      if (bars[x.id].src) {
-        const audio = new Audio(bars[x.id].src)
-        const timeout = x.margin * 90
-        if (!playing) {
-          setTimeout(() => audio.play(), timeout)
+    if (!playing) {
+      const longestWidth = bars.map((i) => i.width).sort((a, b) => b - a)[0]
+      const longestMargin = bars.map((i) => i.margin).sort((a, b) => b - a)[0]
+      bars.forEach((x) => {
+        if (bars[x.id].src) {
+          const audio = new Audio(bars[x.id].src)
+          const timeout = x.margin * 100
           dispatch(setPlaying(true))
-        } else {
-          audio.pause()
-          dispatch(setPlaying(false))
+          setTimeout(() => audio.play(), timeout)
         }
-      }
-    })
+      })
+      setTimeout(() => {
+        dispatch(setPlaying(false))
+      }, longestWidth * 100 + longestMargin * 100)
+    } else dispatch(setPlaying(false))
   }
+
   React.useEffect(() => {
     const timer = setInterval(() => {
       if (status === 'recording') {
