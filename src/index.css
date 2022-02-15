@@ -9,7 +9,7 @@ body {
   -moz-osx-font-smoothing: grayscale;
   background-image: url('../public/bg.jpg');
   background-repeat: repeat;
-  background-size: 700px;
+  background-size: 600px;
 }
 
 code {

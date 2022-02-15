@@ -214,8 +214,13 @@ function PlayboxMenu() {
           variant="contained"
           sx={{
             background: 'linear-gradient(90deg, rgba(255,68,186,0.5) 0%, rgba(106,0,106,0.5) 100%)',
+            marginTop: '30px',
           }}
-          onClick={() => dispatch(setPlaying(!playing))}
+          onClick={() => {
+            if (bars.filter((i) => i.src !== '').length > 0) {
+              dispatch(setPlaying(!playing))
+            }
+          }}
         >
           {!playing ? <PlaylistPlayIcon fontSize="large" /> : <StopIcon fontSize="large" />}
         </Button>

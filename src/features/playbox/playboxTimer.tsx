@@ -13,10 +13,11 @@ function Timer() {
     <Paper
       sx={{
         position: 'absolute',
-        height: '310px',
+        height: '650%',
         width: '1px',
         marginLeft: `${margin}px`,
         background: 'rgb(255,0,0,0.7)',
+        zIndex: '1',
       }}
     />
   )
@@ -26,7 +27,7 @@ function Timer() {
         key={i}
         sx={{
           width: '2px',
-          backgroundColor: 'rgb(0,0,0,0.5)',
+          backgroundColor: 'rgb(0,0,0,0.3)',
         }}
       />,
     )
@@ -50,6 +51,7 @@ function Timer() {
         padding: '10px',
         position: 'relative',
       }}
+      elevation={0}
     >
       {movingThing}
       {times}

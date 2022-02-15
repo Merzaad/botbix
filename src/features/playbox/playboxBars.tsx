@@ -37,7 +37,7 @@ function PlayboxBars() {
               position: 'absolute',
               left: '0',
               top: '12px',
-              height: '4px',
+              height: '10px',
               width: `${1790 - bar.margin}px`,
               background: `${bar.src !== '' ? bar.color : 'rgb(0,0,0,0.2)'}`,
             }}

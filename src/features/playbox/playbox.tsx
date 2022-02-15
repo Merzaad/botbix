@@ -56,6 +56,7 @@ function Playbox() {
             sx={{
               height: '15%',
             }}
+            elevation={0}
           >
             <Timer />
           </Paper>
