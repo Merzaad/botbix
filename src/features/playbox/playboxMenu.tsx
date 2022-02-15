@@ -1,13 +1,16 @@
 /* eslint-disable import/extensions */
 /* eslint-disable import/no-unresolved */
 import * as React from 'react'
+import { useReactMediaRecorder } from 'react-media-recorder'
 import {
   Paper, Button, Slider,
 } from '@mui/material'
 import DeleteForeverOutlinedIcon from '@mui/icons-material/DeleteForeverOutlined'
 import RadioButtonCheckedTwoToneIcon from '@mui/icons-material/RadioButtonCheckedTwoTone'
 import RadioButtonUncheckedTwoToneIcon from '@mui/icons-material/RadioButtonUncheckedTwoTone'
-import { useReactMediaRecorder } from 'react-media-recorder'
+import PlaylistPlayIcon from '@mui/icons-material/PlaylistPlay'
+import EmojiSymbolsIcon from '@mui/icons-material/EmojiSymbols'
+import RepeatIcon from '@mui/icons-material/Repeat'
 import PlayArrowRoundedIcon from '@mui/icons-material/PlayArrowRounded'
 import { useAppDispatch, useAppSelector } from '../../app/hooks'
 import {
@@ -68,30 +71,12 @@ function PlayboxMenu() {
       dispatch(setMargin(currentValue as number * 10))
     }
   }
-  const playAll = () => {
-    if (!playing) {
-      const longestWidth = bars.map((i) => i.width).sort((a, b) => b - a)[0]
-      const longestMargin = bars.map((i) => i.margin).sort((a, b) => b - a)[0]
-      bars.forEach((x) => {
-        if (bars[x.id].src) {
-          const audio = new Audio(bars[x.id].src)
-          const timeout = x.margin * 100
-          dispatch(setPlaying(true))
-          setTimeout(() => audio.play(), timeout)
-        }
-      })
-      setTimeout(() => {
-        dispatch(setPlaying(false))
-      }, longestWidth * 100 + longestMargin * 100)
-    } else dispatch(setPlaying(false))
-  }
-
   React.useEffect(() => {
     const timer = setInterval(() => {
       if (status === 'recording') {
-        dispatch(addWidth(5))
+        dispatch(addWidth(1.25))
       }
-    }, 500)
+    }, 125)
     return () => clearTimeout(timer)
   }, [status])
   React.useEffect(() => {
@@ -109,6 +94,30 @@ function PlayboxMenu() {
       }
     }
   }, [selectedId])
+  React.useEffect(() => {
+    const data = bars.map((x) => new Audio(x.src))
+    const delay2 = bars.map((x) => x.margin)
+    const one = setTimeout(() => { if (playing) data[0].play() }, delay2[0] * 100)
+    const two = setTimeout(() => { if (playing) data[1].play() }, delay2[1] * 100)
+    const three = setTimeout(() => { if (playing) data[2].play() }, delay2[2] * 100)
+    const four = setTimeout(() => { if (playing) data[3].play() }, delay2[3] * 100)
+    const five = setTimeout(() => { if (playing) data[4].play() }, delay2[4] * 100)
+    const six = setTimeout(() => { if (playing) data[5].play() }, delay2[5] * 100)
+    return () => {
+      data[0].pause()
+      data[1].pause()
+      data[2].pause()
+      data[3].pause()
+      data[4].pause()
+      data[5].pause()
+      clearTimeout(one)
+      clearTimeout(two)
+      clearTimeout(three)
+      clearTimeout(four)
+      clearTimeout(five)
+      clearTimeout(six)
+    }
+  }, [playing])
   return (
     <Paper
       sx={{
@@ -164,7 +173,7 @@ function PlayboxMenu() {
           display: 'flex',
           flexDirection: 'column',
           justifyContent: 'center',
-          gap: '5px',
+          gap: '30px',
           height: '85%',
         }}
         elevation={0}
@@ -178,6 +187,8 @@ function PlayboxMenu() {
           onChange={delay}
           sx={{
             color: `${selectedColor}`,
+            height: '1px',
+            padding: '0px',
           }}
         />
         <Button
@@ -187,17 +198,16 @@ function PlayboxMenu() {
             color: selectedColor,
           }}
         >
-          +repeat
+          <RepeatIcon />
         </Button>
         <Button
-          color="error"
-          variant="outlined"
+          variant="contained"
           sx={{
-            marginTop: '50px',
+            background: 'linear-gradient(90deg, rgba(255,68,186,0.5) 0%, rgba(106,0,106,0.5) 100%)',
           }}
-          onClick={playAll}
+          onClick={() => dispatch(setPlaying(!playing))}
         >
-          { !playing ? 'Play All' : 'Back to 0'}
+          {!playing ? <PlaylistPlayIcon fontSize="large" /> : <EmojiSymbolsIcon fontSize="large" />}
         </Button>
       </Paper>
     </Paper>

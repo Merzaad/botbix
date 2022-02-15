@@ -14,19 +14,19 @@ function Timer() {
       sx={{
         position: 'absolute',
         height: '60vh',
-        backgroundColor: 'red',
         width: '1px',
         marginLeft: `${margin}px`,
+        background: 'rgb(255,0,0,0.7)',
       }}
     />
   )
-  for (let i = 0; i < 180; i += 1) {
+  for (let i = 0; i < 90; i += 1) {
     times.push(
       <Paper
         key={i}
         sx={{
-          width: '1px',
-          backgroundColor: 'black',
+          width: '2px',
+          backgroundColor: 'rgb(0,0,0,0.5)',
         }}
       />,
     )
@@ -35,9 +35,9 @@ function Timer() {
     if (!playing) setMargin(0)
     const timer = setInterval(() => {
       if (playing) {
-        setMargin(margin + 5)
+        setMargin(margin + 10)
       }
-    }, 500)
+    }, 1000)
     return () => clearTimeout(timer)
   }, [playing, margin])
   return (
@@ -45,7 +45,7 @@ function Timer() {
       sx={{
         display: 'flex',
         flexDirection: 'row',
-        gap: '9.74px',
+        gap: '18px',
         height: '100%',
         padding: '10px',
         position: 'relative',

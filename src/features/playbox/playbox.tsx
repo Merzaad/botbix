@@ -29,6 +29,7 @@ function Playbox() {
           sx={{
             height: '100%',
           }}
+          elevation={1}
         >
           <PlayboxMenu />
         </Paper>
