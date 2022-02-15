@@ -9,7 +9,7 @@ import DeleteForeverOutlinedIcon from '@mui/icons-material/DeleteForeverOutlined
 import RadioButtonCheckedTwoToneIcon from '@mui/icons-material/RadioButtonCheckedTwoTone'
 import RadioButtonUncheckedTwoToneIcon from '@mui/icons-material/RadioButtonUncheckedTwoTone'
 import PlaylistPlayIcon from '@mui/icons-material/PlaylistPlay'
-import EmojiSymbolsIcon from '@mui/icons-material/EmojiSymbols'
+import StopIcon from '@mui/icons-material/Stop'
 import RepeatIcon from '@mui/icons-material/Repeat'
 import PlayArrowRoundedIcon from '@mui/icons-material/PlayArrowRounded'
 import { useAppDispatch, useAppSelector } from '../../app/hooks'
@@ -96,26 +96,17 @@ function PlayboxMenu() {
   }, [selectedId])
   React.useEffect(() => {
     const data = bars.map((x) => new Audio(x.src))
-    const delay2 = bars.map((x) => x.margin)
-    const one = setTimeout(() => { if (playing) data[0].play() }, delay2[0] * 100)
-    const two = setTimeout(() => { if (playing) data[1].play() }, delay2[1] * 100)
-    const three = setTimeout(() => { if (playing) data[2].play() }, delay2[2] * 100)
-    const four = setTimeout(() => { if (playing) data[3].play() }, delay2[3] * 100)
-    const five = setTimeout(() => { if (playing) data[4].play() }, delay2[4] * 100)
-    const six = setTimeout(() => { if (playing) data[5].play() }, delay2[5] * 100)
+    const timeOuts: any[] = []
+    bars.forEach((x) => {
+      timeOuts.push(setTimeout(() => { if (playing) data[x.id].play() }, x.margin * 100))
+    })
     return () => {
-      data[0].pause()
-      data[1].pause()
-      data[2].pause()
-      data[3].pause()
-      data[4].pause()
-      data[5].pause()
-      clearTimeout(one)
-      clearTimeout(two)
-      clearTimeout(three)
-      clearTimeout(four)
-      clearTimeout(five)
-      clearTimeout(six)
+      data.forEach((x) => {
+        x.pause()
+      })
+      timeOuts.forEach((x) => {
+        clearTimeout(x)
+      })
     }
   }, [playing])
   return (
@@ -128,7 +119,7 @@ function PlayboxMenu() {
         gap: '5px',
         height: '100%',
       }}
-      elevation={0}
+      elevation={1}
     >
       <Paper
         sx={{
@@ -207,7 +198,7 @@ function PlayboxMenu() {
           }}
           onClick={() => dispatch(setPlaying(!playing))}
         >
-          {!playing ? <PlaylistPlayIcon fontSize="large" /> : <EmojiSymbolsIcon fontSize="large" />}
+          {!playing ? <PlaylistPlayIcon fontSize="large" /> : <StopIcon fontSize="large" />}
         </Button>
       </Paper>
     </Paper>
