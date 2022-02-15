@@ -14,7 +14,8 @@ import RepeatIcon from '@mui/icons-material/Repeat'
 import PlayArrowRoundedIcon from '@mui/icons-material/PlayArrowRounded'
 import { useAppDispatch, useAppSelector } from '../../app/hooks'
 import {
-  addWidth, resetWidth, selectedBarId, addSrc, removeSrc, selectBars, setMargin, setRecording, setPlaying, selectPlaying,
+  addWidth, resetWidth, selectedBarId, addSrc,
+  removeSrc, selectBars, setMargin, setRecording, setPlaying, selectPlaying, setRepeat,
 } from './playboxSlice'
 
 function PlayboxMenu() {
@@ -26,7 +27,11 @@ function PlayboxMenu() {
   const selectedId = useAppSelector(selectedBarId)
   const marginValue = selectedId !== null ? bars[selectedId].margin / 10 : 0
   const selectedColor = selectedId !== null ? bars[selectedId].color : 'gray'
-
+  const repeatBtnVariant = () => {
+    if (selectedId !== null && bars[selectedId].repeat) {
+      return 'outlined'
+    } return 'text'
+  }
   const {
     startRecording, stopRecording, status, mediaBlobUrl, clearBlobUrl,
   } = useReactMediaRecorder({
@@ -71,12 +76,17 @@ function PlayboxMenu() {
       dispatch(setMargin(currentValue as number * 10))
     }
   }
+  const repeat = () => {
+    if (selectedId !== null) {
+      dispatch(setRepeat(!bars[selectedId].repeat))
+    }
+  }
   React.useEffect(() => {
     const timer = setInterval(() => {
       if (status === 'recording') {
-        dispatch(addWidth(1.25))
+        dispatch(addWidth(2.5))
       }
-    }, 125)
+    }, 250)
     return () => clearTimeout(timer)
   }, [status])
   React.useEffect(() => {
@@ -97,8 +107,12 @@ function PlayboxMenu() {
   React.useEffect(() => {
     const data = bars.map((x) => new Audio(x.src))
     const timeOuts: any[] = []
+    const repeats: any[] = []
     bars.forEach((x) => {
-      timeOuts.push(setTimeout(() => { if (playing) data[x.id].play() }, x.margin * 100))
+      timeOuts.push(setTimeout(() => { if (playing && !x.repeat) data[x.id].play() }, x.margin * 100))
+      timeOuts.push(setTimeout(() => {
+        if (playing && x.repeat) { repeats.push(setInterval(() => { data[x.id].play() }, x.width * 7)) }
+      }, x.margin * 100))
     })
     return () => {
       data.forEach((x) => {
@@ -106,6 +120,9 @@ function PlayboxMenu() {
       })
       timeOuts.forEach((x) => {
         clearTimeout(x)
+      })
+      repeats.forEach((x) => {
+        clearInterval(x)
       })
     }
   }, [playing])
@@ -177,17 +194,18 @@ function PlayboxMenu() {
           max={180}
           onChange={delay}
           sx={{
-            color: `${selectedColor}`,
+            color: selectedColor,
             height: '1px',
             padding: '0px',
           }}
         />
         <Button
-          variant="outlined"
+          variant={repeatBtnVariant()}
           color="inherit"
           sx={{
             color: selectedColor,
           }}
+          onClick={repeat}
         >
           <RepeatIcon />
         </Button>

@@ -27,9 +27,24 @@ function PlayboxBars() {
           marginLeft: `${bar.margin + 10}px`,
           boxShadow: `${bar.id === selectedId ? `0px 0px 5px ${bar.color}` : 'none'}`,
           cursor: 'pointer',
+          position: 'relative',
         }}
         elevation={0}
-      />
+      >
+        {bar.repeat ? (
+          <Paper
+            sx={{
+              position: 'absolute',
+              left: '0',
+              top: '12px',
+              height: '4px',
+              width: `${1790 - bar.margin}px`,
+              background: `${bar.src !== '' ? bar.color : 'rgb(0,0,0,0.2)'}`,
+            }}
+            elevation={0}
+          />
+        ) : null}
+      </Paper>
     )
   })
   return (

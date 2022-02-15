@@ -13,7 +13,7 @@ function Timer() {
     <Paper
       sx={{
         position: 'absolute',
-        height: '60vh',
+        height: '310px',
         width: '1px',
         marginLeft: `${margin}px`,
         background: 'rgb(255,0,0,0.7)',
