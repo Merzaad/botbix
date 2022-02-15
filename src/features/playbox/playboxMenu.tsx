@@ -66,6 +66,7 @@ function PlayboxMenu() {
     if (selectedId !== null) {
       dispatch(resetWidth())
       dispatch(removeSrc())
+      dispatch(setRepeat(false))
       dispatch(setMargin(0))
       setPreUrl('')
       clearBlobUrl()
@@ -77,7 +78,7 @@ function PlayboxMenu() {
     }
   }
   const repeat = () => {
-    if (selectedId !== null) {
+    if (selectedId !== null && bars[selectedId].src !== '') {
       dispatch(setRepeat(!bars[selectedId].repeat))
     }
   }
