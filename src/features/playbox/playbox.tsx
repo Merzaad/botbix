@@ -29,7 +29,7 @@ function Playbox() {
           sx={{
             height: '100%',
           }}
-          elevation={1}
+          elevation={0}
         >
           <PlayboxMenu />
         </Paper>
@@ -50,6 +50,7 @@ function Playbox() {
             flexDirection: 'column',
             gap: '7px',
           }}
+          elevation={0}
         >
           <Paper
             sx={{
