@@ -153,7 +153,7 @@ function PlayboxMenu() {
         <ButtonGroup
           color="inherit"
           sx={{
-            height: '50px',
+            height: '60px',
           }}
         >
           <Button

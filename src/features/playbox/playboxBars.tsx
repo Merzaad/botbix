@@ -21,7 +21,7 @@ function PlayboxBars() {
         onClick={select}
         key={bar.id}
         sx={{
-          height: '35px',
+          height: '25px',
           background: `${bar.src !== '' ? bar.color : '#c0c0c0'}`,
           width: `${bar.width}px`,
           marginLeft: `${bar.margin + 10}px`,
@@ -36,8 +36,8 @@ function PlayboxBars() {
             sx={{
               position: 'absolute',
               left: '0',
-              top: '12px',
-              height: '10px',
+              top: '0px',
+              height: '25px',
               width: `${1790 - bar.margin}px`,
               background: `${bar.src !== '' ? bar.color : 'rgb(0,0,0,0.2)'}`,
               boxShadow: `${bar.id === selectedId ? `0px 0px 5px
@@ -54,7 +54,7 @@ function PlayboxBars() {
       sx={{
         display: 'flex',
         flexDirection: 'column',
-        gap: '8px',
+        gap: '15px',
         width: '100%',
       }}
       elevation={0}
