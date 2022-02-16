@@ -137,7 +137,7 @@ function PlayboxMenu() {
         gap: '5px',
         height: '100%',
       }}
-      elevation={1}
+      elevation={0}
     >
       <Paper
         sx={{
@@ -212,8 +212,8 @@ function PlayboxMenu() {
         </Button>
         <Button
           variant="contained"
+          id="playAll"
           sx={{
-            background: 'linear-gradient(90deg, rgba(255,68,186,0.5) 0%, rgba(106,0,106,0.5) 100%)',
             marginTop: '30px',
           }}
           onClick={() => {
