@@ -20,13 +20,12 @@ function PlayboxBars() {
     if (mousedown) dispatch(addMargin(e.movementX * 0.6))
   }
   const items = bars.map((bar) => {
-    const select = () => {
-      setMousedown(true)
-      if (!recording) dispatch(selectBar(bar.id))
-    }
+    const select = () => { if (!recording) dispatch(selectBar(bar.id)) }
+    const down = () => setMousedown(true)
     return (
       <Paper
         onClick={select}
+        onMouseDown={down}
         key={bar.id}
         sx={{
           height: '25px',
@@ -60,7 +59,6 @@ function PlayboxBars() {
   return (
     <Paper
       onMouseMove={(e) => move(e)}
-      onMouseLeave={leave}
       onMouseUp={leave}
       sx={{
         display: 'flex',

@@ -3,7 +3,7 @@
 import * as React from 'react'
 import { useReactMediaRecorder } from 'react-media-recorder'
 import {
-  Paper, Button, Slider, ButtonGroup,
+  Paper, Button, ButtonGroup,
 } from '@mui/material'
 import DeleteForeverOutlinedIcon from '@mui/icons-material/DeleteForeverOutlined'
 import RadioButtonCheckedTwoToneIcon from '@mui/icons-material/RadioButtonCheckedTwoTone'
@@ -25,7 +25,6 @@ function PlayboxMenu() {
   const playing = useAppSelector(selectPlaying)
   const dispatch = useAppDispatch()
   const selectedId = useAppSelector(selectedBarId)
-  const marginValue = selectedId !== null ? bars[selectedId].margin / 10 : 0
   const selectedColor = selectedId !== null ? bars[selectedId].color : 'gray'
   const repeatBtnVariant = () => {
     if (selectedId !== null && bars[selectedId].repeat) {
@@ -66,11 +65,6 @@ function PlayboxMenu() {
       dispatch(setMargin(0))
       setPreUrl('')
       clearBlobUrl()
-    }
-  }
-  const delay = (event: Event, currentValue: number | number[]) => {
-    if (selectedId !== null) {
-      dispatch(setMargin(currentValue as number * 10))
     }
   }
   const repeat = () => {
@@ -147,6 +141,7 @@ function PlayboxMenu() {
         elevation={0}
       >
         <ButtonGroup
+          className="recorder"
           color="inherit"
           sx={{
             height: '60px',
@@ -191,19 +186,6 @@ function PlayboxMenu() {
         }}
         elevation={0}
       >
-        <Slider
-          valueLabelDisplay="auto"
-          value={marginValue}
-          step={2}
-          min={0}
-          max={180}
-          onChange={delay}
-          sx={{
-            color: selectedColor,
-            height: '1px',
-            padding: '0px',
-          }}
-        />
         <Button
           variant={repeatBtnVariant()}
           color="inherit"

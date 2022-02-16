@@ -21,3 +21,11 @@ code {
   background-size: 150px;
   background-position: 82px;
 }
+.recorder{
+  display: 'flex'
+}
+@media screen and (max-width: 1000px) {
+  .recorder{
+    flex-direction: 'column'
+  }
+}
