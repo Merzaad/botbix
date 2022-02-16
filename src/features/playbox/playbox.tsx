@@ -40,7 +40,6 @@ function Playbox() {
           width: '80%',
           display: 'grid',
           overflow: 'scroll',
-
         }}
       >
         <Paper

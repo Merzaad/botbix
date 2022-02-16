@@ -78,6 +78,11 @@ export const playboxSlice = createSlice({
       const id = x.selectedBarId
       if (id !== null) x.bars[id].repeat = action.payload
     },
+    addMargin: (state, action: PayloadAction<number>) => {
+      const x = state
+      const id = x.selectedBarId
+      if (id !== null) x.bars[id].margin += action.payload
+    },
   },
 })
 
@@ -87,6 +92,6 @@ export const selectRecording = (state: RootState) => state.playbox.recording
 export const selectPlaying = (state: RootState) => state.playbox.playing
 
 export const {
-  addWidth, selectBar, resetWidth, addSrc, removeSrc, setMargin, setRecording, setPlaying, setRepeat,
+  addWidth, selectBar, resetWidth, addSrc, removeSrc, setMargin, setRecording, setPlaying, setRepeat, addMargin,
 } = playboxSlice.actions
 export default playboxSlice.reducer

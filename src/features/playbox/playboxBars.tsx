@@ -4,16 +4,24 @@ import * as React from 'react'
 import Paper from '@mui/material/Paper'
 import { useAppSelector, useAppDispatch } from '../../app/hooks'
 import {
-  selectBars, selectBar, selectedBarId, selectRecording,
+  selectBars, selectBar, selectedBarId, selectRecording, addMargin,
 } from './playboxSlice'
 
 function PlayboxBars() {
+  const [mousedown, setMousedown] = React.useState(false)
   const dispatch = useAppDispatch()
   const bars = useAppSelector(selectBars)
   const selectedId = useAppSelector(selectedBarId)
   const recording = useAppSelector(selectRecording)
+  const leave = () => {
+    setMousedown(false)
+  }
+  const move = (e: React.MouseEvent<Element, MouseEvent>):void => {
+    if (mousedown) dispatch(addMargin(e.movementX * 0.6))
+  }
   const items = bars.map((bar) => {
     const select = () => {
+      setMousedown(true)
       if (!recording) dispatch(selectBar(bar.id))
     }
     return (
@@ -51,6 +59,9 @@ function PlayboxBars() {
   })
   return (
     <Paper
+      onMouseMove={(e) => move(e)}
+      onMouseLeave={leave}
+      onMouseUp={leave}
       sx={{
         display: 'flex',
         flexDirection: 'column',
