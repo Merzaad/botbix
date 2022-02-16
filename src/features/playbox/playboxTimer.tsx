@@ -38,9 +38,9 @@ function Timer() {
     if (!playing) setMargin(0)
     const timer = setInterval(() => {
       if (playing) {
-        setMargin(margin + 10)
+        setMargin(margin + 5)
       }
-    }, 1000)
+    }, 500)
     return () => clearTimeout(timer)
   }, [playing, margin])
   return (

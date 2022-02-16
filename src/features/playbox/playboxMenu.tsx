@@ -39,31 +39,27 @@ function PlayboxMenu() {
     audio: true,
   })
   const record = () => {
-    if (selectedId !== null) {
-      if (preUrl === '') {
-        if (status !== 'recording') {
-          dispatch(addWidth(-40))
-          startRecording()
-          dispatch(setRecording(true))
-        }
-        if (status === 'recording') {
-          stopRecording()
-          dispatch(setRecording(false))
-        }
+    if (selectedId !== null && !playing && preUrl === '') {
+      if (status !== 'recording') {
+        dispatch(addWidth(-40))
+        startRecording()
+        dispatch(setRecording(true))
+      }
+      if (status === 'recording') {
+        stopRecording()
+        dispatch(setRecording(false))
       }
     }
   }
   const play = () => {
-    if (selectedId !== null) {
-      if (preUrl !== '') {
-        const i = preUrl
-        const x = new Audio(i)
-        x.play()
-      }
+    if (selectedId !== null && !playing && preUrl !== '') {
+      const i = preUrl
+      const x = new Audio(i)
+      x.play()
     }
   }
   const remove = () => {
-    if (selectedId !== null) {
+    if (selectedId !== null && !playing) {
       dispatch(resetWidth())
       dispatch(removeSrc())
       dispatch(setRepeat(false))
@@ -110,9 +106,9 @@ function PlayboxMenu() {
     const timeOuts: any[] = []
     const repeats: any[] = []
     bars.forEach((x) => {
-      timeOuts.push(setTimeout(() => { if (playing && !x.repeat) data[x.id].play() }, x.margin * 100))
       timeOuts.push(setTimeout(() => {
-        if (playing && x.repeat) { repeats.push(setInterval(() => { data[x.id].play() }, x.width * 7)) }
+        if (playing && !x.repeat) data[x.id].play()
+        if (playing && x.repeat) repeats.push(setInterval(() => { data[x.id].play() }))
       }, x.margin * 100))
     })
     return () => {
