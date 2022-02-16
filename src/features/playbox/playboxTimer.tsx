@@ -28,8 +28,7 @@ function Timer() {
         key={i}
         sx={{
           width: '2px',
-          background: `linear-gradient(90deg, rgba(35,255,231,0.2) 0%,
-          rgba(6,255,144,0.5) 100%)`,
+          background: 'rgb(0,0,0,0.2)',
         }}
         elevation={0}
       />,

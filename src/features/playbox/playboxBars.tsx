@@ -25,7 +25,7 @@ function PlayboxBars() {
           background: `${bar.src !== '' ? bar.color : '#c0c0c0'}`,
           width: `${bar.width}px`,
           marginLeft: `${bar.margin + 10}px`,
-          boxShadow: `${bar.id === selectedId ? `0px 0px 5px ${bar.src !== '' ? bar.color : 'rgba(35,255,231,0.6)'}` : 'none'}`,
+          boxShadow: `${bar.id === selectedId ? `0px 0px 5px ${bar.src !== '' ? bar.color : 'rgb(0,0,0,0.3)'}` : 'none'}`,
           cursor: 'pointer',
           position: 'relative',
           border: 'none',
