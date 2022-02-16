@@ -14,7 +14,7 @@ for (let i = 0; i < 6; i += 1) {
       title: '',
       text: '',
       color: colors[i],
-      width: 20,
+      width: 40,
       margin: 0,
       src: '',
       repeat: false,
@@ -52,7 +52,7 @@ export const playboxSlice = createSlice({
     resetWidth: (state) => {
       const x = state
       const id = x.selectedBarId
-      if (id !== null) x.bars[id].width = 20
+      if (id !== null) x.bars[id].width = 40
     },
     addSrc: (state, action: PayloadAction<string>) => {
       const x = state

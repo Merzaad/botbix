@@ -3,7 +3,7 @@
 import * as React from 'react'
 import { useReactMediaRecorder } from 'react-media-recorder'
 import {
-  Paper, Button, Slider,
+  Paper, Button, Slider, ButtonGroup,
 } from '@mui/material'
 import DeleteForeverOutlinedIcon from '@mui/icons-material/DeleteForeverOutlined'
 import RadioButtonCheckedTwoToneIcon from '@mui/icons-material/RadioButtonCheckedTwoTone'
@@ -42,7 +42,7 @@ function PlayboxMenu() {
     if (selectedId !== null) {
       if (preUrl === '') {
         if (status !== 'recording') {
-          dispatch(addWidth(-20))
+          dispatch(addWidth(-40))
           startRecording()
           dispatch(setRecording(true))
         }
@@ -150,31 +150,39 @@ function PlayboxMenu() {
         }}
         elevation={0}
       >
-        <Button
-          onClick={record}
+        <ButtonGroup
+          color="inherit"
           sx={{
-            color: selectedColor,
+            height: '50px',
           }}
         >
-          {status === 'recording' ? <RadioButtonCheckedTwoToneIcon /> : <RadioButtonUncheckedTwoToneIcon /> }
-        </Button>
-        <Button
-          onClick={play}
-          sx={{
-            color: selectedColor,
-          }}
-        >
-          <PlayArrowRoundedIcon fontSize="large" />
-        </Button>
-        <Button
-          onClick={remove}
-          sx={{
-            color: selectedColor,
-          }}
-          disabled={preUrl === ''}
-        >
-          <DeleteForeverOutlinedIcon fontSize="large" />
-        </Button>
+          <Button
+            onClick={record}
+            sx={{
+              color: selectedColor,
+            }}
+          >
+            {status === 'recording' ? <RadioButtonCheckedTwoToneIcon /> : <RadioButtonUncheckedTwoToneIcon /> }
+          </Button>
+          <Button
+            onClick={play}
+            sx={{
+              color: selectedColor,
+            }}
+          >
+            <PlayArrowRoundedIcon fontSize="large" />
+          </Button>
+          <Button
+            onClick={remove}
+            sx={{
+              color: selectedColor,
+              ':disabled': { borderColor: selectedColor },
+            }}
+            disabled={preUrl === ''}
+          >
+            <DeleteForeverOutlinedIcon fontSize="medium" />
+          </Button>
+        </ButtonGroup>
       </Paper>
       <Paper
         sx={{
@@ -205,7 +213,9 @@ function PlayboxMenu() {
           color="inherit"
           sx={{
             color: selectedColor,
+            ':disabled': { borderColor: selectedColor },
           }}
+          disabled={preUrl === ''}
           onClick={repeat}
         >
           <RepeatIcon />

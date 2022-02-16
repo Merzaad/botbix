@@ -16,7 +16,8 @@ function Timer() {
         height: '650%',
         width: '1px',
         marginLeft: `${margin}px`,
-        background: 'rgb(255,0,0,0.7)',
+        background: `linear-gradient(90deg, rgba(35,255,231,0.8) 0%,
+        rgba(6,255,144,0.5) 100%)`,
         zIndex: '1',
       }}
     />
@@ -27,8 +28,10 @@ function Timer() {
         key={i}
         sx={{
           width: '2px',
-          backgroundColor: 'rgb(0,0,0,0.3)',
+          background: `linear-gradient(90deg, rgba(35,255,231,0.8) 0%,
+          rgba(6,255,144,0.5) 100%)`,
         }}
+        elevation={0}
       />,
     )
   }

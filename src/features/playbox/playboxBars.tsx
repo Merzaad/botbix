@@ -22,12 +22,13 @@ function PlayboxBars() {
         key={bar.id}
         sx={{
           height: '35px',
-          background: `${bar.src !== '' ? bar.color : 'rgb(0,0,0,0.32)'}`,
+          background: `${bar.src !== '' ? bar.color : '#c0c0c0'}`,
           width: `${bar.width}px`,
           marginLeft: `${bar.margin + 10}px`,
-          boxShadow: `${bar.id === selectedId ? `0px 0px 5px ${bar.color}` : 'none'}`,
+          boxShadow: `${bar.id === selectedId ? `0px 0px 5px ${bar.src !== '' ? bar.color : 'rgba(35,255,231,0.6)'}` : 'none'}`,
           cursor: 'pointer',
           position: 'relative',
+          border: 'none',
         }}
       >
         {bar.repeat ? (
@@ -39,6 +40,8 @@ function PlayboxBars() {
               height: '10px',
               width: `${1790 - bar.margin}px`,
               background: `${bar.src !== '' ? bar.color : 'rgb(0,0,0,0.2)'}`,
+              boxShadow: `${bar.id === selectedId ? `0px 0px 5px
+               ${bar.src !== '' ? bar.color : '#06b79e'}` : 'none'}`,
             }}
             elevation={0}
           />
