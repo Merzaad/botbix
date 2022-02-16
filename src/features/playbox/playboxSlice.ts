@@ -5,7 +5,7 @@ import { createSlice, PayloadAction } from '@reduxjs/toolkit'
 import { RootState } from '../../app/store'
 import { PlayBoxSlice } from '../../app/types'
 
-const colors: string[] = ['#97ccfe', '#934df9', '#ff9d97', '#facb00', '#ffce92', '#8dd400']
+const colors: string[] = ['#63c9d5', '#d8532a', '#f2b193', '#e4a139', '#6eb7a3', '#a7bb74']
 const initialBars = []
 for (let i = 0; i < 6; i += 1) {
   initialBars.push(
