@@ -17,9 +17,7 @@ code {
 }
 
 .recorder{
-  background-image: url('../public/bgb.jpg');
-  background-size: 500px;
-  background-position: 82px;
+background: linear-gradient(54deg, rgba(172, 166, 166, 0.164) 0%, rgba(151, 150, 150, 0.144) 100%);
 }
 #playAll {
   background-image: url('../public/bg.jpg');

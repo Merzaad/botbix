@@ -19,6 +19,29 @@ function PlayboxBars() {
       if (!recording) dispatch(selectBar(bar.id))
       dispatch(setMoving(true))
     }
+    const repeats = []
+    if (bar.repeat) {
+      for (let i = 0; i < ((1800 - bar.margin) / bar.width) - 1; i += 1) {
+        repeats.push(
+          <Paper
+            sx={{
+              position: 'absolute',
+              left: `${bar.width * i}px`,
+              top: '0px',
+              height: '25px',
+              width: `${bar.width}px`,
+              background: `${bar.src !== '' ? bar.color : 'rgb(0,0,0,0.2)'}`,
+              boxShadow: `${bar.id === selectedId ? `0px 0px 5px
+             ${bar.src !== '' ? bar.color : '#06b79e'}` : 'none'}`,
+              '@media screen and (max-width: 720px)': {
+                height: '50px',
+              },
+            }}
+            elevation={0}
+          />,
+        )
+      }
+    }
     return (
       <Paper
         onMouseDown={startMoving}
@@ -35,26 +58,11 @@ function PlayboxBars() {
           '@media screen and (max-width: 720px)': {
             height: '50px',
           },
+          display: 'flex',
+          gap: '1px',
         }}
       >
-        {bar.repeat ? (
-          <Paper
-            sx={{
-              position: 'absolute',
-              left: '0',
-              top: '0px',
-              height: '25px',
-              width: `${1790 - bar.margin}px`,
-              background: `${bar.src !== '' ? bar.color : 'rgb(0,0,0,0.2)'}`,
-              boxShadow: `${bar.id === selectedId ? `0px 0px 5px
-               ${bar.src !== '' ? bar.color : '#06b79e'}` : 'none'}`,
-              '@media screen and (max-width: 720px)': {
-                height: '50px',
-              },
-            }}
-            elevation={0}
-          />
-        ) : null}
+        {repeats}
       </Paper>
     )
   })
