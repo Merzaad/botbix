@@ -12,4 +12,5 @@ export interface PlayBoxSlice {
 selectedBarId: number | null
 recording: boolean
 playing: boolean
+moving: boolean
 }
