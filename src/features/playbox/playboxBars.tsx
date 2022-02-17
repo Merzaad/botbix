@@ -24,11 +24,12 @@ function PlayboxBars() {
       for (let i = 0; i < ((1800 - bar.margin) / bar.width) - 1; i += 1) {
         repeats.push(
           <Paper
+            key={i}
             sx={{
               position: 'absolute',
-              left: `${bar.width * i}px`,
+              left: `${(bar.width) * i}px`,
               top: '0px',
-              height: '25px',
+              height: '30px',
               width: `${bar.width}px`,
               background: `${bar.src !== '' ? bar.color : 'rgb(0,0,0,0.2)'}`,
               boxShadow: `${bar.id === selectedId ? `0px 0px 5px
@@ -47,19 +48,16 @@ function PlayboxBars() {
         onMouseDown={startMoving}
         key={bar.id}
         sx={{
-          height: '25px',
+          height: '30px',
           background: `${bar.src !== '' ? bar.color : '#c0c0c0'}`,
           width: `${bar.width}px`,
           marginLeft: `${bar.margin + 10}px`,
           boxShadow: `${bar.id === selectedId ? `0px 0px 5px ${bar.src !== '' ? bar.color : 'rgb(0,0,0,0.3)'}` : 'none'}`,
           cursor: 'pointer',
           position: 'relative',
-          border: 'none',
           '@media screen and (max-width: 720px)': {
             height: '50px',
           },
-          display: 'flex',
-          gap: '1px',
         }}
       >
         {repeats}
@@ -71,7 +69,7 @@ function PlayboxBars() {
       sx={{
         display: 'flex',
         flexDirection: 'column',
-        gap: '15px',
+        gap: '10px',
         width: '100%',
       }}
       elevation={0}

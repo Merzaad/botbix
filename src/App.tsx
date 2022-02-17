@@ -18,7 +18,7 @@ function App() {
   const recording = useAppSelector(selectRecording)
   const move = (e: React.MouseEvent<Element, MouseEvent>):void => {
     if (moving && !recording && selectedId !== null) {
-      dispatch(addMargin(e.movementX * 0.66))
+      dispatch(addMargin(e.movementX * 0.6))
     }
   }
   const stopMoving = (e: React.MouseEvent<Element, MouseEvent>):void => {
@@ -46,7 +46,7 @@ function App() {
           background: 'white',
           '@media screen and (max-width: 720px)': {
             gap: '0px',
-            height: '80%',
+            height: '60%',
           },
         }}
       >

@@ -75,9 +75,9 @@ function PlayboxMenu() {
   React.useEffect(() => {
     const timer = setInterval(() => {
       if (status === 'recording') {
-        dispatch(addWidth(2.5))
+        dispatch(addWidth(1.21))
       }
-    }, 250)
+    }, 125)
     return () => clearTimeout(timer)
   }, [status])
   React.useEffect(() => {
@@ -101,7 +101,7 @@ function PlayboxMenu() {
     const repeats: any[] = []
     bars.forEach((x) => {
       timeOuts.push(setTimeout(() => {
-        if (playing && !x.repeat) data[x.id].play()
+        if (playing) data[x.id].play()
         if (playing && x.repeat) repeats.push(setInterval(() => { data[x.id].play() }))
       }, x.margin * 100))
     })
@@ -151,7 +151,8 @@ function PlayboxMenu() {
             color: selectedColor,
           }}
         >
-          {status === 'recording' ? <RadioButtonCheckedTwoToneIcon /> : <RadioButtonUncheckedTwoToneIcon /> }
+          {status === 'recording'
+            ? <RadioButtonCheckedTwoToneIcon fontSize="large" /> : <RadioButtonUncheckedTwoToneIcon fontSize="large" /> }
         </Button>
         <Button
           className="recorder"
@@ -171,7 +172,7 @@ function PlayboxMenu() {
           }}
           disabled={preUrl === ''}
         >
-          <DeleteForeverOutlinedIcon fontSize="medium" />
+          <DeleteForeverOutlinedIcon fontSize="large" />
         </Button>
         <Button
           variant={repeatBtnVariant()}
@@ -184,14 +185,11 @@ function PlayboxMenu() {
           disabled={preUrl === ''}
           onClick={repeat}
         >
-          <RepeatIcon />
+          <RepeatIcon fontSize="large" />
         </Button>
         <Button
           variant="contained"
           id="playAll"
-          sx={{
-            marginTop: '30px',
-          }}
           onClick={() => {
             if (bars.filter((i) => i.src !== '').length > 0) {
               dispatch(setPlaying(!playing))

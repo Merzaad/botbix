@@ -87,6 +87,10 @@ export const playboxSlice = createSlice({
         x.bars[id].margin = 0
         x.moving = false
       }
+      if (id !== null && x.bars[id].margin + x.bars[id].width > 1790) {
+        x.bars[id].margin = 1790 - x.bars[id].width
+        x.moving = false
+      }
     },
     setMoving: (state, action: PayloadAction<boolean>) => {
       const x = state
