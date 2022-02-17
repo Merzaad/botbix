@@ -16,16 +16,13 @@ code {
   font-family: source-code-pro, Menlo, Monaco, Consolas, 'Courier New', monospace;
 }
 
+.recorder{
+  background-image: url('../public/bgb.jpg');
+  background-size: 500px;
+  background-position: 82px;
+}
 #playAll {
   background-image: url('../public/bg.jpg');
   background-size: 150px;
   background-position: 82px;
-}
-.recorder{
-  display: 'flex'
-}
-@media screen and (max-width: 1000px) {
-  .recorder{
-    flex-direction: 'column'
-  }
 }

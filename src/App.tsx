@@ -6,21 +6,29 @@ import * as React from 'react'
 import Box from '@mui/material/Box'
 import Playbox from './features/playbox/playbox'
 import { useAppDispatch, useAppSelector } from './app/hooks'
-import { setMoving, selectMoving, selectRecording, addMargin } from './features/playbox/playboxSlice'
+import { setMoving, selectMoving, selectRecording, addMargin, selectBars, selectedBarId } from './features/playbox/playboxSlice'
 
 function App() {
   const dispatch = useAppDispatch()
   const moving = useAppSelector(selectMoving)
+  // eslint-disable-next-line no-unused-vars
+  const bars = useAppSelector(selectBars)
+  const selectedId = useAppSelector(selectedBarId)
+
   const recording = useAppSelector(selectRecording)
   const move = (e: React.MouseEvent<Element, MouseEvent>):void => {
-    if (moving && !recording) dispatch(addMargin(e.movementX * 0.63))
+    if (moving && !recording && selectedId !== null) {
+      dispatch(addMargin(e.movementX * 0.66))
+    }
   }
-  const stopMoving = () => {
+  const stopMoving = (e: React.MouseEvent<Element, MouseEvent>):void => {
+    e.preventDefault()
     dispatch(setMoving(false))
   }
   return (
     <Box
       onMouseUp={stopMoving}
+      onMouseLeave={stopMoving}
       onMouseMove={(e) => move(e)}
       sx={{
         position: 'fixed',
@@ -36,6 +44,10 @@ function App() {
           height: '60%',
           width: '100%',
           background: 'white',
+          '@media screen and (max-width: 720px)': {
+            gap: '0px',
+            height: '80%',
+          },
         }}
       >
         <Playbox />

@@ -32,6 +32,9 @@ function PlayboxBars() {
           cursor: 'pointer',
           position: 'relative',
           border: 'none',
+          '@media screen and (max-width: 720px)': {
+            height: '50px',
+          },
         }}
       >
         {bar.repeat ? (
@@ -45,6 +48,9 @@ function PlayboxBars() {
               background: `${bar.src !== '' ? bar.color : 'rgb(0,0,0,0.2)'}`,
               boxShadow: `${bar.id === selectedId ? `0px 0px 5px
                ${bar.src !== '' ? bar.color : '#06b79e'}` : 'none'}`,
+              '@media screen and (max-width: 720px)': {
+                height: '50px',
+              },
             }}
             elevation={0}
           />

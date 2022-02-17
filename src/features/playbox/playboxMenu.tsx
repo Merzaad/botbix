@@ -3,7 +3,7 @@
 import * as React from 'react'
 import { useReactMediaRecorder } from 'react-media-recorder'
 import {
-  Paper, Button, ButtonGroup,
+  Paper, Button,
 } from '@mui/material'
 import DeleteForeverOutlinedIcon from '@mui/icons-material/DeleteForeverOutlined'
 import RadioButtonCheckedTwoToneIcon from '@mui/icons-material/RadioButtonCheckedTwoTone'
@@ -126,72 +126,60 @@ function PlayboxMenu() {
         justifyContent: 'center',
         gap: '5px',
         height: '100%',
+        '@media screen and (max-width: 720px)': {
+          padding: '0px',
+          gap: '0px',
+        },
       }}
       elevation={0}
     >
       <Paper
         sx={{
-          padding: '10px',
-          display: 'flex',
-          flexDirection: 'row',
-          justifyContent: 'center',
-          gap: '5px',
-          height: '15%',
-        }}
-        elevation={0}
-      >
-        <ButtonGroup
-          className="recorder"
-          color="inherit"
-          sx={{
-            height: '60px',
-          }}
-        >
-          <Button
-            onClick={record}
-            sx={{
-              color: selectedColor,
-            }}
-          >
-            {status === 'recording' ? <RadioButtonCheckedTwoToneIcon /> : <RadioButtonUncheckedTwoToneIcon /> }
-          </Button>
-          <Button
-            onClick={play}
-            sx={{
-              color: selectedColor,
-            }}
-          >
-            <PlayArrowRoundedIcon fontSize="large" />
-          </Button>
-          <Button
-            onClick={remove}
-            sx={{
-              color: selectedColor,
-              ':disabled': { borderColor: selectedColor },
-            }}
-            disabled={preUrl === ''}
-          >
-            <DeleteForeverOutlinedIcon fontSize="medium" />
-          </Button>
-        </ButtonGroup>
-      </Paper>
-      <Paper
-        sx={{
-          padding: '10px',
+          padding: '0px',
           display: 'flex',
           flexDirection: 'column',
           justifyContent: 'center',
-          gap: '30px',
+          gap: '10px',
           height: '85%',
         }}
         elevation={0}
       >
         <Button
+          className="recorder"
+          onClick={record}
+          sx={{
+            color: selectedColor,
+          }}
+        >
+          {status === 'recording' ? <RadioButtonCheckedTwoToneIcon /> : <RadioButtonUncheckedTwoToneIcon /> }
+        </Button>
+        <Button
+          className="recorder"
+          onClick={play}
+          sx={{
+            color: selectedColor,
+          }}
+        >
+          <PlayArrowRoundedIcon fontSize="large" />
+        </Button>
+        <Button
+          className="recorder"
+          onClick={remove}
+          sx={{
+            color: selectedColor,
+            ':disabled': { color: 'gray' },
+          }}
+          disabled={preUrl === ''}
+        >
+          <DeleteForeverOutlinedIcon fontSize="medium" />
+        </Button>
+        <Button
           variant={repeatBtnVariant()}
+          className="recorder"
           color="inherit"
           sx={{
             color: selectedColor,
-            ':disabled': { borderColor: selectedColor },
+            ':disabled': { color: 'gray' },
           }}
           disabled={preUrl === ''}
           onClick={repeat}

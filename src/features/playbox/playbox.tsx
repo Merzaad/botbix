@@ -10,7 +10,7 @@ import Timer from './playboxTimer'
 
 function Playbox() {
   return (
-    <Box
+    <Paper
       sx={{
         display: 'flex',
         width: '100%',
@@ -72,7 +72,7 @@ function Playbox() {
           </Paper>
         </Paper>
       </Box>
-    </Box>
+    </Paper>
   )
 }
 export default Playbox
