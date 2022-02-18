@@ -1,11 +1,11 @@
 /* eslint-disable import/no-unresolved */
 /* eslint-disable import/extensions */
 import { configureStore, ThunkAction, Action } from '@reduxjs/toolkit'
-import playboxReucer from '../features/playbox/playboxSlice'
+import playboxReducer from '../features/playbox/playboxSlice'
 
 export const store = configureStore({
   reducer: {
-    playbox: playboxReucer,
+    playbox: playboxReducer,
   },
 })
 
