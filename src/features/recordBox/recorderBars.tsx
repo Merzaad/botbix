@@ -12,8 +12,8 @@ function PlayboxBars() {
   const recording = useAppSelector(selectRecording)
 
   const items = bars.map((bar) => {
-    const startMoving = (e: React.MouseEvent<Element, MouseEvent>) => {
-      e.preventDefault()
+    const startMoving = (event: React.MouseEvent<Element, MouseEvent>) => {
+      event.preventDefault()
       if (!recording) dispatch(selectBar(bar.id))
       dispatch(setMoving(true))
     }
