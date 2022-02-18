@@ -26,11 +26,6 @@ function PlayboxMenu() {
   const dispatch = useAppDispatch()
   const selectedId = useAppSelector(selectedBarId)
   const selectedColor = selectedId !== null ? bars[selectedId].color : 'gray'
-  const repeatBtnVariant = () => {
-    if (selectedId !== null && bars[selectedId].repeat) {
-      return 'outlined'
-    } return 'text'
-  }
   const {
     startRecording, stopRecording, status, mediaBlobUrl, clearBlobUrl,
   } = useReactMediaRecorder({
@@ -175,7 +170,6 @@ function PlayboxMenu() {
           <DeleteForeverOutlinedIcon fontSize="large" />
         </Button>
         <Button
-          variant={repeatBtnVariant()}
           className="recorder"
           color="inherit"
           sx={{
