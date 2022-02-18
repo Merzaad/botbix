@@ -1,29 +1,23 @@
-/* eslint-disable object-curly-newline */
-/* eslint-disable import/no-unresolved */
-/* eslint-disable import/extensions */
 import { createSlice, PayloadAction } from '@reduxjs/toolkit'
 import { RootState } from '../../app/store'
-import { PlayBoxSlice } from '../../app/types'
+import { RecorderSlice } from '../../app/types'
 
 const colors: string[] = ['#f9c74f', '#90be6d', '#43aa8b', '#4d908e', '#577590', '#277da1']
 const initialBars = []
 for (let i = 0; i < 6; i += 1) {
-  initialBars.push(
-    {
-      id: i,
-      title: '',
-      text: '',
-      color: colors[i],
-      width: 40,
-      margin: 0,
-      src: '',
-      repeat: false,
-    },
-
-  )
+  initialBars.push({
+    id: i,
+    title: '',
+    text: '',
+    color: colors[i],
+    width: 40,
+    margin: 0,
+    src: '',
+    repeat: false,
+  })
 }
 
-const initialState: PlayBoxSlice = {
+const initialState: RecorderSlice = {
   bars: initialBars,
   selectedBarId: null,
   recording: false,
@@ -106,6 +100,16 @@ export const selectPlaying = (state: RootState) => state.playbox.playing
 export const selectMoving = (state: RootState) => state.playbox.moving
 
 export const {
-  addWidth, selectBar, resetWidth, addSrc, removeSrc, setMargin, setRecording, setPlaying, setRepeat, addMargin, setMoving,
+  addWidth,
+  selectBar,
+  resetWidth,
+  addSrc,
+  removeSrc,
+  setMargin,
+  setRecording,
+  setPlaying,
+  setRepeat,
+  addMargin,
+  setMoving,
 } = playboxSlice.actions
 export default playboxSlice.reducer

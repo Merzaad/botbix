@@ -1,9 +1,7 @@
-/* eslint-disable import/extensions */
-/* eslint-disable import/no-unresolved */
 import * as React from 'react'
 import Paper from '@mui/material/Paper'
 import { useAppSelector } from '../../app/hooks'
-import { selectPlaying } from './playboxSlice'
+import { selectPlaying } from './recorderSlice'
 
 function Timer() {
   const playing = useAppSelector(selectPlaying)

@@ -1,4 +1,4 @@
-export interface PlayBoxSlice {
+export interface RecorderSlice {
   bars: {
     id: number
     title: string

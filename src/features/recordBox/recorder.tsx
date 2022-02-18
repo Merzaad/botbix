@@ -1,12 +1,9 @@
-/* eslint-disable react/jsx-props-no-spreading */
-/* eslint-disable import/extensions */
-/* eslint-disable import/no-unresolved */
 import * as React from 'react'
 import Paper from '@mui/material/Paper'
 import { Box } from '@material-ui/core'
-import PlayboxBars from './playboxBars'
-import PlayboxMenu from './playboxMenu'
-import Timer from './playboxTimer'
+import PlayboxBars from './recorderBars'
+import PlayboxMenu from './recorderMenu'
+import Timer from './recorderTimer'
 
 function Playbox() {
   return (

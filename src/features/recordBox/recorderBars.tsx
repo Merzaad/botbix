@@ -1,11 +1,9 @@
-/* eslint-disable import/extensions */
-/* eslint-disable import/no-unresolved */
 import * as React from 'react'
 import Paper from '@mui/material/Paper'
 import { useAppSelector, useAppDispatch } from '../../app/hooks'
 import {
   selectBars, selectBar, selectedBarId, selectRecording, setMoving,
-} from './playboxSlice'
+} from './recorderSlice'
 
 function PlayboxBars() {
   const dispatch = useAppDispatch()
@@ -21,19 +19,23 @@ function PlayboxBars() {
     }
     const repeats = []
     if (bar.repeat) {
-      for (let i = 0; i < ((1800 - bar.margin) / bar.width) - 1; i += 1) {
+      for (let i = 0; i < (1800 - bar.margin) / bar.width - 1; i += 1) {
         repeats.push(
           <Paper
             key={i}
             sx={{
               position: 'absolute',
-              left: `${(bar.width) * i}px`,
+              left: `${bar.width * i}px`,
               top: '0px',
               height: '25px',
               width: `${bar.width}px`,
               background: `${bar.src !== '' ? bar.color : 'rgb(0,0,0,0.2)'}`,
-              boxShadow: `${bar.id === selectedId ? `0px 0px 5px
-             ${bar.src !== '' ? bar.color : '#06b79e'}` : 'none'}`,
+              boxShadow: `${
+                bar.id === selectedId
+                  ? `0px 0px 5px
+             ${bar.src !== '' ? bar.color : '#06b79e'}`
+                  : 'none'
+              }`,
               '@media screen and (max-width: 720px)': {
                 height: '50px',
               },

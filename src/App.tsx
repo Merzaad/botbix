@@ -1,12 +1,10 @@
-/* eslint-disable linebreak-style */
-/* eslint-disable object-curly-newline */
-/* eslint-disable import/extensions */
-/* eslint-disable import/no-unresolved */
 import * as React from 'react'
 import Box from '@mui/material/Box'
-import Playbox from './features/playbox/playbox'
+import Playbox from './features/recordBox/recorder'
 import { useAppDispatch, useAppSelector } from './app/hooks'
-import { setMoving, selectMoving, selectRecording, addMargin, selectedBarId } from './features/playbox/playboxSlice'
+import {
+  setMoving, selectMoving, selectRecording, addMargin, selectedBarId,
+} from './features/recordBox/recorderSlice'
 
 function App() {
   const dispatch = useAppDispatch()
@@ -14,12 +12,12 @@ function App() {
   const selectedId = useAppSelector(selectedBarId)
 
   const recording = useAppSelector(selectRecording)
-  const move = (e: React.MouseEvent<Element, MouseEvent>):void => {
+  const move = (e: React.MouseEvent<Element, MouseEvent>): void => {
     if (moving && !recording && selectedId !== null) {
       dispatch(addMargin(e.movementX * 0.6))
     }
   }
-  const stopMoving = (e: React.MouseEvent<Element, MouseEvent>):void => {
+  const stopMoving = (e: React.MouseEvent<Element, MouseEvent>): void => {
     e.preventDefault()
     dispatch(setMoving(false))
   }

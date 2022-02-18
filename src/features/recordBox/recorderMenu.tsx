@@ -1,10 +1,6 @@
-/* eslint-disable import/extensions */
-/* eslint-disable import/no-unresolved */
 import * as React from 'react'
 import { useReactMediaRecorder } from 'react-media-recorder'
-import {
-  Paper, Button,
-} from '@mui/material'
+import { Paper, Button } from '@mui/material'
 import DeleteForeverOutlinedIcon from '@mui/icons-material/DeleteForeverOutlined'
 import RadioButtonCheckedTwoToneIcon from '@mui/icons-material/RadioButtonCheckedTwoTone'
 import RadioButtonUncheckedTwoToneIcon from '@mui/icons-material/RadioButtonUncheckedTwoTone'
@@ -14,9 +10,18 @@ import RepeatIcon from '@mui/icons-material/Repeat'
 import PlayArrowRoundedIcon from '@mui/icons-material/PlayArrowRounded'
 import { useAppDispatch, useAppSelector } from '../../app/hooks'
 import {
-  addWidth, resetWidth, selectedBarId, addSrc,
-  removeSrc, selectBars, setMargin, setRecording, setPlaying, selectPlaying, setRepeat,
-} from './playboxSlice'
+  addWidth,
+  resetWidth,
+  selectedBarId,
+  addSrc,
+  removeSrc,
+  selectBars,
+  setMargin,
+  setRecording,
+  setPlaying,
+  selectPlaying,
+  setRepeat,
+} from './recorderSlice'
 
 function PlayboxMenu() {
   const [preUrl, setPreUrl] = React.useState('')
@@ -95,10 +100,18 @@ function PlayboxMenu() {
     const timeOuts: any[] = []
     const repeats: any[] = []
     bars.forEach((bar) => {
-      timeOuts.push(setTimeout(() => {
-        if (playing && bar.src !== '') data[bar.id].play()
-        if (playing && bar.repeat) repeats.push(setInterval(() => { data[bar.id].play() }))
-      }, bar.margin * 100))
+      timeOuts.push(
+        setTimeout(() => {
+          if (playing && bar.src !== '') data[bar.id].play()
+          if (playing && bar.repeat) {
+            repeats.push(
+              setInterval(() => {
+                data[bar.id].play()
+              }),
+            )
+          }
+        }, bar.margin * 100),
+      )
     })
     return () => {
       data.forEach((x) => {
@@ -146,8 +159,11 @@ function PlayboxMenu() {
             color: selectedColor,
           }}
         >
-          {status === 'recording'
-            ? <RadioButtonCheckedTwoToneIcon fontSize="large" /> : <RadioButtonUncheckedTwoToneIcon fontSize="large" /> }
+          {status === 'recording' ? (
+            <RadioButtonCheckedTwoToneIcon fontSize="large" />
+          ) : (
+            <RadioButtonUncheckedTwoToneIcon fontSize="large" />
+          )}
         </Button>
         <Button
           className="recorder"
@@ -194,7 +210,6 @@ function PlayboxMenu() {
         </Button>
       </Paper>
     </Paper>
-
   )
 }
 export default PlayboxMenu
