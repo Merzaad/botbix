@@ -91,14 +91,14 @@ function PlayboxMenu() {
     }
   }, [selectedId])
   React.useEffect(() => {
-    const data = bars.map((x) => new Audio(x.src))
+    const data = bars.map((bar) => new Audio(bar.src))
     const timeOuts: any[] = []
     const repeats: any[] = []
-    bars.forEach((x) => {
+    bars.forEach((bar) => {
       timeOuts.push(setTimeout(() => {
-        if (playing) data[x.id].play()
-        if (playing && x.repeat) repeats.push(setInterval(() => { data[x.id].play() }))
-      }, x.margin * 100))
+        if (playing && bar.src !== '') data[bar.id].play()
+        if (playing && bar.repeat) repeats.push(setInterval(() => { data[bar.id].play() }))
+      }, bar.margin * 100))
     })
     return () => {
       data.forEach((x) => {
