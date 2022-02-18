@@ -53,7 +53,7 @@
     ]
   },
   "engines": {
-    "node": "17.3.0"
+    "node": "17.5.0"
   },
   "devDependencies": {
     "@babel/core": "^7.17.5",
