@@ -1,6 +1,6 @@
 import * as React from 'react'
 import Box from '@mui/material/Box'
-import Playbox from './features/recordBox/recorder'
+import Recorder from './features/recordBox/recorder'
 import { useAppDispatch, useAppSelector } from './app/hooks'
 import {
   setMoving, selectMoving, selectRecording, addMargin, selectedBarId,
@@ -46,7 +46,7 @@ function App() {
           },
         }}
       >
-        <Playbox />
+        <Recorder />
       </Box>
     </Box>
   )

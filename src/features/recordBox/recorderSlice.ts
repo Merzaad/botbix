@@ -25,8 +25,8 @@ const initialState: RecorderSlice = {
   moving: false,
 }
 
-export const playboxSlice = createSlice({
-  name: 'playbox',
+export const recorderSlice = createSlice({
+  name: 'recorder',
   initialState,
   reducers: {
     selectBar: (state, action: PayloadAction<number>) => {
@@ -93,11 +93,11 @@ export const playboxSlice = createSlice({
   },
 })
 
-export const selectBars = (state: RootState) => state.playbox.bars
-export const selectedBarId = (state: RootState) => state.playbox.selectedBarId
-export const selectRecording = (state: RootState) => state.playbox.recording
-export const selectPlaying = (state: RootState) => state.playbox.playing
-export const selectMoving = (state: RootState) => state.playbox.moving
+export const selectBars = (state: RootState) => state.recorder.bars
+export const selectedBarId = (state: RootState) => state.recorder.selectedBarId
+export const selectRecording = (state: RootState) => state.recorder.recording
+export const selectPlaying = (state: RootState) => state.recorder.playing
+export const selectMoving = (state: RootState) => state.recorder.moving
 
 export const {
   addWidth,
@@ -111,5 +111,5 @@ export const {
   setRepeat,
   addMargin,
   setMoving,
-} = playboxSlice.actions
-export default playboxSlice.reducer
+} = recorderSlice.actions
+export default recorderSlice.reducer

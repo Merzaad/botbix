@@ -1,11 +1,11 @@
 import * as React from 'react'
 import Paper from '@mui/material/Paper'
 import { Box } from '@material-ui/core'
-import PlayboxBars from './recorderBars'
-import PlayboxMenu from './recorderMenu'
+import RecorderBars from './recorderBars'
+import RecorderMenu from './recorderMenu'
 import Timer from './recorderTimer'
 
-function Playbox() {
+function Recorder() {
   return (
     <Paper
       sx={{
@@ -28,7 +28,7 @@ function Playbox() {
           }}
           elevation={0}
         >
-          <PlayboxMenu />
+          <RecorderMenu />
         </Paper>
       </Box>
       <Box
@@ -65,11 +65,11 @@ function Playbox() {
             }}
             elevation={0}
           >
-            <PlayboxBars />
+            <RecorderBars />
           </Paper>
         </Paper>
       </Box>
     </Paper>
   )
 }
-export default Playbox
+export default Recorder

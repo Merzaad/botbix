@@ -1,9 +1,9 @@
 import { configureStore, ThunkAction, Action } from '@reduxjs/toolkit'
-import playboxReducer from '../features/recordBox/recorderSlice'
+import recorderReducer from '../features/recordBox/recorderSlice'
 
 export const store = configureStore({
   reducer: {
-    playbox: playboxReducer,
+    recorder: recorderReducer,
   },
 })
 

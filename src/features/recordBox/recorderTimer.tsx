@@ -3,7 +3,7 @@ import Paper from '@mui/material/Paper'
 import { useAppSelector } from '../../app/hooks'
 import { selectPlaying } from './recorderSlice'
 
-function Timer() {
+function RecorderTimer() {
   const playing = useAppSelector(selectPlaying)
   const [margin, setMargin] = React.useState(0)
   const times: any[] = []
@@ -58,4 +58,4 @@ function Timer() {
     </Paper>
   )
 }
-export default Timer
+export default RecorderTimer

@@ -5,7 +5,7 @@ import {
   selectBars, selectBar, selectedBarId, selectRecording, setMoving,
 } from './recorderSlice'
 
-function PlayboxBars() {
+function RecorderBars() {
   const dispatch = useAppDispatch()
   const bars = useAppSelector(selectBars)
   const selectedId = useAppSelector(selectedBarId)
@@ -80,4 +80,4 @@ function PlayboxBars() {
     </Paper>
   )
 }
-export default PlayboxBars
+export default RecorderBars

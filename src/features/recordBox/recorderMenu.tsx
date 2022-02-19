@@ -23,7 +23,7 @@ import {
   setRepeat,
 } from './recorderSlice'
 
-function PlayboxMenu() {
+function RecorderMenu() {
   const [preUrl, setPreUrl] = React.useState('')
 
   const bars = useAppSelector(selectBars)
@@ -212,4 +212,4 @@ function PlayboxMenu() {
     </Paper>
   )
 }
-export default PlayboxMenu
+export default RecorderMenu
