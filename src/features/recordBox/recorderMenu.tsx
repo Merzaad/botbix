@@ -40,7 +40,7 @@ function RecorderMenu() {
   const record = () => {
     if (selectedId !== null && !playing && preUrl === '') {
       if (status !== 'recording') {
-        dispatch(addWidth(-40))
+        dispatch(addWidth(-39))
         startRecording()
         dispatch(setRecording(true))
       }

@@ -10,10 +10,9 @@ function RecorderBars() {
   const bars = useAppSelector(selectBars)
   const selectedId = useAppSelector(selectedBarId)
   const recording = useAppSelector(selectRecording)
-
   const items = bars.map((bar) => {
-    const startMoving = (event: React.MouseEvent<Element, MouseEvent>) => {
-      event.preventDefault()
+    const startMoving = (e: React.MouseEvent): void => {
+      e.preventDefault()
       if (!recording) dispatch(selectBar(bar.id))
       dispatch(setMoving(true))
     }

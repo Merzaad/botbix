@@ -12,12 +12,12 @@ function App() {
   const selectedId = useAppSelector(selectedBarId)
 
   const recording = useAppSelector(selectRecording)
-  const move = (e: React.MouseEvent<Element, MouseEvent>): void => {
+  const move = (e: React.MouseEvent): void => {
     if (moving && !recording && selectedId !== null) {
       dispatch(addMargin(e.movementX * 0.6))
     }
   }
-  const stopMoving = (e: React.MouseEvent<Element, MouseEvent>): void => {
+  const stopMoving = (e: React.MouseEvent): void => {
     e.preventDefault()
     dispatch(setMoving(false))
   }
