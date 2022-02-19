@@ -29,7 +29,7 @@ function RecorderMenu() {
   const bars = useAppSelector(selectBars)
   const playing = useAppSelector(selectPlaying)
   const dispatch = useAppDispatch()
-  const selectedId = useAppSelector(selectedBarId)
+  const selectedId = useAppSelector(selectedBarId)!
   const selectedColor = selectedId !== null ? bars[selectedId].color : 'gray'
   const {
     startRecording, stopRecording, status, mediaBlobUrl, clearBlobUrl,
@@ -38,7 +38,7 @@ function RecorderMenu() {
     audio: true,
   })
   const record = () => {
-    if (selectedId !== null && !playing && preUrl === '') {
+    if (!playing && preUrl === '') {
       if (status !== 'recording') {
         dispatch(addWidth(-39))
         startRecording()
@@ -51,14 +51,14 @@ function RecorderMenu() {
     }
   }
   const play = () => {
-    if (selectedId !== null && !playing && preUrl !== '') {
+    if (!playing && preUrl !== '') {
       const i = preUrl
       const x = new Audio(i)
       x.play()
     }
   }
   const remove = () => {
-    if (selectedId !== null && !playing) {
+    if (!playing) {
       dispatch(resetWidth())
       dispatch(removeSrc())
       dispatch(setRepeat(false))
@@ -68,7 +68,7 @@ function RecorderMenu() {
     }
   }
   const repeat = () => {
-    if (selectedId !== null && bars[selectedId].src !== '') {
+    if (bars[selectedId].src !== '') {
       dispatch(setRepeat(!bars[selectedId].repeat))
     }
   }
@@ -87,7 +87,7 @@ function RecorderMenu() {
     }
   }, [mediaBlobUrl])
   React.useEffect(() => {
-    if (selectedId !== null) {
+    if (selectedId) {
       if (bars[selectedId].src !== '') {
         setPreUrl(bars[selectedId].src)
       } else {

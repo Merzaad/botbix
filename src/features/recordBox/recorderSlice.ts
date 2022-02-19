@@ -39,30 +39,28 @@ export const recorderSlice = createSlice({
     },
     addWidth: (state, action: PayloadAction<number>) => {
       const x = state
-      const id = x.selectedBarId
-      if (id !== null) {
-        x.bars[id].width += action.payload
-      }
+      const id = x.selectedBarId!
+      x.bars[id].width += action.payload
     },
     resetWidth: (state) => {
       const x = state
-      const id = x.selectedBarId
-      if (id !== null) x.bars[id].width = 40
+      const id = x.selectedBarId!
+      x.bars[id].width = 40
     },
     addSrc: (state, action: PayloadAction<string>) => {
       const x = state
-      const id = x.selectedBarId
-      if (id !== null) x.bars[id].src = action.payload
+      const id = x.selectedBarId!
+      x.bars[id].src = action.payload
     },
     removeSrc: (state) => {
       const x = state
-      const id = x.selectedBarId
-      if (id !== null) x.bars[id].src = ''
+      const id = x.selectedBarId!
+      x.bars[id].src = ''
     },
     setMargin: (state, action: PayloadAction<number>) => {
       const x = state
-      const id = x.selectedBarId
-      if (id !== null) x.bars[id].margin = action.payload
+      const id = x.selectedBarId!
+      x.bars[id].margin = action.payload
     },
     setPlaying: (state, action: PayloadAction<boolean>) => {
       const x = state
@@ -70,18 +68,18 @@ export const recorderSlice = createSlice({
     },
     setRepeat: (state, action: PayloadAction<boolean>) => {
       const x = state
-      const id = x.selectedBarId
-      if (id !== null) x.bars[id].repeat = action.payload
+      const id = x.selectedBarId!
+      x.bars[id].repeat = action.payload
     },
     addMargin: (state, action: PayloadAction<number>) => {
       const x = state
-      const id = x.selectedBarId
-      if (id !== null) x.bars[id].margin += action.payload
-      if (id !== null && x.bars[id].margin < 0) {
+      const id = x.selectedBarId!
+      x.bars[id].margin += action.payload
+      if (x.bars[id].margin < 0) {
         x.bars[id].margin = 0
         x.moving = false
       }
-      if (id !== null && x.bars[id].margin + x.bars[id].width > 1790) {
+      if (x.bars[id].margin + x.bars[id].width > 1790) {
         x.bars[id].margin = 1790 - x.bars[id].width
         x.moving = false
       }
