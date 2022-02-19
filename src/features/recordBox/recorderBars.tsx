@@ -18,13 +18,13 @@ function RecorderBars() {
     }
     const repeats = []
     if (bar.repeat) {
-      for (let i = 0; i < (1800 - bar.margin) / bar.width - 1; i += 1) {
+      for (let i = 0; i < (1780 - bar.margin) / (bar.width + 1); i += 1) {
         repeats.push(
           <Paper
             key={i}
             sx={{
               position: 'absolute',
-              left: `${bar.width * i}px`,
+              left: `${(bar.width + 1) * i}px`,
               top: '0px',
               height: '25px',
               width: `${bar.width}px`,

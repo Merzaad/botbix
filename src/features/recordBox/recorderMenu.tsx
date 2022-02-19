@@ -30,7 +30,7 @@ function RecorderMenu() {
   const playing = useAppSelector(selectPlaying)
   const dispatch = useAppDispatch()
   const selectedId = useAppSelector(selectedBarId)!
-  const selectedColor = selectedId ? bars[selectedId].color : 'gray'
+  const selectedColor = selectedId !== null ? bars[selectedId].color : 'gray'
   const {
     startRecording, stopRecording, status, mediaBlobUrl, clearBlobUrl,
   } = useReactMediaRecorder({
