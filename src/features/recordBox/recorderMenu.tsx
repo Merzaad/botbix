@@ -30,7 +30,7 @@ function RecorderMenu() {
   const playing = useAppSelector(selectPlaying)
   const dispatch = useAppDispatch()
   const selectedId = useAppSelector(selectedBarId)!
-  const selectedColor = selectedId !== null ? bars[selectedId].color : 'gray'
+  const selectedColor = selectedId ? bars[selectedId].color : 'gray'
   const {
     startRecording, stopRecording, status, mediaBlobUrl, clearBlobUrl,
   } = useReactMediaRecorder({
@@ -38,7 +38,7 @@ function RecorderMenu() {
     audio: true,
   })
   const record = () => {
-    if (!playing && preUrl === '') {
+    if (!playing && !preUrl) {
       if (status !== 'recording') {
         dispatch(addWidth(-39))
         startRecording()
@@ -51,7 +51,7 @@ function RecorderMenu() {
     }
   }
   const play = () => {
-    if (!playing && preUrl !== '') {
+    if (!playing && preUrl) {
       const i = preUrl
       const x = new Audio(i)
       x.play()
@@ -68,7 +68,7 @@ function RecorderMenu() {
     }
   }
   const repeat = () => {
-    if (bars[selectedId].src !== '') {
+    if (bars[selectedId].src) {
       dispatch(setRepeat(!bars[selectedId].repeat))
     }
   }
@@ -81,14 +81,14 @@ function RecorderMenu() {
     return () => clearTimeout(timer)
   }, [status])
   React.useEffect(() => {
-    if (mediaBlobUrl !== null) {
+    if (mediaBlobUrl) {
       setPreUrl(mediaBlobUrl)
       dispatch(addSrc(mediaBlobUrl))
     }
   }, [mediaBlobUrl])
   React.useEffect(() => {
     if (selectedId) {
-      if (bars[selectedId].src !== '') {
+      if (bars[selectedId].src) {
         setPreUrl(bars[selectedId].src)
       } else {
         setPreUrl('')
@@ -102,7 +102,7 @@ function RecorderMenu() {
     bars.forEach((bar) => {
       timeOuts.push(
         setTimeout(() => {
-          if (playing && bar.src !== '') data[bar.id].play()
+          if (playing && bar.src) data[bar.id].play()
           if (playing && bar.repeat) {
             repeats.push(
               setInterval(() => {
@@ -128,87 +128,75 @@ function RecorderMenu() {
   return (
     <Paper
       sx={{
-        padding: '10px',
         display: 'flex',
-        flexDirection: 'column',
         justifyContent: 'center',
-        gap: '5px',
+        flexDirection: 'column',
+        gap: '10px',
         height: '100%',
         '@media screen and (max-width: 720px)': {
-          padding: '0px',
-          gap: '0px',
+          flexDirection: 'row',
+          gap: '2px',
+          flexWrap: 'wrap',
         },
       }}
       elevation={0}
     >
-      <Paper
+      <Button
+        className="recorder"
+        onClick={record}
         sx={{
-          padding: '0px',
-          display: 'flex',
-          flexDirection: 'column',
-          justifyContent: 'center',
-          gap: '10px',
-          height: '85%',
+          color: selectedColor,
         }}
-        elevation={0}
       >
-        <Button
-          className="recorder"
-          onClick={record}
-          sx={{
-            color: selectedColor,
-          }}
-        >
-          {status === 'recording' ? (
-            <RadioButtonCheckedTwoToneIcon fontSize="large" />
-          ) : (
-            <RadioButtonUncheckedTwoToneIcon fontSize="large" />
-          )}
-        </Button>
-        <Button
-          className="recorder"
-          onClick={play}
-          sx={{
-            color: selectedColor,
-          }}
-        >
-          <PlayArrowRoundedIcon fontSize="large" />
-        </Button>
-        <Button
-          className="recorder"
-          onClick={remove}
-          sx={{
-            color: selectedColor,
-            ':disabled': { color: 'gray' },
-          }}
-          disabled={preUrl === ''}
-        >
-          <DeleteForeverOutlinedIcon fontSize="large" />
-        </Button>
-        <Button
-          className="recorder"
-          color="inherit"
-          sx={{
-            color: selectedColor,
-            ':disabled': { color: 'gray' },
-          }}
-          disabled={preUrl === ''}
-          onClick={repeat}
-        >
-          <RepeatIcon fontSize="large" />
-        </Button>
-        <Button
-          variant="contained"
-          id="playAll"
-          onClick={() => {
-            if (bars.filter((i) => i.src !== '').length > 0) {
-              dispatch(setPlaying(!playing))
-            }
-          }}
-        >
-          {!playing ? <PlaylistPlayIcon fontSize="large" /> : <StopIcon fontSize="large" />}
-        </Button>
-      </Paper>
+        {status === 'recording' ? (
+          <RadioButtonCheckedTwoToneIcon fontSize="large" />
+        ) : (
+          <RadioButtonUncheckedTwoToneIcon fontSize="large" />
+        )}
+      </Button>
+      <Button
+        className="recorder"
+        onClick={play}
+        sx={{
+          color: selectedColor,
+        }}
+      >
+        <PlayArrowRoundedIcon fontSize="large" />
+      </Button>
+      <Button
+        className="recorder"
+        onClick={remove}
+        sx={{
+          color: selectedColor,
+          ':disabled': { color: 'gray' },
+        }}
+        disabled={!preUrl}
+      >
+        <DeleteForeverOutlinedIcon fontSize="large" />
+      </Button>
+      <Button
+        className="recorder"
+        color="inherit"
+        sx={{
+          color: selectedColor,
+          ':disabled': { color: 'gray' },
+        }}
+        disabled={!preUrl}
+        onClick={repeat}
+      >
+        <RepeatIcon fontSize="large" />
+      </Button>
+      <Button
+        variant="contained"
+        id="playAll"
+        onClick={() => {
+          if (bars.filter((i) => i.src !== '').length > 0) {
+            dispatch(setPlaying(!playing))
+          }
+        }}
+      >
+        {!playing ? <PlaylistPlayIcon fontSize="large" /> : <StopIcon fontSize="large" />}
+      </Button>
     </Paper>
   )
 }

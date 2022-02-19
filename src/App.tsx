@@ -3,16 +3,18 @@ import Box from '@mui/material/Box'
 import Recorder from './features/recordBox/recorder'
 import { useAppDispatch, useAppSelector } from './app/hooks'
 import {
-  setMoving, selectMoving, selectRecording, addMargin,
+  setMoving, selectMoving, selectRecording, addMargin, selectBars, selectedBarId,
 } from './features/recordBox/recorderSlice'
 
 function App() {
   const dispatch = useAppDispatch()
   const moving = useAppSelector(selectMoving)
+  const bars = useAppSelector(selectBars)
+  const selectedId = useAppSelector(selectedBarId)!
 
   const recording = useAppSelector(selectRecording)
   const move = (e: React.MouseEvent): void => {
-    if (moving && !recording) {
+    if (moving && !recording && bars[selectedId].src) {
       dispatch(addMargin(e.movementX * 0.6))
     }
   }
@@ -41,7 +43,7 @@ function App() {
           background: 'white',
           '@media screen and (max-width: 720px)': {
             gap: '0px',
-            height: '75%',
+            height: '100%',
           },
         }}
       >

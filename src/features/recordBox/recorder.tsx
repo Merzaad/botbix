@@ -1,6 +1,5 @@
 import * as React from 'react'
 import Paper from '@mui/material/Paper'
-import { Box } from '@material-ui/core'
 import RecorderBars from './recorderBars'
 import RecorderMenu from './recorderMenu'
 import Timer from './recorderTimer'
@@ -12,14 +11,20 @@ function Recorder() {
         display: 'flex',
         width: '100%',
         height: '100%',
+        '@media screen and (max-width: 720px)': {
+          flexDirection: 'column-reverse',
+        },
       }}
     >
-      <Box
+      <Paper
         sx={{
           bottom: '0',
           width: '20%',
           display: 'grid',
           padding: '10px',
+          '@media screen and (max-width: 720px)': {
+            width: '100%',
+          },
         }}
       >
         <Paper
@@ -30,14 +35,19 @@ function Recorder() {
         >
           <RecorderMenu />
         </Paper>
-      </Box>
-      <Box
+      </Paper>
+      <Paper
         sx={{
           bottom: '0',
           width: '80%',
           display: 'grid',
           overflow: 'scroll',
+          '@media screen and (max-width: 720px)': {
+            width: '100%',
+            height: '90%',
+          },
         }}
+        elevation={0}
       >
         <Paper
           sx={{
@@ -68,7 +78,7 @@ function Recorder() {
             <RecorderBars />
           </Paper>
         </Paper>
-      </Box>
+      </Paper>
     </Paper>
   )
 }
