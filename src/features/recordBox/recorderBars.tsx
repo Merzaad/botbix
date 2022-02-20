@@ -24,7 +24,7 @@ function RecorderBars() {
             key={i}
             sx={{
               position: 'absolute',
-              left: `${((bar.width) * i)}px`,
+              left: `${((bar.width) * (i + 1))}px`,
               top: '0px',
               height: '25px',
               borderRight: '1px solid white',
@@ -57,6 +57,7 @@ function RecorderBars() {
           boxShadow: `${bar.id === selectedId ? `0px 0px 5px ${bar.src !== '' ? bar.color : 'rgb(0,0,0,0.3)'}` : 'none'}`,
           cursor: 'pointer',
           position: 'relative',
+          borderRight: '1px solid white',
           '@media screen and (max-width: 720px)': {
             height: '50px',
           },
