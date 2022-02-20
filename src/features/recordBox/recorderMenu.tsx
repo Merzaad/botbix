@@ -11,7 +11,7 @@ import PlayArrowRoundedIcon from '@mui/icons-material/PlayArrowRounded'
 import { useAppDispatch, useAppSelector } from '../../app/hooks'
 import {
   addWidth,
-  resetWidth,
+  setWidth,
   selectedBarId,
   addSrc,
   removeSrc,
@@ -21,6 +21,7 @@ import {
   setPlaying,
   selectPlaying,
   setRepeat,
+  selectRecording,
 } from './recorderSlice'
 
 function RecorderMenu() {
@@ -28,25 +29,25 @@ function RecorderMenu() {
 
   const bars = useAppSelector(selectBars)
   const playing = useAppSelector(selectPlaying)
+  const recording = useAppSelector(selectRecording)
   const dispatch = useAppDispatch()
-  const selectedId = useAppSelector(selectedBarId)!
+  const selectedId = useAppSelector(selectedBarId)
   const selectedColor = selectedId !== null ? bars[selectedId].color : 'gray'
   const {
-    startRecording, stopRecording, status, mediaBlobUrl, clearBlobUrl,
+    startRecording, stopRecording, mediaBlobUrl, clearBlobUrl,
   } = useReactMediaRecorder({
     video: false,
     audio: true,
   })
   const record = () => {
-    if (!playing && !preUrl) {
-      if (status !== 'recording') {
-        dispatch(addWidth(-39))
+    if (!playing) {
+      if (recording) {
+        dispatch(setRecording(false))
+        stopRecording()
+      } else {
         startRecording()
         dispatch(setRecording(true))
-      }
-      if (status === 'recording') {
-        stopRecording()
-        dispatch(setRecording(false))
+        dispatch(setWidth(0))
       }
     }
   }
@@ -59,7 +60,7 @@ function RecorderMenu() {
   }
   const remove = () => {
     if (!playing) {
-      dispatch(resetWidth())
+      dispatch(setWidth(40))
       dispatch(removeSrc())
       dispatch(setRepeat(false))
       dispatch(setMargin(0))
@@ -68,18 +69,16 @@ function RecorderMenu() {
     }
   }
   const repeat = () => {
-    if (bars[selectedId].src) {
-      dispatch(setRepeat(!bars[selectedId].repeat))
-    }
+    dispatch(setRepeat(!bars[selectedId!].repeat))
   }
   React.useEffect(() => {
     const timer = setInterval(() => {
-      if (status === 'recording') {
-        dispatch(addWidth(1.21))
+      if (recording) {
+        dispatch(addWidth(1.11))
       }
     }, 125)
     return () => clearTimeout(timer)
-  }, [status])
+  }, [recording])
   React.useEffect(() => {
     if (mediaBlobUrl) {
       setPreUrl(mediaBlobUrl)
@@ -87,7 +86,7 @@ function RecorderMenu() {
     }
   }, [mediaBlobUrl])
   React.useEffect(() => {
-    if (selectedId) {
+    if (selectedId !== null) {
       if (bars[selectedId].src) {
         setPreUrl(bars[selectedId].src)
       } else {
@@ -146,9 +145,11 @@ function RecorderMenu() {
         onClick={record}
         sx={{
           color: selectedColor,
+          ':disabled': { color: 'gray' },
         }}
+        disabled={!!preUrl}
       >
-        {status === 'recording' ? (
+        {recording ? (
           <RadioButtonCheckedTwoToneIcon fontSize="large" />
         ) : (
           <RadioButtonUncheckedTwoToneIcon fontSize="large" />
@@ -159,7 +160,9 @@ function RecorderMenu() {
         onClick={play}
         sx={{
           color: selectedColor,
+          ':disabled': { color: 'gray' },
         }}
+        disabled={!preUrl}
       >
         <PlayArrowRoundedIcon fontSize="large" />
       </Button>

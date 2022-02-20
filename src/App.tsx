@@ -15,7 +15,7 @@ function App() {
   const recording = useAppSelector(selectRecording)
   const move = (e: React.MouseEvent): void => {
     if (moving && !recording && bars[selectedId].src) {
-      dispatch(addMargin(e.movementX * 0.6))
+      dispatch(addMargin(e.movementX))
     }
   }
   const stopMoving = (e: React.MouseEvent): void => {

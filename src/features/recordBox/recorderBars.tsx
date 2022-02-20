@@ -18,15 +18,16 @@ function RecorderBars() {
     }
     const repeats = []
     if (bar.repeat) {
-      for (let i = 0; i < (1780 - bar.margin) / (bar.width + 1); i += 1) {
+      for (let i = 0; i < (1790 - bar.margin) / (bar.width) - 1; i += 1) {
         repeats.push(
           <Paper
             key={i}
             sx={{
               position: 'absolute',
-              left: `${(bar.width + 1) * i}px`,
+              left: `${(bar.width) * i}px`,
               top: '0px',
               height: '25px',
+              borderRight: '0.2px solid white',
               width: `${bar.width}px`,
               background: `${bar.src !== '' ? bar.color : 'rgb(0,0,0,0.2)'}`,
               boxShadow: `${
@@ -52,7 +53,7 @@ function RecorderBars() {
           height: '25px',
           background: `${bar.src !== '' ? bar.color : '#c0c0c0'}`,
           width: `${bar.width}px`,
-          marginLeft: `${bar.margin + 10}px`,
+          marginLeft: `${bar.margin}px`,
           boxShadow: `${bar.id === selectedId ? `0px 0px 5px ${bar.src !== '' ? bar.color : 'rgb(0,0,0,0.3)'}` : 'none'}`,
           cursor: 'pointer',
           position: 'relative',

@@ -40,12 +40,12 @@ export const recorderSlice = createSlice({
     addWidth: (state, action: PayloadAction<number>) => {
       const x = state
       const id = x.selectedBarId!
-      x.bars[id].width += action.payload
+      x.bars[id].width += Math.floor(action.payload)
     },
-    resetWidth: (state) => {
+    setWidth: (state, action: PayloadAction<number>) => {
       const x = state
       const id = x.selectedBarId!
-      x.bars[id].width = 40
+      x.bars[id].width = action.payload
     },
     addSrc: (state, action: PayloadAction<string>) => {
       const x = state
@@ -74,7 +74,7 @@ export const recorderSlice = createSlice({
     addMargin: (state, action: PayloadAction<number>) => {
       const x = state
       const id = x.selectedBarId!
-      x.bars[id].margin += action.payload
+      x.bars[id].margin += Math.floor(action.payload * 0.6)
       if (x.bars[id].margin < 0) {
         x.bars[id].margin = 0
         x.moving = false
@@ -100,7 +100,7 @@ export const selectMoving = (state: RootState) => state.recorder.moving
 export const {
   addWidth,
   selectBar,
-  resetWidth,
+  setWidth,
   addSrc,
   removeSrc,
   setMargin,

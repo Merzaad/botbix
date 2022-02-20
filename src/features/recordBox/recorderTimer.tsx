@@ -11,7 +11,7 @@ function RecorderTimer() {
     <Paper
       sx={{
         position: 'absolute',
-        height: '650%',
+        height: '800%',
         width: '1px',
         marginLeft: `${margin}px`,
         background: `linear-gradient(90deg, rgba(35,255,231,0.8) 0%,
@@ -47,8 +47,7 @@ function RecorderTimer() {
         display: 'flex',
         flexDirection: 'row',
         gap: '18px',
-        height: '100%',
-        padding: '10px',
+        height: '80%',
         position: 'relative',
       }}
       elevation={0}
