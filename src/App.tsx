@@ -23,7 +23,7 @@ function App() {
       e.preventDefault()
       dispatch(setMoving(false))
       const newMargin = (Math.floor(bars[selectedId].margin / 20)) * 20
-      dispatch(setMargin(newMargin + 1))
+      dispatch(setMargin(newMargin))
     }
   }
   return (

@@ -18,16 +18,16 @@ function RecorderBars() {
     }
     const repeats = []
     if (bar.repeat) {
-      for (let i = 0; i < (1790 - bar.margin) / (bar.width) - 1; i += 1) {
+      for (let i = 0; i < ((1790 - bar.margin) / (bar.width)) - 1; i += 1) {
         repeats.push(
           <Paper
             key={i}
             sx={{
               position: 'absolute',
-              left: `${(bar.width) * i}px`,
+              left: `${((bar.width + 2) * (i + 1))}px`,
               top: '0px',
               height: '25px',
-              borderRight: '0.2px solid white',
+              borderRight: '1px solid white',
               width: `${bar.width}px`,
               background: `${bar.src !== '' ? bar.color : 'rgb(0,0,0,0.2)'}`,
               boxShadow: `${

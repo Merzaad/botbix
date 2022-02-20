@@ -5,14 +5,14 @@ import { selectPlaying } from './recorderSlice'
 
 function RecorderTimer() {
   const playing = useAppSelector(selectPlaying)
-  const [margin, setMargin] = React.useState(0)
+  const [margin, setMargin] = React.useState(() => 0)
   const times: any[] = []
   const movingThing = (
     <Paper
       sx={{
         position: 'absolute',
         height: '800%',
-        width: '1px',
+        width: '2px',
         marginLeft: `${margin}px`,
         background: `linear-gradient(90deg, rgba(35,255,231,0.8) 0%,
         rgba(6,255,144,0.5) 100%)`,
@@ -36,9 +36,9 @@ function RecorderTimer() {
     if (!playing) setMargin(0)
     const timer = setInterval(() => {
       if (playing) {
-        setMargin(margin + 1.375)
+        setMargin(margin + 2.5)
       }
-    }, 125)
+    }, 250)
     return () => clearTimeout(timer)
   }, [playing, margin])
   return (

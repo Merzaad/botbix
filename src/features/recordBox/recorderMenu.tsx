@@ -73,7 +73,7 @@ function RecorderMenu() {
   React.useEffect(() => {
     const timer = setInterval(() => {
       if (recording) {
-        dispatch(addWidth(1.25))
+        dispatch(addWidth(1.375))
       }
     }, 125)
     return () => clearTimeout(timer)
