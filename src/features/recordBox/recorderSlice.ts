@@ -33,9 +33,22 @@ export const recorderSlice = createSlice({
       const x = state
       x.selectedBarId = action.payload
     },
+    setPlaying: (state, action: PayloadAction<boolean>) => {
+      const x = state
+      x.playing = action.payload
+    },
     setRecording: (state, action: PayloadAction<boolean>) => {
       const x = state
       x.recording = action.payload
+    },
+    setMoving: (state, action: PayloadAction<boolean>) => {
+      const x = state
+      x.moving = action.payload
+    },
+    setRepeat: (state, action: PayloadAction<boolean>) => {
+      const x = state
+      const id = x.selectedBarId!
+      x.bars[id].repeat = action.payload
     },
     addWidth: (state, action: PayloadAction<number>) => {
       const x = state
@@ -62,15 +75,6 @@ export const recorderSlice = createSlice({
       const id = x.selectedBarId!
       x.bars[id].margin = action.payload
     },
-    setPlaying: (state, action: PayloadAction<boolean>) => {
-      const x = state
-      x.playing = action.payload
-    },
-    setRepeat: (state, action: PayloadAction<boolean>) => {
-      const x = state
-      const id = x.selectedBarId!
-      x.bars[id].repeat = action.payload
-    },
     addMargin: (state, action: PayloadAction<number>) => {
       const x = state
       const id = x.selectedBarId!
@@ -84,10 +88,6 @@ export const recorderSlice = createSlice({
         x.moving = false
       }
     },
-    setMoving: (state, action: PayloadAction<boolean>) => {
-      const x = state
-      x.moving = action.payload
-    },
   },
 })
 
@@ -98,16 +98,16 @@ export const selectPlaying = (state: RootState) => state.recorder.playing
 export const selectMoving = (state: RootState) => state.recorder.moving
 
 export const {
-  addWidth,
   selectBar,
+  setRecording,
+  setPlaying,
+  setMoving,
+  setRepeat,
+  addWidth,
   setWidth,
   addSrc,
   removeSrc,
   setMargin,
-  setRecording,
-  setPlaying,
-  setRepeat,
   addMargin,
-  setMoving,
 } = recorderSlice.actions
 export default recorderSlice.reducer

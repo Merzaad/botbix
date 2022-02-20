@@ -26,11 +26,10 @@ import {
 
 function RecorderMenu() {
   const [preUrl, setPreUrl] = React.useState('')
-
+  const dispatch = useAppDispatch()
   const bars = useAppSelector(selectBars)
   const playing = useAppSelector(selectPlaying)
   const recording = useAppSelector(selectRecording)
-  const dispatch = useAppDispatch()
   const selectedId = useAppSelector(selectedBarId)
   const selectedColor = selectedId !== null ? bars[selectedId].color : 'gray'
   const {
@@ -40,7 +39,7 @@ function RecorderMenu() {
     audio: true,
   })
   const record = () => {
-    if (!playing) {
+    if (!playing && selectedId !== null) {
       if (recording) {
         dispatch(setRecording(false))
         stopRecording()
@@ -74,7 +73,7 @@ function RecorderMenu() {
   React.useEffect(() => {
     const timer = setInterval(() => {
       if (recording) {
-        dispatch(addWidth(1.11))
+        dispatch(addWidth(1.25))
       }
     }, 125)
     return () => clearTimeout(timer)
@@ -109,7 +108,7 @@ function RecorderMenu() {
               }),
             )
           }
-        }, bar.margin * 100),
+        }, ((bar.margin) * 100)),
       )
     })
     return () => {
