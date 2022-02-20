@@ -22,7 +22,7 @@ function App() {
     if (selectedId !== null) {
       e.preventDefault()
       dispatch(setMoving(false))
-      const newMargin = (Math.floor(bars[selectedId].margin / 20)) * 20
+      const newMargin = (Math.floor(bars[selectedId].margin / 5)) * 5
       dispatch(setMargin(newMargin))
     }
   }
