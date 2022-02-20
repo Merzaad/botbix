@@ -75,7 +75,7 @@ function RecorderMenu() {
       if (recording) {
         dispatch(addWidth(5))
       }
-    }, 501)
+    }, 500)
     return () => clearTimeout(timer)
   }, [recording])
   React.useEffect(() => {
