@@ -24,7 +24,7 @@ function RecorderBars() {
             key={i}
             sx={{
               position: 'absolute',
-              left: `${((bar.width + 2) * (i + 1))}px`,
+              left: `${((bar.width) * i)}px`,
               top: '0px',
               height: '25px',
               borderRight: '1px solid white',

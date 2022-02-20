@@ -11,7 +11,7 @@ for (let i = 0; i < 6; i += 1) {
     text: '',
     color: colors[i],
     width: 40,
-    margin: 0,
+    margin: 1,
     src: '',
     repeat: false,
   })
