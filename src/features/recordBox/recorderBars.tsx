@@ -42,7 +42,6 @@ function RecorderBars() {
         />,
       )
     }
-
     const startMoving = (e: React.MouseEvent): void => {
       e.preventDefault()
       if (!recording && e.button === 0) {
@@ -51,16 +50,9 @@ function RecorderBars() {
         dispatch(selectBar(id))
       }
     }
-
-    const contextMenu = (e: React.MouseEvent): void => {
-      if (e.button === 2) {
-        e.preventDefault()
-      }
-    }
     return (
       <Paper
         onMouseDown={startMoving}
-        onContextMenu={contextMenu}
         key={id}
         elevation={0}
         sx={{
