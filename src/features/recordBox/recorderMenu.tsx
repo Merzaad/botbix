@@ -129,11 +129,14 @@ function RecorderMenu() {
         display: 'flex',
         justifyContent: 'center',
         flexDirection: 'column',
+        padding: '20px',
+        paddingBottom: '10px',
         gap: '10px',
         height: '100%',
         '@media screen and (max-width: 720px)': {
+          padding: '10px',
           flexDirection: 'row',
-          gap: '2px',
+          gap: '10px',
           flexWrap: 'wrap',
         },
       }}

@@ -23,4 +23,5 @@ background: linear-gradient(54deg, rgba(172, 166, 166, 0.164) 0%, rgba(151, 150,
   background-image: url('../public/bg.jpg');
   background-size: 150px;
   background-position: 82px;
+  width: '100%';
 }

@@ -38,7 +38,7 @@ function RecorderTimer() {
       if (playing) {
         setMargin(margin + 5)
       }
-    }, 485)
+    }, 486)
     return () => clearTimeout(timer)
   }, [playing, margin])
   return (
@@ -46,14 +46,15 @@ function RecorderTimer() {
       sx={{
         display: 'flex',
         flexDirection: 'row',
+        paddingTop: '10px',
         gap: '18px',
         height: '80%',
         position: 'relative',
       }}
       elevation={0}
     >
-      {movingThing}
       {times}
+      {movingThing}
     </Paper>
   )
 }

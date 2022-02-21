@@ -8,7 +8,6 @@ for (let i = 0; i < 6; i += 1) {
   initialBars.push({
     id: i,
     title: '',
-    menu: false,
     color: colors[i],
     width: 40,
     margin: 0,
@@ -88,11 +87,6 @@ export const recorderSlice = createSlice({
         x.moving = false
       }
     },
-    setMenu: (state, action: PayloadAction<boolean>) => {
-      const x = state
-      const id = x.selectedBarId!
-      x.bars[id].menu = action.payload
-    },
   },
 })
 
@@ -114,6 +108,5 @@ export const {
   removeSrc,
   setMargin,
   addMargin,
-  setMenu,
 } = recorderSlice.actions
 export default recorderSlice.reducer
