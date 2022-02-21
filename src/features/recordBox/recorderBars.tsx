@@ -26,7 +26,7 @@ function RecorderBars() {
             top: '0px',
             height: '35px',
             width: `${width}px`,
-            borderLeft: '1px solid white',
+            borderRight: '1px solid white',
             background: `${src !== '' ? color : 'rgb(0,0,0,0.2)'}`,
             boxShadow: `${
               id === selectedId

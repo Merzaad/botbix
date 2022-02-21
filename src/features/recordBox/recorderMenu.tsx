@@ -41,8 +41,8 @@ function RecorderMenu() {
   const record = () => {
     if (!playing && selectedId !== null) {
       if (recording) {
-        dispatch(setRecording(false))
         stopRecording()
+        dispatch(setRecording(false))
       } else {
         startRecording()
         dispatch(setRecording(true))
@@ -136,7 +136,7 @@ function RecorderMenu() {
         '@media screen and (max-width: 720px)': {
           padding: '10px',
           flexDirection: 'row',
-          gap: '10px',
+          gap: '3px',
           flexWrap: 'wrap',
         },
       }}
