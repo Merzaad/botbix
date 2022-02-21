@@ -2,7 +2,7 @@ export interface RecorderSlice {
   bars: {
     id: number
     title: string
-    text: string
+    menu: boolean
     color: string
     width: number
     margin: number
