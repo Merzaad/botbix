@@ -38,7 +38,7 @@ function RecorderTimer() {
       if (playing) {
         setMargin(margin + 5)
       }
-    }, 486)
+    }, 490)
     return () => clearTimeout(timer)
   }, [playing, margin])
   return (
