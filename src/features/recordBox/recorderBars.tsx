@@ -2,7 +2,7 @@ import * as React from 'react'
 import Paper from '@mui/material/Paper'
 import { useAppSelector, useAppDispatch } from '../../app/hooks'
 import {
-  selectBars, selectBar, selectedBarId, selectRecording, setMoving, setMenu,
+  selectBars, selectBar, selectedBarId, selectRecording, setMoving,
 } from './recorderSlice'
 
 function RecorderBars() {
@@ -12,7 +12,7 @@ function RecorderBars() {
   const recording = useAppSelector(selectRecording)
   const items = bars.map((bar) => {
     const {
-      id, menu, color, width, margin, src, repeat,
+      id, color, width, margin, src, repeat,
     } = bar
     const x = repeat ? ((1800 - margin) / (width)) - 1 : 1
     const repeats = []
@@ -24,18 +24,18 @@ function RecorderBars() {
             position: 'absolute',
             left: `${(width * i)}px`,
             top: '0px',
-            height: '25px',
+            height: '35px',
             width: `${width}px`,
             borderLeft: '1px solid white',
             background: `${src !== '' ? color : 'rgb(0,0,0,0.2)'}`,
             boxShadow: `${
               id === selectedId
                 ? `0px 0px 5px
-             ${src !== '' ? color : '#06b79e'}`
+             ${src !== '' ? color : 'rgb(0,0,0,0.2)'}`
                 : 'none'
             }`,
             '@media screen and (max-width: 720px)': {
-              height: '50px',
+              height: '40px',
             },
           }}
           elevation={0}
@@ -55,7 +55,6 @@ function RecorderBars() {
     const contextMenu = (e: React.MouseEvent): void => {
       if (e.button === 2) {
         e.preventDefault()
-        dispatch(setMenu(true))
       }
     }
     return (
@@ -65,26 +64,16 @@ function RecorderBars() {
         key={id}
         elevation={0}
         sx={{
-          height: '25px',
+          height: '35px',
           cursor: 'pointer',
           position: 'relative',
           marginLeft: `${bar.margin}px`,
           '@media screen and (max-width: 720px)': {
-            height: '50px',
+            height: '40px',
           },
         }}
       >
         {repeats}
-        <Paper
-          sx={{
-            padding: '10px',
-            position: 'absolute',
-            left: '0',
-            display: menu ? 'inherit' : 'none',
-          }}
-        >
-          Hello
-        </Paper>
       </Paper>
     )
   })
@@ -93,7 +82,7 @@ function RecorderBars() {
       sx={{
         display: 'flex',
         flexDirection: 'column',
-        gap: '15px',
+        gap: '10px',
         width: '100%',
       }}
       elevation={0}
