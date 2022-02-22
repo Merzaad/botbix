@@ -6,7 +6,7 @@ import { selectPlaying } from './recorderSlice'
 function RecorderTimer() {
   const playing = useAppSelector(selectPlaying)
   const [margin, setMargin] = React.useState(() => 0)
-  const times: any[] = []
+  const times: React.ReactElement[] = []
   const movingThing = (
     <Paper
       sx={{
