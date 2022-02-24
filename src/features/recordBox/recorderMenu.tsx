@@ -1,5 +1,4 @@
 import * as React from 'react'
-import { useReactMediaRecorder } from 'react-media-recorder'
 import { Paper, Button } from '@mui/material'
 import DeleteForeverOutlinedIcon from '@mui/icons-material/DeleteForeverOutlined'
 import RadioButtonCheckedTwoToneIcon from '@mui/icons-material/RadioButtonCheckedTwoTone'
@@ -32,45 +31,68 @@ function RecorderMenu() {
   const recording = useAppSelector(selectRecording)
   const selectedId = useAppSelector(selectedBarId)
   const selectedColor = selectedId !== null ? bars[selectedId].color : 'gray'
-  const {
-    startRecording, stopRecording, mediaBlobUrl, clearBlobUrl,
-  } = useReactMediaRecorder({
-    video: false,
-    audio: true,
-  })
 
-  const record = () => {
+  const handleRecord = () => {
     if (!playing && selectedId !== null) {
       if (recording) {
-        stopRecording()
         dispatch(setRecording(false))
       } else {
-        startRecording()
         dispatch(setRecording(true))
         dispatch(setWidth(0))
       }
     }
   }
-  const play = () => {
+  const handlePlay = () => {
     if (!playing && preUrl) {
       const i = preUrl
       const x = new Audio(i)
       x.play()
     }
   }
-  const remove = () => {
+  const handleRemove = () => {
     if (!playing) {
       dispatch(setWidth(40))
       dispatch(removeSrc())
       dispatch(setRepeat(false))
       dispatch(setMargin(0))
       setPreUrl('')
-      clearBlobUrl()
     }
   }
-  const repeat = () => {
+  const handleRepeate = () => {
     dispatch(setRepeat(!bars[selectedId!].repeat))
   }
+  React.useEffect(() => {
+    const nav: any = navigator
+    let recorder: MediaRecorder
+    let base64 = null
+
+    if (recording) {
+      const onsuccess = (stream: any) => {
+        recorder = new MediaRecorder(stream)
+        recorder.start()
+        recorder.ondataavailable = (e) => {
+          const reader = new FileReader()
+          reader.onloadend = () => {
+            base64 = reader.result
+            dispatch(addSrc(String(base64)))
+            setPreUrl(String(base64))
+          }
+          reader.readAsDataURL(e.data)
+        }
+      }
+
+      nav.getUserMedia(
+        {
+          audio: true,
+        },
+        onsuccess,
+        (error: any) => {
+          console.log(error.name)
+        },
+      )
+    }
+    return () => { if (recorder) recorder.stop() }
+  }, [recording])
   React.useEffect(() => {
     const timer = setInterval(() => {
       if (recording) {
@@ -79,12 +101,6 @@ function RecorderMenu() {
     }, 500)
     return () => clearTimeout(timer)
   }, [recording])
-  React.useEffect(() => {
-    if (mediaBlobUrl) {
-      setPreUrl(mediaBlobUrl)
-      dispatch(addSrc(mediaBlobUrl))
-    }
-  }, [mediaBlobUrl])
   React.useEffect(() => {
     if (selectedId !== null) {
       if (bars[selectedId].src) {
@@ -145,7 +161,7 @@ function RecorderMenu() {
     >
       <Button
         className="recorder"
-        onClick={record}
+        onClick={handleRecord}
         sx={{
           color: selectedColor,
           ':disabled': { color: 'gray' },
@@ -160,7 +176,7 @@ function RecorderMenu() {
       </Button>
       <Button
         className="recorder"
-        onClick={play}
+        onClick={handlePlay}
         sx={{
           color: selectedColor,
           ':disabled': { color: 'gray' },
@@ -171,7 +187,7 @@ function RecorderMenu() {
       </Button>
       <Button
         className="recorder"
-        onClick={remove}
+        onClick={handleRemove}
         sx={{
           color: selectedColor,
           ':disabled': { color: 'gray' },
@@ -188,7 +204,7 @@ function RecorderMenu() {
           ':disabled': { color: 'gray' },
         }}
         disabled={!preUrl}
-        onClick={repeat}
+        onClick={handleRepeate}
       >
         <RepeatIcon fontSize="large" />
       </Button>
