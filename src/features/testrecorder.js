@@ -1,18 +1,17 @@
 export default function testrecorder() {
   let recorder = null
-  let test
+  let test = null
   const onsuccess = (stream) => {
     recorder = new MediaRecorder(stream, {
       type: 'audio/ogg; codecs=opus',
     })
-    recorder.start() // Starting the record
+    recorder.start()
     recorder.ondataavailable = (e) => {
-      // Converting audio blob to base64
+      // blob to base64
       const reader = new FileReader()
       reader.onloadend = () => {
         test = reader.result
       }
-
       reader.readAsDataURL(e.data)
     }
   }
@@ -27,11 +26,10 @@ export default function testrecorder() {
       audio: true,
     },
     onsuccess,
-    (e) => {
-      console.log(e)
+    (error) => {
+      console.log(error)
     },
   )
-
   setTimeout(() => {
     recorder.stop()
   }, 5000)
