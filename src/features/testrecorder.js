@@ -1,25 +1,28 @@
 export default function testrecorder() {
   let recorder = null
-  let test = null
+  let base64 = null
+
   const onsuccess = (stream) => {
     recorder = new MediaRecorder(stream, {
       type: 'audio/ogg; codecs=opus',
     })
+
     recorder.start()
+
     recorder.ondataavailable = (e) => {
-      // blob to base64
       const reader = new FileReader()
       reader.onloadend = () => {
-        test = reader.result
+        base64 = reader.result
       }
+
       reader.readAsDataURL(e.data)
     }
   }
 
   navigator.getUserMedia = navigator.getUserMedia
-      || navigator.webkitGetUserMedia
-      || navigator.mozGetUserMedia
-      || navigator.msGetUserMedia
+    || navigator.webkitGetUserMedia
+    || navigator.mozGetUserMedia
+    || navigator.msGetUserMedia
 
   navigator.getUserMedia(
     {
@@ -30,8 +33,10 @@ export default function testrecorder() {
       console.log(error)
     },
   )
+
   setTimeout(() => {
     recorder.stop()
+    console.log(base64)
+    localStorage.setItem('testRecord', base64)
   }, 5000)
-  return test
 }
