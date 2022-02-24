@@ -38,6 +38,7 @@ function RecorderMenu() {
     video: false,
     audio: true,
   })
+
   const record = () => {
     if (!playing && selectedId !== null) {
       if (recording) {

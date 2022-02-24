@@ -1,4 +1,4 @@
-<img href="https://github.com/Merzaad/botbix" style="width:700px" src="https://i.postimg.cc/ZqTnxT6m/botbixx.png">
+<img href="https://github.com/Merzaad/botbix" style="width:700px" src="https://i.postimg.cc/851cYzTQ/botbix.png">
 This project was bootstrapped with [Create React App](https://github.com/facebook/create-react-app), using the [Redux](https://redux.js.org/) and [Redux Toolkit](https://redux-toolkit.js.org/) template.
 
 ## Available Scripts
