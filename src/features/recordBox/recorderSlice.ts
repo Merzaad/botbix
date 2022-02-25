@@ -76,6 +76,8 @@ export const recorderSlice = createSlice({
       const audio = {
         width: 40,
         src: '',
+        margin: 0,
+        repeat: false,
       }
       localStorage.setItem(`audio${id}`, JSON.stringify(audio))
     },
