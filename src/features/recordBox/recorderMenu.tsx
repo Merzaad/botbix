@@ -21,15 +21,16 @@ import {
   selectPlaying,
   setRepeat,
   selectRecording,
+  setStorage,
 } from './recorderSlice'
 
 function RecorderMenu() {
   const [preUrl, setPreUrl] = React.useState('')
-  const dispatch = useAppDispatch()
+  const selectedId = useAppSelector(selectedBarId)
   const bars = useAppSelector(selectBars)
+  const dispatch = useAppDispatch()
   const playing = useAppSelector(selectPlaying)
   const recording = useAppSelector(selectRecording)
-  const selectedId = useAppSelector(selectedBarId)
   const selectedColor = selectedId !== null ? bars[selectedId].color : 'gray'
 
   const handleRecord = () => {
@@ -61,6 +62,7 @@ function RecorderMenu() {
   const handleRepeate = () => {
     dispatch(setRepeat(!bars[selectedId!].repeat))
   }
+
   React.useEffect(() => {
     const nav: any = navigator
     let recorder: MediaRecorder
@@ -140,6 +142,9 @@ function RecorderMenu() {
       })
     }
   }, [playing])
+  React.useEffect(() => {
+    dispatch(setStorage())
+  })
   return (
     <Paper
       sx={{

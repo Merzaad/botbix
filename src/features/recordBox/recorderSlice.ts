@@ -5,14 +5,19 @@ import { RecorderSlice } from '../../app/types'
 const colors: string[] = ['#f9c74f', '#90be6d', '#43aa8b', '#4d908e', '#577590', '#277da1']
 const initialBars = []
 for (let i = 0; i < 6; i += 1) {
+  const test = localStorage.getItem(`audio${i}`)
+  const audio = test ? JSON.parse(test) : {
+    width: 40, src: '', margin: 0, repeat: false,
+  }
+
   initialBars.push({
     id: i,
     title: '',
     color: colors[i],
-    width: 40,
-    margin: 0,
-    src: '',
-    repeat: false,
+    width: audio.width,
+    margin: audio.margin,
+    src: audio.src,
+    repeat: audio.repeat,
   })
 }
 
@@ -68,6 +73,11 @@ export const recorderSlice = createSlice({
       const x = state
       const id = x.selectedBarId!
       x.bars[id].src = ''
+      const audio = {
+        width: 40,
+        src: '',
+      }
+      localStorage.setItem(`audio${id}`, JSON.stringify(audio))
     },
     setMargin: (state, action: PayloadAction<number>) => {
       const x = state
@@ -85,6 +95,19 @@ export const recorderSlice = createSlice({
       if (x.bars[id].margin + x.bars[id].width > 1790) {
         x.bars[id].margin = 1790 - x.bars[id].width
         x.moving = false
+      }
+    },
+    setStorage: (state) => {
+      const x = state
+      const id = x.selectedBarId
+      if (id !== null) {
+        const audio = {
+          width: x.bars[id].width,
+          src: x.bars[id].src,
+          margin: x.bars[id].margin,
+          repeat: x.bars[id].repeat,
+        }
+        localStorage.setItem(`audio${id}`, JSON.stringify(audio))
       }
     },
   },
@@ -108,5 +131,6 @@ export const {
   removeSrc,
   setMargin,
   addMargin,
+  setStorage,
 } = recorderSlice.actions
 export default recorderSlice.reducer
